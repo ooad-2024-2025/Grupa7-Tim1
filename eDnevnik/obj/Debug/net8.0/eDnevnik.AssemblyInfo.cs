@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("eDnevnik")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+035c3309a52938ab0def27d059309e95275292b6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e893f8a36b291c7eb56de0d21f8b45429d548893")]
 [assembly: System.Reflection.AssemblyProductAttribute("eDnevnik")]
 [assembly: System.Reflection.AssemblyTitleAttribute("eDnevnik")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
