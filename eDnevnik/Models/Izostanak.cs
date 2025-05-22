@@ -12,7 +12,7 @@ namespace eDnevnik.Models
 
         public StatusIzostanka status { get; set; } = StatusIzostanka.Neopravdan;
         [ForeignKey("Korisnik")]
-        public int UcenikId { set; get; }
+        public string UcenikId { set; get; }
         public Korisnik Ucenik { get; set; }
         [ForeignKey("Cas")]
         public int CasId { set; get; }

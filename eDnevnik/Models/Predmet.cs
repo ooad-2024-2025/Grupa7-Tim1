@@ -15,7 +15,7 @@ namespace eDnevnik.Models
         public string? Opis { get; set; }
 
         [ForeignKey("Korisnik")]
-        public int NastavnikId { set; get; }
+        public string NastavnikId { set; get; }
         public Korisnik Nastavnik { get; set; }
 
         

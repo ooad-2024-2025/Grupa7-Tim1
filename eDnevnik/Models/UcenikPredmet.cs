@@ -12,7 +12,7 @@ namespace eDnevnik.Models
 
 
         [ForeignKey("Korisnik")]
-        public int UcenikId { get; set; }
+        public string UcenikId { get; set; }
         public Korisnik Ucenik { get; set; }
 
 

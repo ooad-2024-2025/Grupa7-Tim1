@@ -10,7 +10,6 @@ namespace eDnevnik.Models
 
         public DateTime Termin { set; get; }
 
-        [ForeignKey ("Razred")]
         public int RazredId { set; get; }
         public Razred Razred { set; get; }
 
@@ -19,7 +18,7 @@ namespace eDnevnik.Models
         public Predmet Predmet { set; get; }
 
         [ForeignKey("Korisnik")]
-        public int NastavnikId { set; get; }
+        public string NastavnikId { set; get; }
         public Korisnik Nastavnik { set; get; }
        
         public Cas() { }

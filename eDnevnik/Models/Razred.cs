@@ -13,9 +13,9 @@ public class Razred
 
 
         [ForeignKey("Korisnik")]
-   public int NastavnikId { get; set; }
+        public string NastavnikId { get; set; }
     public Korisnik Nastavnik { get; set; }
 
     public ICollection<Cas> Casovi { get; set; }
-        public Razred() { }
+       
 } }
