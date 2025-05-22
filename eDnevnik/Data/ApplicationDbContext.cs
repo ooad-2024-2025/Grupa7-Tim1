@@ -38,17 +38,18 @@ namespace eDnevnik.Data
 
             base.OnModelCreating(modelBuilder);
 
+            // CAS
             modelBuilder.Entity<Cas>()
-         .HasOne(c => c.Razred)
-         .WithMany(r => r.Casovi)
-         .HasForeignKey(c => c.RazredId)
-         .OnDelete(DeleteBehavior.Restrict);
+                .HasOne(c => c.Razred)
+                .WithMany(r => r.Casovi)
+                .HasForeignKey(c => c.RazredId)
+                .OnDelete(DeleteBehavior.Restrict); // Samo ovde Cascade
 
             modelBuilder.Entity<Cas>()
                 .HasOne(c => c.Predmet)
                 .WithMany(p => p.Casovi)
                 .HasForeignKey(c => c.PredmetId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); // Ovde Restrict
 
             modelBuilder.Entity<Cas>()
                 .HasOne(c => c.Nastavnik)

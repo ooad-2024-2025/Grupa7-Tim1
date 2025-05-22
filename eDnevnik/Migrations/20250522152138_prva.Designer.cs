@@ -12,8 +12,8 @@ using eDnevnik.Data;
 namespace eDnevnik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250522144105_Init")]
-    partial class Init
+    [Migration("20250522152138_prva")]
+    partial class prva
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -303,8 +303,7 @@ namespace eDnevnik.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("RazredId")
-                        .IsUnique();
+                    b.HasIndex("RazredId");
 
                     b.HasIndex("RoditeljId");
 
@@ -380,13 +379,15 @@ namespace eDnevnik.Migrations
 
                     b.Property<string>("NastavnikId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Naziv")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NastavnikId");
 
                     b.ToTable("Razred", (string)null);
                 });
@@ -477,13 +478,13 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Predmet", "Predmet")
                         .WithMany("Casovi")
                         .HasForeignKey("PredmetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eDnevnik.Models.Razred", "Razred")
                         .WithMany("Casovi")
                         .HasForeignKey("RazredId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Nastavnik");
@@ -498,13 +499,13 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Cas", "Cas")
                         .WithMany()
                         .HasForeignKey("CasId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eDnevnik.Models.Korisnik", "Ucenik")
                         .WithMany()
                         .HasForeignKey("UcenikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Cas");
@@ -515,14 +516,15 @@ namespace eDnevnik.Migrations
             modelBuilder.Entity("eDnevnik.Models.Korisnik", b =>
                 {
                     b.HasOne("eDnevnik.Models.Razred", "Razred")
-                        .WithOne("Nastavnik")
-                        .HasForeignKey("eDnevnik.Models.Korisnik", "RazredId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithMany()
+                        .HasForeignKey("RazredId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eDnevnik.Models.Korisnik", "Roditelj")
                         .WithMany()
-                        .HasForeignKey("RoditeljId");
+                        .HasForeignKey("RoditeljId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Razred");
 
@@ -534,13 +536,13 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Predmet", "Predmet")
                         .WithMany("Ocjene")
                         .HasForeignKey("PredmetId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("eDnevnik.Models.Korisnik", "Ucenik")
                         .WithMany()
                         .HasForeignKey("UcenikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Predmet");
@@ -553,7 +555,18 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Korisnik", "Nastavnik")
                         .WithMany()
                         .HasForeignKey("NastavnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Nastavnik");
+                });
+
+            modelBuilder.Entity("eDnevnik.Models.Razred", b =>
+                {
+                    b.HasOne("eDnevnik.Models.Korisnik", "Nastavnik")
+                        .WithMany()
+                        .HasForeignKey("NastavnikId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Nastavnik");
@@ -590,9 +603,6 @@ namespace eDnevnik.Migrations
             modelBuilder.Entity("eDnevnik.Models.Razred", b =>
                 {
                     b.Navigation("Casovi");
-
-                    b.Navigation("Nastavnik")
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
