@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = eDnevnik
 build_property.RootNamespace = eDnevnik
@@ -24,12 +32,112 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Cas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Cas/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Cas/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Cas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Cas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Izostanak/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Izostanak/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Izostanak/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Izostanak/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Izostanak/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Ocjena/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Ocjena/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Ocjena/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Ocjena/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Ocjena/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Predmet/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Predmet/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Predmet/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Predmet/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Predmet/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Razred/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Razred/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Razred/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Razred/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Razred/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/bombi/OneDrive/Desktop/OOAD/Grupa7-Tim1/eDnevnik/Views/Shared/Error.cshtml]

@@ -16,6 +16,6 @@ public class Razred
         public string NastavnikId { get; set; }
     public Korisnik Nastavnik { get; set; }
 
-    public ICollection<Cas> Casovi { get; set; }
+   
        
 } }

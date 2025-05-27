@@ -39,17 +39,9 @@ namespace eDnevnik.Data
             base.OnModelCreating(modelBuilder);
 
             // CAS
-            modelBuilder.Entity<Cas>()
-                .HasOne(c => c.Razred)
-                .WithMany(r => r.Casovi)
-                .HasForeignKey(c => c.RazredId)
-                .OnDelete(DeleteBehavior.Restrict); // Samo ovde Cascade
+             // Samo ovde Cascade
 
-            modelBuilder.Entity<Cas>()
-                .HasOne(c => c.Predmet)
-                .WithMany(p => p.Casovi)
-                .HasForeignKey(c => c.PredmetId)
-                .OnDelete(DeleteBehavior.Restrict); // Ovde Restrict
+             // Ovde Restrict
 
             modelBuilder.Entity<Cas>()
                 .HasOne(c => c.Nastavnik)
@@ -91,11 +83,7 @@ namespace eDnevnik.Data
                 .HasForeignKey(o => o.UcenikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Ocjena>()
-                .HasOne(o => o.Predmet)
-                .WithMany(p => p.Ocjene)
-                .HasForeignKey(o => o.PredmetId)
-                .OnDelete(DeleteBehavior.Restrict);
+       
 
             // KORISNIK
             modelBuilder.Entity<Korisnik>()
