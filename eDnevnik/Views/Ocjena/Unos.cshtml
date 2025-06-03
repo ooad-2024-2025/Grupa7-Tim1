@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Unos ocjena";
+}
+
+<h2 class="mb-4">Unos ocjena</h2>
+
+<form method="get" asp-action="UnesiZaRazredPredmet">
+    <div class="mb-3 w-50 mx-auto">
+        <label for="dodjela" class="form-label">Odaberite razred i predmet</label>
+        <select id="dodjela" name="dodjela" class="form-select" asp-items="@(ViewBag.Dodjele)">
+            <option value="">-- Odaberite --</option>
+        </select>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Nastavi</button>
+    </div>
+</form>

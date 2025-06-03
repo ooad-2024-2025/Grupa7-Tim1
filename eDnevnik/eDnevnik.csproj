@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\PredmetRazred\**" />
+    <Content Remove="Views\PredmetRazred\**" />
+    <EmbeddedResource Remove="Views\PredmetRazred\**" />
+    <None Remove="Views\PredmetRazred\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\PredmetRazredController.cs" />
+    <Compile Remove="Views\Razredi\DetaljiPredmeti.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.13" />
@@ -17,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
 </Project>

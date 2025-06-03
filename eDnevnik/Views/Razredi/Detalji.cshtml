@@ -1,0 +1,38 @@
+﻿@model List<eDnevnik.Models.Korisnik>
+@{
+    var razred = ViewBag.Razred as eDnevnik.Models.Razred;
+    ViewData["Title"] = "Učenici razreda";
+}
+
+<h2 class="text-center">Učenici - @razred.Naziv</h2>
+
+@if (Model.Count == 0)
+{
+    <p class="text-center mt-3">Nema učenika u ovom razredu.</p>
+}
+else
+{
+    <div class="table-responsive mt-4">
+        <table class="table table-striped">
+            <thead class="table-primary">
+                <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Email</th>
+                    <th>Telefon</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ucenik in Model)
+                {
+                    <tr>
+                        <td>@ucenik.Ime</td>
+                        <td>@ucenik.Prezime</td>
+                        <td>@ucenik.Email</td>
+                        <td>@ucenik.PhoneNumber</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

@@ -1,0 +1,45 @@
+﻿@model eDnevnik.Models.Korisnik
+@{
+    ViewData["Title"] = "Uredi nastavnika";
+}
+
+<h2 class="text-center mb-4">Uredi podatke nastavnika</h2>
+
+<form asp-action="Edit" method="post" class="w-50 mx-auto">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Ime" class="form-label">Ime</label>
+        <input asp-for="Ime" class="form-control" />
+        <span asp-validation-for="Ime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Prezime" class="form-label">Prezime</label>
+        <input asp-for="Prezime" class="form-control" />
+        <span asp-validation-for="Prezime" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Telefon" class="form-label">Telefon</label>
+        <input asp-for="Telefon" class="form-control" />
+        <span asp-validation-for="Telefon" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Adresa" class="form-label">Adresa</label>
+        <input asp-for="Adresa" class="form-control" />
+        <span asp-validation-for="Adresa" class="text-danger"></span>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Spasi izmjene</button>
+        <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+    </div>
+</form>

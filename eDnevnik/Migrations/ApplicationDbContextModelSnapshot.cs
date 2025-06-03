@@ -229,6 +229,9 @@ namespace eDnevnik.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Adresa")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -271,13 +274,16 @@ namespace eDnevnik.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RazredId")
+                    b.Property<int?>("RazredId")
                         .HasColumnType("int");
 
                     b.Property<string>("RoditeljId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -363,6 +369,29 @@ namespace eDnevnik.Migrations
                     b.HasIndex("NastavnikId");
 
                     b.ToTable("Predmet", (string)null);
+                });
+
+            modelBuilder.Entity("eDnevnik.Models.PredmetRazred", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("PredmetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RazredId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PredmetId");
+
+                    b.HasIndex("RazredId");
+
+                    b.ToTable("PredmetRazred");
                 });
 
             modelBuilder.Entity("eDnevnik.Models.Razred", b =>
@@ -514,8 +543,7 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Razred", "Razred")
                         .WithMany()
                         .HasForeignKey("RazredId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("eDnevnik.Models.Korisnik", "Roditelj")
                         .WithMany()
@@ -554,6 +582,25 @@ namespace eDnevnik.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Nastavnik");
+                });
+
+            modelBuilder.Entity("eDnevnik.Models.PredmetRazred", b =>
+                {
+                    b.HasOne("eDnevnik.Models.Predmet", "Predmet")
+                        .WithMany()
+                        .HasForeignKey("PredmetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eDnevnik.Models.Razred", "Razred")
+                        .WithMany()
+                        .HasForeignKey("RazredId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Predmet");
+
+                    b.Navigation("Razred");
                 });
 
             modelBuilder.Entity("eDnevnik.Models.Razred", b =>

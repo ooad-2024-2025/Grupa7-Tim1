@@ -1,0 +1,43 @@
+﻿@model eDnevnik.Models.Predmet
+@{
+    ViewData["Title"] = "Uredi predmet";
+    var nastavnici = ViewBag.Nastavnici as List<eDnevnik.Models.Korisnik>;
+}
+
+<h2 class="text-center mb-4">Uredi predmet</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Naziv" class="form-label">Naziv predmeta</label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Opis" class="form-label">Opis</label>
+        <textarea asp-for="Opis" class="form-control"></textarea>
+        <span asp-validation-for="Opis" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nastavnik</label>
+        <select asp-for="NastavnikId" class="form-select">
+            <option value="">(nema nastavnika)</option>
+            @foreach (var nastavnik in nastavnici)
+            {
+                <option value="@nastavnik.Id" selected="@(nastavnik.Id == Model.NastavnikId)">
+                    @nastavnik.Ime @nastavnik.Prezime
+                </option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Spasi izmjene</button>
+    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

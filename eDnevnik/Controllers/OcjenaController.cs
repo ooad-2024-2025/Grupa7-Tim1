@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,161 +8,178 @@ using eDnevnik.Models;
 
 namespace eDnevnik.Controllers
 {
+    [Authorize(Roles = "Nastavnik")]
     public class OcjenaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Korisnik> _userManager;
 
-        public OcjenaController(ApplicationDbContext context)
+        public OcjenaController(ApplicationDbContext context, UserManager<Korisnik> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Ocjena
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Razredi()
         {
-            var applicationDbContext = _context.Ocjena.Include(o => o.Predmet).Include(o => o.Ucenik);
-            return View(await applicationDbContext.ToListAsync());
+            var user = await _userManager.GetUserAsync(User);
+            var razredi = await _context.PredmetRazred
+                .Include(pr => pr.Razred)
+                .Include(pr => pr.Predmet)
+                .Where(pr => pr.Predmet.NastavnikId == user.Id)
+                .Select(pr => pr.Razred)
+                .Distinct()
+                .ToListAsync();
+
+            return View(razredi);
         }
 
-        // GET: Ocjena/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Predmeti(int razredId)
         {
-            if (id == null)
-            {
+            var user = await _userManager.GetUserAsync(User);
+            var predmeti = await _context.PredmetRazred
+                .Include(pr => pr.Predmet)
+                .Where(pr => pr.RazredId == razredId && pr.Predmet.NastavnikId == user.Id)
+                .Select(pr => pr.Predmet)
+                .ToListAsync();
+
+            ViewBag.RazredId = razredId;
+            return View(predmeti);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Ucenici(int razredId, int predmetId)
+        {
+            var ucenici = await _userManager.Users
+                .Where(u => u.RazredId == razredId)
+                .ToListAsync();
+
+            ViewBag.PredmetId = predmetId;
+            ViewBag.RazredId = razredId;
+            return View(ucenici);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Dodaj(string ucenikId, int predmetId)
+        {
+            var ucenik = await _userManager.FindByIdAsync(ucenikId);
+            var predmet = await _context.Predmet.FindAsync(predmetId);
+
+            if (ucenik == null || predmet == null)
                 return NotFound();
-            }
 
-            var ocjena = await _context.Ocjena
-                .Include(o => o.Predmet)
-                .Include(o => o.Ucenik)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ocjena == null)
-            {
-                return NotFound();
-            }
+            ViewBag.Ucenik = ucenik;
+            ViewBag.Predmet = predmet;
 
-            return View(ocjena);
-        }
-
-        // GET: Ocjena/Create
-        public IActionResult Create()
-        {
-            ViewData["PredmetId"] = new SelectList(_context.Predmet, "Id", "Id");
-            ViewData["UcenikId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Ocjena/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UcenikId,PredmetId,Vrijednost,Komentar,Datum")] Ocjena ocjena)
+        public async Task<IActionResult> Dodaj(string UcenikId, int PredmetId, int Vrijednost, string? Komentar)
         {
-            if (ModelState.IsValid)
+            if (Vrijednost < 1 || Vrijednost > 5)
             {
-                _context.Add(ocjena);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ModelState.AddModelError("Vrijednost", "Ocjena mora biti između 1 i 5.");
             }
-            ViewData["PredmetId"] = new SelectList(_context.Predmet, "Id", "Id", ocjena.PredmetId);
-            ViewData["UcenikId"] = new SelectList(_context.Users, "Id", "Id", ocjena.UcenikId);
-            return View(ocjena);
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Ucenik = await _userManager.FindByIdAsync(UcenikId);
+                ViewBag.Predmet = await _context.Predmet.FindAsync(PredmetId);
+                return View();
+            }
+
+            var ocjena = new Ocjena
+            {
+                UcenikId = UcenikId,
+                PredmetId = PredmetId,
+                Vrijednost = Vrijednost,
+                Komentar = Komentar,
+                Datum = DateTime.Now
+            };
+
+            _context.Ocjena.Add(ocjena);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Razredi");
         }
 
-        // GET: Ocjena/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Unos()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var nastavnik = await _userManager.GetUserAsync(User);
 
-            var ocjena = await _context.Ocjena.FindAsync(id);
-            if (ocjena == null)
-            {
-                return NotFound();
-            }
-            ViewData["PredmetId"] = new SelectList(_context.Predmet, "Id", "Id", ocjena.PredmetId);
-            ViewData["UcenikId"] = new SelectList(_context.Users, "Id", "Id", ocjena.UcenikId);
-            return View(ocjena);
+            var predmetiIds = await _context.Predmet
+                .Where(p => p.NastavnikId == nastavnik.Id)
+                .Select(p => p.Id)
+                .ToListAsync();
+
+            var dodjele = await _context.PredmetRazred
+                .Include(pr => pr.Razred)
+                .Include(pr => pr.Predmet)
+                .Where(pr => predmetiIds.Contains(pr.PredmetId))
+                .ToListAsync();
+
+            ViewBag.Dodjele = dodjele
+                .Select(d => new SelectListItem
+                {
+                    Value = $"{d.RazredId}_{d.PredmetId}",
+                    Text = $"{d.Razred.Naziv} - {d.Predmet.Naziv}"
+                })
+                .ToList();
+
+            return View();
         }
 
-        // POST: Ocjena/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpGet]
+        public async Task<IActionResult> UnesiZaRazredPredmet(string dodjela)
+        {
+            if (string.IsNullOrEmpty(dodjela) || !dodjela.Contains('_'))
+                return RedirectToAction("Unos");
+
+            var parts = dodjela.Split('_');
+            int razredId = int.Parse(parts[0]);
+            int predmetId = int.Parse(parts[1]);
+
+            var predmet = await _context.Predmet.FindAsync(predmetId);
+            var razred = await _context.Razred.FindAsync(razredId);
+
+            var ucenici = await _userManager.Users
+                .Where(u => u.RazredId == razredId)
+                .ToListAsync();
+
+            ViewBag.Predmet = predmet;
+            ViewBag.Razred = razred;
+            ViewBag.PredmetId = predmetId;
+            ViewBag.RazredId = razredId;
+
+            return View(ucenici);
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UcenikId,PredmetId,Vrijednost,Komentar,Datum")] Ocjena ocjena)
+        public async Task<IActionResult> SpasiOcjene(int PredmetId, List<string> UcenikIdList, List<int> Vrijednosti, List<string?> Komentari)
         {
-            if (id != ocjena.Id)
-            {
-                return NotFound();
-            }
+            if (UcenikIdList.Count != Vrijednosti.Count)
+                return BadRequest("Neusklađeni podaci.");
 
-            if (ModelState.IsValid)
+            for (int i = 0; i < UcenikIdList.Count; i++)
             {
-                try
+                var ocjena = new Ocjena
                 {
-                    _context.Update(ocjena);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OcjenaExists(ocjena.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["PredmetId"] = new SelectList(_context.Predmet, "Id", "Id", ocjena.PredmetId);
-            ViewData["UcenikId"] = new SelectList(_context.Users, "Id", "Id", ocjena.UcenikId);
-            return View(ocjena);
-        }
+                    UcenikId = UcenikIdList[i],
+                    PredmetId = PredmetId,
+                    Vrijednost = Vrijednosti[i],
+                    Komentar = Komentari[i],
+                    Datum = DateTime.Now
+                };
 
-        // GET: Ocjena/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var ocjena = await _context.Ocjena
-                .Include(o => o.Predmet)
-                .Include(o => o.Ucenik)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (ocjena == null)
-            {
-                return NotFound();
-            }
-
-            return View(ocjena);
-        }
-
-        // POST: Ocjena/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var ocjena = await _context.Ocjena.FindAsync(id);
-            if (ocjena != null)
-            {
-                _context.Ocjena.Remove(ocjena);
+                _context.Ocjena.Add(ocjena);
             }
 
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool OcjenaExists(int id)
-        {
-            return _context.Ocjena.Any(e => e.Id == id);
+            return RedirectToAction("Unos");
         }
     }
 }

@@ -1,0 +1,26 @@
+﻿@model List<eDnevnik.Models.Korisnik>
+@{
+    ViewData["Title"] = "Odaberi učenika";
+    var predmetId = ViewBag.PredmetId;
+}
+
+<h2 class="text-center mb-4">Odaberi učenika</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-center">Nema učenika u ovom razredu.</p>
+}
+else
+{
+    <div class="list-group w-50 mx-auto">
+        @foreach (var u in Model)
+        {
+            <a class="list-group-item list-group-item-action"
+               asp-action="Dodaj"
+               asp-route-ucenikId="@u.Id"
+               asp-route-predmetId="@predmetId">
+                @u.Ime @u.Prezime
+            </a>
+        }
+    </div>
+}

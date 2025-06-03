@@ -1,0 +1,27 @@
+﻿@model eDnevnik.Models.PredmetRazred
+
+@{
+    ViewData["Title"] = "Dodjela predmeta razredu";
+    int razredId = ViewBag.RazredId;
+    var predmeti = ViewBag.Predmeti as List<SelectListItem>;
+}
+
+<h2 class="text-center mb-4">Dodjela predmeta razredu</h2>
+
+<form asp-action="Dodaj" method="post" class="w-50 mx-auto">
+
+    <input type="hidden" name="RazredId" value="@razredId" />
+
+    <div class="mb-3">
+        <label asp-for="PredmetId" class="form-label">Predmet</label>
+        <select asp-for="PredmetId" class="form-select" asp-items="predmeti">
+            <option value="">-- Odaberi predmet --</option>
+        </select>
+        <span asp-validation-for="PredmetId" class="text-danger"></span>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Dodaj</button>
+        <a asp-controller="Razredi" asp-action="DetaljiPredmeti" asp-route-id="@razredId" class="btn btn-secondary">Nazad</a>
+    </div>
+</form>

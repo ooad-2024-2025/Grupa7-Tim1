@@ -1,0 +1,31 @@
+﻿@model eDnevnik.Models.Razred
+@{
+    ViewData["Title"] = "Uredi razred";
+}
+
+<h2 class="text-center">Uredi razred</h2>
+
+<form asp-action="Edit" method="post" class="w-50 mx-auto mt-4">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-3">
+        <label asp-for="Naziv" class="form-label">Naziv</label>
+        <input asp-for="Naziv" class="form-control" />
+        <span asp-validation-for="Naziv" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="NastavnikId" class="form-label">Razrednik</label>
+        <select asp-for="NastavnikId" class="form-select" asp-items="ViewBag.Nastavnici">
+            <option value="">-- Odaberite nastavnika --</option>
+        </select>
+
+        <span asp-validation-for="NastavnikId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Spasi promjene</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

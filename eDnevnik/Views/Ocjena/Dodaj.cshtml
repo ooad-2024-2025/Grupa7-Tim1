@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Unos ocjene";
+    var ucenik = ViewBag.Ucenik as eDnevnik.Models.Korisnik;
+    var predmet = ViewBag.Predmet as eDnevnik.Models.Predmet;
+}
+
+<h2 class="text-center mb-4">Unos ocjene za @ucenik.Ime @ucenik.Prezime iz predmeta @predmet.Naziv</h2>
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger text-center w-50 mx-auto">
+        Forma nije validna. Provjerite unesene podatke.
+    </div>
+}
+
+<div asp-validation-summary="All" class="text-danger text-center mb-3"></div>
+
+<div class="w-50 mx-auto">
+    <form asp-action="Dodaj" asp-controller="Ocjena" method="post">
+        <input type="hidden" name="UcenikId" value="@ucenik.Id" />
+        <input type="hidden" name="PredmetId" value="@predmet.Id" />
+
+        <div class="mb-3">
+            <label for="Vrijednost" class="form-label">Ocjena (1-5)</label>
+            <input type="number" name="Vrijednost" min="1" max="5" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="Komentar" class="form-label">Komentar</label>
+            <textarea name="Komentar" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary w-50">Spasi</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

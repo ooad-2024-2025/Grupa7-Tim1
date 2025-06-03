@@ -17,6 +17,8 @@ namespace eDnevnik.Data
         public DbSet<Cas> Cas { get; set; }
         public DbSet<Izostanak> Izostanak { get; set; }
         public DbSet<Ocjena> Ocjena { get; set; }
+        public DbSet<PredmetRazred> PredmetRazred { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

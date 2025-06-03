@@ -1,0 +1,79 @@
+﻿@model List<eDnevnik.Models.PredmetRazred>
+@{
+    ViewData["Title"] = "Predmeti u razredu";
+    string nazivRazreda = ViewBag.RazredNaziv ?? "Nepoznat razred";
+    int razredId = ViewBag.RazredId ?? 0;
+    var sviPredmeti = ViewBag.SviPredmeti as List<SelectListItem>;
+}
+
+<h2 class="text-center mb-4">Predmeti za razred: @nazivRazreda</h2>
+
+@if (TempData["Greska"] != null)
+{
+    <div class="alert alert-danger text-center">
+        @TempData["Greska"]
+    </div>
+}
+
+
+@if (!Model.Any())
+{
+    <div class="alert alert-info text-center">
+        Nema dodijeljenih predmeta za ovaj razred.
+    </div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead class="table-primary text-center">
+            <tr>
+                <th>Predmet</th>
+                <th>Nastavnik</th>
+                <th>Akcija</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var pr in Model)
+            {
+                <tr>
+                    <td>@pr.Predmet.Naziv</td>
+                    <td>@(pr.Predmet.Nastavnik != null ? pr.Predmet.Nastavnik.Ime + " " + pr.Predmet.Nastavnik.Prezime : "N/A")</td>
+                    <td>
+                        <form asp-action="ObrisiPredmetIzRazreda" method="post" onsubmit="return confirm('Da li ste sigurni da želite ukloniti predmet iz razreda?');">
+                            <input type="hidden" name="id" value="@pr.Id" />
+                            <input type="hidden" name="razredId" value="@razredId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Obriši</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<hr />
+
+<h4 class="text-center">Dodaj novi predmet u razred</h4>
+
+<form asp-action="DodajPredmetURazred" method="post" class="w-50 mx-auto">
+    <input type="hidden" name="razredId" value="@razredId" />
+
+    <div class="mb-3">
+        <label for="predmetId" class="form-label">Predmet</label>
+        <select class="form-select" name="predmetId" required>
+            <option value="">-- Odaberi predmet --</option>
+            @foreach (var p in sviPredmeti)
+            {
+                <option value="@p.Value">@p.Text</option>
+            }
+        </select>
+    </div>
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success">Dodaj predmet</button>
+    </div>
+</form>
+
+<div class="text-center mt-4">
+    <a class="btn btn-secondary" asp-action="Index">Nazad na pregled razreda</a>
+</div>

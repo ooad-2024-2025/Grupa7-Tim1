@@ -1,0 +1,47 @@
+﻿@model List<eDnevnik.Models.Korisnik>
+
+@{
+    ViewData["Title"] = "Unos ocjena";
+    var predmet = ViewBag.Predmet as eDnevnik.Models.Predmet;
+    var razred = ViewBag.Razred as eDnevnik.Models.Razred;
+    int predmetId = ViewBag.PredmetId;
+    int razredId = ViewBag.RazredId;
+}
+
+<h3>Unos ocjena za predmet: <strong>@predmet.Naziv</strong> u razredu <strong>@razred.Naziv</strong></h3>
+
+<form asp-action="SpasiOcjene" method="post">
+    <input type="hidden" name="PredmetId" value="@predmetId" />
+
+    <table class="table table-bordered mt-3">
+        <thead class="table-secondary">
+            <tr>
+                <th>Ime i prezime</th>
+                <th>Ocjena</th>
+                <th>Komentar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model[i].Ime @Model[i].Prezime
+                        <input type="hidden" name="UcenikIdList[@i]" value="@Model[i].Id" />
+                    </td>
+                    <td>
+                        <input name="Vrijednosti[@i]" type="number" min="1" max="5" class="form-control" required />
+                    </td>
+                    <td>
+                        <input name="Komentari[@i]" type="text" class="form-control" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center mt-3">
+        <button type="submit" class="btn btn-success">Spasi ocjene</button>
+        <a asp-action="Unos" class="btn btn-secondary ms-2">Nazad</a>
+    </div>
+</form>

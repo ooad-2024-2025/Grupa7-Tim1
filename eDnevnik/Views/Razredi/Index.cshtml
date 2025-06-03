@@ -1,0 +1,49 @@
+﻿@model List<eDnevnik.Models.Razred>
+@{
+    ViewData["Title"] = "Pregled razreda";
+}
+
+@if (TempData["Greska"] != null)
+{
+    <div class="alert alert-danger text-center">
+        @TempData["Greska"]
+    </div>
+}
+
+<h2 class="text-center mb-4">Pregled razreda</h2>
+
+<div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+    <table class="table table-bordered table-striped mb-0">
+        <thead class="table-primary">
+            <tr>
+                <th>Naziv</th>
+                <th>Razrednik</th>
+                <th>Akcije</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model)
+            {
+                <tr>
+                    <td>@r.Naziv</td>
+                    <td>@(r.Nastavnik?.Ime + " " + r.Nastavnik?.Prezime)</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            <a class="btn btn-warning w-100" style="min-width:80px;" asp-action="Edit" asp-route-id="@r.Id">Uredi</a>
+                            <a class="btn btn-primary w-100" style="min-width:80px;" asp-action="DetaljiPredmeti" asp-route-id="@r.Id">Predmeti</a>
+                            <a class="btn btn-info w-100" style="min-width:80px;" asp-action="Detalji" asp-route-id="@r.Id">Učenici</a>
+                            <form asp-action="Delete" asp-route-id="@r.Id" method="post"
+                                  class="w-100" style="min-width:80px;" onsubmit="return confirm('Da li ste sigurni da želite obrisati ovaj razred?');">
+                                <button type="submit" class="btn btn-danger w-100">Obriši</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="text-center mt-3">
+    <a class="btn btn-primary btn-lg" asp-action="Dodaj">+ Dodaj razred</a>
+</div>

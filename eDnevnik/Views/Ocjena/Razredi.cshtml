@@ -1,0 +1,24 @@
+﻿@model List<eDnevnik.Models.Razred>
+@{
+    ViewData["Title"] = "Moji razredi";
+}
+
+<h2 class="text-center mb-4">Moji razredi</h2>
+
+@if (!Model.Any())
+{
+    <p class="text-center">Nemate nijedan razred.</p>
+}
+else
+{
+    <div class="list-group w-50 mx-auto">
+        @foreach (var razred in Model)
+        {
+            <a class="list-group-item list-group-item-action"
+               asp-action="Predmeti"
+               asp-route-razredId="@razred.Id">
+                @razred.Naziv
+            </a>
+        }
+    </div>
+}

@@ -1,164 +1,240 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using eDnevnik.Data;
+using eDnevnik.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using eDnevnik.Data;
-using eDnevnik.Models;
 
 namespace eDnevnik.Controllers
 {
-    public class RazredController : Controller
+    [Authorize(Roles = "Administrator")]
+    public class RazrediController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Korisnik> _userManager;
 
-        public RazredController(ApplicationDbContext context)
+        public RazrediController(ApplicationDbContext context, UserManager<Korisnik> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        // GET: Razreds
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var applicationDbContext = _context.Razred.Include(r => r.Nastavnik);
-            return View(await applicationDbContext.ToListAsync());
+            var razredi = _context.Razred.Include(r => r.Nastavnik).ToList();
+            return View(razredi);
         }
 
-        // GET: Razreds/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [HttpGet]
+        public async Task<IActionResult> Dodaj()
         {
-            if (id == null)
+            var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
+
+            ViewBag.Nastavnici = nastavnici.Select(n => new SelectListItem
             {
-                return NotFound();
-            }
+                Value = n.Id,
+                Text = $"{n.Ime} {n.Prezime}"
+            }).ToList();
 
-            var razred = await _context.Razred
-                .Include(r => r.Nastavnik)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (razred == null)
-            {
-                return NotFound();
-            }
-
-            return View(razred);
+            return View(new Razred());
         }
 
-        // GET: Razreds/Create
-        public IActionResult Create()
-        {
-            ViewData["NastavnikId"] = new SelectList(_context.Users, "Id", "Id");
-            return View();
-        }
-
-        // POST: Razreds/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naziv,NastavnikId")] Razred razred)
+        public async Task<IActionResult> Dodaj(Razred razred)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _context.Add(razred);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["NastavnikId"] = new SelectList(_context.Users, "Id", "Id", razred.NastavnikId);
-            return View(razred);
-        }
-
-        // GET: Razreds/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var razred = await _context.Razred.FindAsync(id);
-            if (razred == null)
-            {
-                return NotFound();
-            }
-            ViewData["NastavnikId"] = new SelectList(_context.Users, "Id", "Id", razred.NastavnikId);
-            return View(razred);
-        }
-
-        // POST: Razreds/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naziv,NastavnikId")] Razred razred)
-        {
-            if (id != razred.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
+                ViewBag.Nastavnici = nastavnici.Select(n => new SelectListItem
                 {
-                    _context.Update(razred);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
+                    Value = n.Id,
+                    Text = $"{n.Ime} {n.Prezime}"
+                }).ToList();
+
+                return View(razred);
+            }
+
+            bool postoji = _context.Razred.Any(r => r.Naziv == razred.Naziv);
+            if (postoji)
+            {
+                ModelState.AddModelError("", "Razred s tim nazivom već postoji.");
+
+                var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
+                ViewBag.Nastavnici = nastavnici.Select(n => new SelectListItem
                 {
-                    if (!RazredExists(razred.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["NastavnikId"] = new SelectList(_context.Users, "Id", "Id", razred.NastavnikId);
-            return View(razred);
-        }
+                    Value = n.Id,
+                    Text = $"{n.Ime} {n.Prezime}"
+                }).ToList();
 
-        // GET: Razreds/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
+                return View(razred);
             }
 
-            var razred = await _context.Razred
-                .Include(r => r.Nastavnik)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (razred == null)
-            {
-                return NotFound();
-            }
-
-            return View(razred);
-        }
-
-        // POST: Razreds/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var razred = await _context.Razred.FindAsync(id);
-            if (razred != null)
-            {
-                _context.Razred.Remove(razred);
-            }
-
+            _context.Razred.Add(razred);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RazredExists(int id)
+
+
+
+        [HttpGet]
+        public async Task<IActionResult> Detalji(int id)
         {
-            return _context.Razred.Any(e => e.Id == id);
+            var razred = await _context.Razred
+                .Include(r => r.Nastavnik)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
+            if (razred == null)
+                return NotFound();
+
+            var ucenici = await _context.Users
+                .Where(u => u.RazredId == id)
+                .ToListAsync();
+
+            ViewBag.Razred = razred;
+            return View(ucenici);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var razred = await _context.Razred.FindAsync(id);
+            if (razred == null) return NotFound();
+
+            var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
+            var lista = nastavnici.Select(n => new SelectListItem
+            {
+                Value = n.Id,
+                Text = $"{n.Ime} {n.Prezime}"
+            }).ToList();
+
+            ViewBag.Nastavnici = lista;
+            return View(razred);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Razred razred)
+        {
+            if (!ModelState.IsValid)
+            {
+                var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
+                ViewBag.Nastavnici = nastavnici.Select(n => new SelectListItem
+                {
+                    Value = n.Id,
+                    Text = $"{n.Ime} {n.Prezime}"
+                }).ToList();
+
+                return View(razred);
+            }
+
+            var postojeci = await _context.Razred.FindAsync(razred.Id);
+            if (postojeci == null)
+                return NotFound();
+
+            postojeci.Naziv = razred.Naziv;
+            postojeci.NastavnikId = razred.NastavnikId;
+
+            _context.Update(postojeci);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var razred = await _context.Razred.FindAsync(id);
+            if (razred == null) return NotFound();
+
+            bool imaUcenika = await _context.Users.AnyAsync(u => u.RazredId == id);
+            if (imaUcenika)
+            {
+                TempData["Greska"] = "Nije moguće obrisati razred jer ima učenika.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            _context.Razred.Remove(razred);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> DetaljiPredmeti(int id)
+        {
+            var razred = await _context.Razred.FindAsync(id);
+            if (razred == null) return NotFound();
+
+            var predmeti = await _context.PredmetRazred
+                .Include(pr => pr.Predmet)
+                    .ThenInclude(p => p.Nastavnik)
+                .Where(pr => pr.RazredId == id)
+                .ToListAsync();
+
+            ViewBag.RazredNaziv = razred.Naziv;
+            ViewBag.RazredId = id;
+
+            var sviPredmeti = await _context.Predmet
+                .Include(p => p.Nastavnik)
+                .Select(p => new SelectListItem
+                {
+                    Value = p.Id.ToString(),
+                    Text = p.Naziv + (p.Nastavnik != null ? $" ({p.Nastavnik.Ime} {p.Nastavnik.Prezime})" : "")
+                }).ToListAsync();
+
+            ViewBag.SviPredmeti = sviPredmeti;
+
+            return View(predmeti);
+        }
+
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> DodajPredmetURazred(int razredId, int predmetId)
+        {
+            bool postoji = await _context.PredmetRazred
+                .AnyAsync(pr => pr.RazredId == razredId && pr.PredmetId == predmetId);
+
+            if (postoji)
+            {
+                TempData["Greska"] = "Ovaj predmet je već dodijeljen razredu.";
+                return RedirectToAction("DetaljiPredmeti", new { id = razredId });
+            }
+
+            if (!postoji)
+            {
+                var novi = new PredmetRazred
+                {
+                    RazredId = razredId,
+                    PredmetId = predmetId
+                };
+
+                _context.PredmetRazred.Add(novi);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("DetaljiPredmeti", new { id = razredId });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> ObrisiPredmetIzRazreda(int id, int razredId)
+        {
+            var entitet = await _context.PredmetRazred.FindAsync(id);
+            if (entitet != null)
+            {
+                _context.PredmetRazred.Remove(entitet);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction("DetaljiPredmeti", new { id = razredId });
+        }
+
+
     }
 }
