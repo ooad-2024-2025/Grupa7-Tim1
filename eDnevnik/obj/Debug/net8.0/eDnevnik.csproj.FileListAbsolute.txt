@@ -698,3 +698,4 @@ C:\Users\emirb\OneDrive\Desktop\Grupa7-Tim1\eDnevnik\obj\Debug\net8.0\refint\eDn
 C:\Users\emirb\OneDrive\Desktop\Grupa7-Tim1\eDnevnik\obj\Debug\net8.0\eDnevnik.pdb
 C:\Users\emirb\OneDrive\Desktop\Grupa7-Tim1\eDnevnik\obj\Debug\net8.0\eDnevnik.genruntimeconfig.cache
 C:\Users\emirb\OneDrive\Desktop\Grupa7-Tim1\eDnevnik\obj\Debug\net8.0\ref\eDnevnik.dll
+C:\Users\bombi\OneDrive\Desktop\OOAD\Grupa7-Tim1\eDnevnik\bin\Debug\net8.0\NuGet.config
