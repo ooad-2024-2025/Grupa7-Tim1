@@ -40,6 +40,10 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Roditelji" asp-action="Index">Roditelji</a>
                             </li>
+                        }
+
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Nastavnik") || User.IsInRole("Ucenik") || User.IsInRole("Roditelj"))
+                        {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index">Chat</a>
                             </li>

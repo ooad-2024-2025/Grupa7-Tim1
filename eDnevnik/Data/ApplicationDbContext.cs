@@ -19,6 +19,8 @@ namespace eDnevnik.Data
         public DbSet<Ocjena> Ocjena { get; set; }
         public DbSet<PredmetRazred> PredmetRazred { get; set; }
 
+        public DbSet<Poruka> Poruka { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -99,6 +101,21 @@ namespace eDnevnik.Data
                 .WithMany()
                 .HasForeignKey(k => k.RoditeljId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            //PORUKA MIKI
+
+            modelBuilder.Entity<Poruka>()
+                .HasOne(p => p.Posiljalac)
+                .WithMany()
+                .HasForeignKey(p => p.PosiljalacId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Poruka>()
+                .HasOne(p => p.Primalac)
+                .WithMany()
+                .HasForeignKey(p => p.PrimalacId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
     }
 }

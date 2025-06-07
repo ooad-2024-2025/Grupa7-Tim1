@@ -1,0 +1,30 @@
+﻿@model List<eDnevnik.Models.Poruka>
+@using eDnevnik.Models
+
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="card shadow">
+        <div class="card-body">
+            <h4 class="text-center mb-4">Chat</h4>
+
+            <div style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
+                @foreach (var poruka in Model)
+                {
+                    <div class="mb-3">
+                        <strong>@poruka.Posiljalac.FullName</strong>
+                        <span class="text-muted" style="font-size: 0.8rem;">@poruka.VrijemeSlanja.ToString("HH:mm")</span>
+                        <div>@poruka.Sadrzaj</div>
+                    </div>
+                }
+            </div>
+
+            <form asp-action="Posalji" method="post" class="d-flex">
+                <input name="sadrzaj" class="form-control me-2" placeholder="Pošalji poruku" required />
+                <button type="submit" class="btn btn-primary">Pošalji</button>
+            </form>
+        </div>
+    </div>
+</div>

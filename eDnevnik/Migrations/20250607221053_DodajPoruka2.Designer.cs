@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eDnevnik.Data;
 
@@ -11,9 +12,11 @@ using eDnevnik.Data;
 namespace eDnevnik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250607221053_DodajPoruka2")]
+    partial class DodajPoruka2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -359,6 +362,7 @@ namespace eDnevnik.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("PrimalacId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Sadrzaj")
@@ -616,7 +620,8 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Korisnik", "Primalac")
                         .WithMany()
                         .HasForeignKey("PrimalacId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Posiljalac");
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eDnevnik.Data;
 
@@ -11,9 +12,11 @@ using eDnevnik.Data;
 namespace eDnevnik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250607203123_DodajPoruka")]
+    partial class DodajPoruka
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -346,37 +349,6 @@ namespace eDnevnik.Migrations
                     b.ToTable("Ocjena", (string)null);
                 });
 
-            modelBuilder.Entity("eDnevnik.Models.Poruka", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("PosiljalacId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("PrimalacId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Sadrzaj")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("VrijemeSlanja")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PosiljalacId");
-
-                    b.HasIndex("PrimalacId");
-
-                    b.ToTable("Poruka");
-                });
-
             modelBuilder.Entity("eDnevnik.Models.Predmet", b =>
                 {
                     b.Property<int>("Id")
@@ -603,24 +575,6 @@ namespace eDnevnik.Migrations
                     b.Navigation("Predmet");
 
                     b.Navigation("Ucenik");
-                });
-
-            modelBuilder.Entity("eDnevnik.Models.Poruka", b =>
-                {
-                    b.HasOne("eDnevnik.Models.Korisnik", "Posiljalac")
-                        .WithMany()
-                        .HasForeignKey("PosiljalacId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("eDnevnik.Models.Korisnik", "Primalac")
-                        .WithMany()
-                        .HasForeignKey("PrimalacId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Posiljalac");
-
-                    b.Navigation("Primalac");
                 });
 
             modelBuilder.Entity("eDnevnik.Models.Predmet", b =>

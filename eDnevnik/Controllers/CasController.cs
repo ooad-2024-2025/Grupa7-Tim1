@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using eDnevnik.Data;
+using eDnevnik.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using eDnevnik.Data;
-using eDnevnik.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace eDnevnik.Controllers
 {
@@ -15,10 +17,21 @@ namespace eDnevnik.Controllers
         //potrebno da bi mogao da radi sa bazom, controller je povezan sa cas klasom modela
         private readonly ApplicationDbContext _context;
 
+        // Add the following private field to the CasController class OVO JE SAMO ZA TESTIRANJE
+        private readonly UserManager<Korisnik> _userManager;
+
         //konstruktor potreban da bi sistem koji vodi brigu o zivotnom ciklusu mogao instancirati controller
-        public CasController(ApplicationDbContext context)
+        //OVO URADIO SAMO ZBOG TESTIRANJA
+        //public CasController(ApplicationDbContext context)
+        //{
+        //    _context = context;
+        //}
+        //PRIJE JE OVDJE IDENTITYUSER UMJESTO KROSNIKA
+        // Update the constructor to initialize the _userManager field I OVO ZA TESTIRANJE
+        public CasController(ApplicationDbContext context, UserManager<Korisnik> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Cas
@@ -177,5 +190,61 @@ namespace eDnevnik.Controllers
         {
             return _context.Cas.Any(e => e.Id == id);
         }
+        //BEZZE PODATKE DODAO SAM
+        public async Task<IActionResult> DodajTestCasove()
+        {
+            var predmet = await _context.Predmet.FirstOrDefaultAsync();
+            var razred = await _context.Razred.FirstOrDefaultAsync();
+            var nastavnik = await _userManager.Users.FirstOrDefaultAsync(u => u.Email.Contains("nastavnik"));
+
+            if (predmet == null || razred == null || nastavnik == null)
+                return Content("Nedostaju entiteti za test unos.");
+
+            var termini = new[]
+            {
+        new DateTime(2025, 6, 10, 8, 0, 0), // ponedjeljak
+        new DateTime(2025, 6, 11, 8, 50, 0), // utorak
+        new DateTime(2025, 6, 12, 9, 40, 0), // srijeda
+    };
+
+            foreach (var termin in termini)
+            {
+                _context.Cas.Add(new Cas
+                {
+                    Termin = termin,
+                    PredmetId = predmet.Id,
+                    RazredId = razred.Id,
+                    NastavnikId = nastavnik.Id
+                });
+            }
+
+            await _context.SaveChangesAsync();
+            return Content("Test časovi dodani.");
+        }
+
+
+        // sedmicni raspored i filter po danu
+        [Authorize]
+        public async Task<IActionResult> SedmicniRaspored(string dan)
+        {
+            var casovi = await _context.Cas
+                .Include(c => c.Predmet)
+                .Include(c => c.Razred)
+                .Include(c => c.Nastavnik)
+                .ToListAsync();
+
+            DayOfWeek? danFilter = null;
+            if (!string.IsNullOrEmpty(dan))
+            {
+                danFilter = Enum.Parse<DayOfWeek>(dan);
+                casovi = casovi.Where(c => c.Termin.DayOfWeek == danFilter).ToList();
+            }
+
+            ViewBag.IzabraniDan = dan;
+            return View(casovi);
+        }
+
+
+
     }
 }

@@ -1,0 +1,76 @@
+﻿@model List<eDnevnik.Models.Cas>
+@using System.Globalization
+
+@{
+    ViewData["Title"] = "Raspored časova - Sedmični prikaz";
+
+    // Fiksni vremenski slotovi
+    var slotovi = new List<string>
+    {
+        "08:00", "08:50", "09:40", "10:30", "11:20"
+    };
+
+    // Dani u sedmici: pon-pet
+    var dani = new List<DayOfWeek>
+    {
+        DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday,
+        DayOfWeek.Thursday, DayOfWeek.Friday
+    };
+
+    // Funkcija za dohvat predmeta u slotu i danu
+    string DohvatiPredmet(List<eDnevnik.Models.Cas> casovi, DayOfWeek dan, string vrijeme)
+    {
+        var cas = casovi.FirstOrDefault(c =>
+            c.Termin.DayOfWeek == dan &&
+            c.Termin.ToString("HH:mm") == vrijeme);
+
+        return cas != null ? cas.Predmet.Naziv : "";
+    }
+}
+
+<div class="container mt-4">
+    <h3 class="text-center mb-4">Raspored časova - Sedmični prikaz</h3>
+    <form method="get" asp-action="SedmicniRaspored" class="mb-4">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="dan">Odaberi dan:</label>
+                <select class="form-select" name="dan" id="dan">
+                    <option value="">Bez filtera</option>
+                    @foreach (var d in Enum.GetValues(typeof(DayOfWeek)))
+                    {
+                        <option value="@d" selected="@(ViewBag.IzabraniDan == d.ToString() ? "selected" : null)">
+                            @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetDayName((DayOfWeek)d)
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary">Filtriraj</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-bordered text-center">
+        <thead class="table-primary">
+            <tr>
+                <th>Vrijeme</th>
+                @foreach (var dan in dani)
+                {
+                    <th>@CultureInfo.CurrentCulture.DateTimeFormat.GetDayName(dan)</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vrijeme in slotovi)
+            {
+                <tr>
+                    <td><strong>@vrijeme - @DateTime.Parse(vrijeme).AddMinutes(45).ToString("HH:mm")</strong></td>
+                    @foreach (var dan in dani)
+                    {
+                        <td>@DohvatiPredmet(Model, dan, vrijeme)</td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
