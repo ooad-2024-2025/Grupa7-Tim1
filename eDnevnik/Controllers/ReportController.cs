@@ -34,27 +34,28 @@ namespace eDnevnik.Controllers
             var prijavljeni = await _userManager.GetUserAsync(User);
             Korisnik ciljani;
 
-            // Dohvati sve role korisnika
+            // Dohvati role
             var roleList = await _userManager.GetRolesAsync(prijavljeni);
             var isAdmin = roleList.Contains("Administrator");
             var isNastavnik = roleList.Contains("Nastavnik") || roleList.Contains("Profesor");
             var isUcenik = roleList.Contains("Ucenik");
             var isRoditelj = roleList.Contains("Roditelj");
 
-            // Admin ili Nastavnik mogu slati za bilo kojeg učenika
+            // ADMIN / NASTAVNIK šalju za učenika, ali dobijaju izvještaj na svoj e-mail
             if (!string.IsNullOrEmpty(ucenikId) && (isAdmin || isNastavnik))
             {
                 ciljani = await _userManager.FindByIdAsync(ucenikId);
             }
-            // Učenik može sebi
+            // UČENIK sam sebi
             else if (isUcenik)
             {
                 ciljani = prijavljeni;
             }
-            // Roditelj može za svoje dijete
+            // RODITELJ šalje za svoje dijete
             else if (isRoditelj)
             {
                 ciljani = await _userManager.FindByIdAsync(ucenikId);
+
                 if (ciljani == null || !RoditeljJePovezanSaUcenikom(prijavljeni.Id, ciljani.Id))
                 {
                     return RedirectToAction("Greska");
@@ -70,10 +71,13 @@ namespace eDnevnik.Controllers
 
             var reportBytes = await _reportService.GenerateReportAsync(ciljani.Id);
 
+            // 📬 kome se šalje mail?
+            var toEmail = (isAdmin || isNastavnik) ? prijavljeni.Email : ciljani.Email;
+
             await _emailService.SendEmailAsync(
-                toEmail: ciljani.Email,
-                subject: "Vaš izvještaj o učeniku",
-                body: "U prilogu se nalazi generisani izvještaj o ocjenama, izostancima i ponašanju.",
+                toEmail: toEmail,
+                subject: $"Izvještaj za učenika {ciljani.Ime} {ciljani.Prezime}",
+                body: $"U prilogu se nalazi izvještaj za učenika {ciljani.Ime} {ciljani.Prezime}.",
                 attachment: reportBytes,
                 filename: "izvjestaj.xlsx"
             );
