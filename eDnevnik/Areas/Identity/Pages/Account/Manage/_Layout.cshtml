@@ -1,0 +1,28 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout !=  null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<h1 class="text-center">Uredi svoj profil i postavke privatnosti</h1>
+<hr />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

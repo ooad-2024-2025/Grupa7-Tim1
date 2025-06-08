@@ -1,174 +1,54 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\",
+  "WorkspaceRootPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\reportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\ucenici\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ucenici\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\_viewstart.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\_viewimports.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\report\\potvrda.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\report\\potvrda.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\ednevnik.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:ednevnik.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\models\\excelreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\excelreportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\models\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\errorviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\models\\poruka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\poruka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\nuget.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:nuget.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:scaffoldingreadme.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\models\\ocjena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\models\\ocjena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\ocjena.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\models\\cas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\cas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\views\\ocjena\\uredi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\uredi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\cas\\sedmicniraspored.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\cas\\sedmicniraspored.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\views\\ocjena\\rezime.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\rezime.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\controllers\\cascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\cascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\views\\ocjena\\rezime.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\rezime.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\migrations\\20250607203123_dodajporuka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:migrations\\20250607203123_dodajporuka.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\migrations\\20250605114740_sedma.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:migrations\\20250605114740_sedma.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\viewmodels\\korisnikviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\korisnikviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\viewmodels\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\chat\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\chatcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:migrations\\applicationdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\migrations\\20250601125426_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:migrations\\20250601125426_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\migrations\\20250602220906_izmjenevn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:migrations\\20250602220906_izmjenevn.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\roditelji\\dodaj.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\roditelji\\dodaj.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\ocjena\\dodaj.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\dodaj.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\ocjena\\ucenici.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\ucenici.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\ocjena\\predmeti.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\views\\ocjena\\predmeti.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\predmeti.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\ocjena\\razredi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\razredi.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\controllers\\ocjenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\controllers\\ocjenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\ocjenacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\tarem\\source\\repos\\grupa7-tim1\\ednevnik\\views\\ocjena\\unos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ocjena\\unos.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\areas\\identity\\pages\\account\\manage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:areas\\identity\\pages\\account\\manage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\areas\\identity\\pages\\account\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:areas\\identity\\pages\\account\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\areas\\identity\\pages\\account\\manage\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:areas\\identity\\pages\\account\\manage\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\areas\\identity\\pages\\account\\manage\\_statusmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:areas\\identity\\pages\\account\\manage\\_statusmessage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\mujkicizmjene\\grupa7-tim1\\ednevnik\\areas\\identity\\pages\\account\\manage\\changepassword.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:areas\\identity\\pages\\account\\manage\\changepassword.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -178,537 +58,167 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-05T11:43:13.867Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Admin\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Admin\\Index.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Admin\\Index.cshtml",
-              "RelativeToolTip": "Views\\Admin\\Index.cshtml",
-              "ViewState": "AgIAAEsAAAAAAAAAAAAAAGcAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T21:14:51.775Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "eDnevnik.csproj",
-              "DocumentMoniker": "C:\\Users\\tarem\\Source\\Repos\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
-              "RelativeDocumentMoniker": "eDnevnik.csproj",
-              "ToolTip": "C:\\Users\\tarem\\Source\\Repos\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
-              "RelativeToolTip": "eDnevnik.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-07T21:43:28.026Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "ScaffoldingReadMe.txt",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\ScaffoldingReadMe.txt",
-              "RelativeDocumentMoniker": "ScaffoldingReadMe.txt",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\ScaffoldingReadMe.txt",
-              "RelativeToolTip": "ScaffoldingReadMe.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2025-06-07T21:41:49.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAiwCgAAAA9AAAAAAAAAA==",
+              "Title": "Ocjena.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Models\\Ocjena.cs",
+              "RelativeDocumentMoniker": "Models\\Ocjena.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Models\\Ocjena.cs*",
+              "RelativeToolTip": "Models\\Ocjena.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T21:26:13.081Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ReportController.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\ReportController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ReportController.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\ReportController.cs",
-              "RelativeToolTip": "Controllers\\ReportController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T11:27:54.607Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Poruka.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\Poruka.cs",
-              "RelativeDocumentMoniker": "Models\\Poruka.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\Poruka.cs",
-              "RelativeToolTip": "Models\\Poruka.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAsAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:23:24.974Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "_ViewImports.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\_ViewImports.cshtml",
-              "RelativeDocumentMoniker": "Views\\_ViewImports.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\_ViewImports.cshtml",
-              "RelativeToolTip": "Views\\_ViewImports.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T21:14:29.155Z",
+              "WhenOpened": "2025-06-08T19:57:44.414Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "Title": "Rezime.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Rezime.cshtml.cs",
+              "RelativeDocumentMoniker": "Views\\Ocjena\\Rezime.cshtml.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Rezime.cshtml.cs",
+              "RelativeToolTip": "Views\\Ocjena\\Rezime.cshtml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:15:09.184Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Potvrda.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Report\\Potvrda.cshtml",
-              "RelativeDocumentMoniker": "Views\\Report\\Potvrda.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Report\\Potvrda.cshtml",
-              "RelativeToolTip": "Views\\Report\\Potvrda.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-08T13:27:09.884Z",
+              "WhenOpened": "2025-06-08T19:53:43.951Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenici\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Ucenici\\Index.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenici\\Index.cshtml",
-              "RelativeToolTip": "Views\\Ucenici\\Index.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAACsAAAAPAAAAAAAAAA==",
+              "Title": "Predmeti.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Predmeti.cshtml",
+              "RelativeDocumentMoniker": "Views\\Ocjena\\Predmeti.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Predmeti.cshtml",
+              "RelativeToolTip": "Views\\Ocjena\\Predmeti.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-08T13:44:09.703Z",
+              "WhenOpened": "2025-06-08T19:52:18.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Uredi.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Uredi.cshtml",
+              "RelativeDocumentMoniker": "Views\\Ocjena\\Uredi.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Uredi.cshtml",
+              "RelativeToolTip": "Views\\Ocjena\\Uredi.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T19:49:08.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Rezime.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Rezime.cshtml",
+              "RelativeDocumentMoniker": "Views\\Ocjena\\Rezime.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Rezime.cshtml",
+              "RelativeToolTip": "Views\\Ocjena\\Rezime.cshtml",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAwBAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T19:48:25.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "OcjenaController.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Controllers\\OcjenaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\OcjenaController.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Controllers\\OcjenaController.cs",
+              "RelativeToolTip": "Controllers\\OcjenaController.cs",
+              "ViewState": "AgIAAOQAAAAAAAAAAAAuwP8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-08T19:46:52.669Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_StatusMessage.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Manage\\_StatusMessage.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T18:02:44.071Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
+              "ViewState": "AgIAABwAAAAAAAAAAAAAwCoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T16:20:52.167Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "_ViewStart.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\_ViewStart.cshtml",
-              "RelativeDocumentMoniker": "Views\\_ViewStart.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\_ViewStart.cshtml",
-              "RelativeToolTip": "Views\\_ViewStart.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T21:14:30.877Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ErrorViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\ErrorViewModel.cs",
-              "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\ErrorViewModel.cs",
-              "RelativeToolTip": "Models\\ErrorViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAIwCcAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T21:26:43.899Z",
+              "WhenOpened": "2025-06-08T16:27:33.728Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "NuGet.config",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\NuGet.config",
-              "RelativeDocumentMoniker": "NuGet.config",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\NuGet.config",
-              "RelativeToolTip": "NuGet.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-06-07T21:54:55.394Z",
+              "DocumentIndex": 8,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Manage\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-08T16:34:41.935Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "ExcelReportService.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\ExcelReportService.cs",
-              "RelativeDocumentMoniker": "Models\\ExcelReportService.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\ExcelReportService.cs",
-              "RelativeToolTip": "Models\\ExcelReportService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAAABAAAAAAAAAA==",
+              "Title": "Korisnik.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Models\\Korisnik.cs",
+              "RelativeDocumentMoniker": "Models\\Korisnik.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Models\\Korisnik.cs",
+              "RelativeToolTip": "Models\\Korisnik.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T11:21:17.094Z",
+              "WhenOpened": "2025-06-08T17:22:20.67Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "EmailService.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\EmailService.cs",
-              "RelativeDocumentMoniker": "Models\\EmailService.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\EmailService.cs",
-              "RelativeToolTip": "Models\\EmailService.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAkwCoAAAABAAAAAAAAAA==",
+              "Title": "ChangePassword.cshtml.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\ChangePassword.cshtml.cs",
+              "RelativeDocumentMoniker": "Areas\\Identity\\Pages\\Account\\Manage\\ChangePassword.cshtml.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\mujkicizmjene\\Grupa7-Tim1\\eDnevnik\\Areas\\Identity\\Pages\\Account\\Manage\\ChangePassword.cshtml.cs",
+              "RelativeToolTip": "Areas\\Identity\\Pages\\Account\\Manage\\ChangePassword.cshtml.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwCkAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-08T11:08:37.546Z",
+              "WhenOpened": "2025-06-08T17:59:50.892Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Ocjena.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\Ocjena.cs",
-              "RelativeDocumentMoniker": "Models\\Ocjena.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\Ocjena.cs",
-              "RelativeToolTip": "Models\\Ocjena.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:59:35.308Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Cas.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\Cas.cs",
-              "RelativeDocumentMoniker": "Models\\Cas.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Models\\Cas.cs",
-              "RelativeToolTip": "Models\\Cas.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:21:07.244Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAAB4AAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:43:19.504Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "20250607203123_DodajPoruka.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250607203123_DodajPoruka.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250607203123_DodajPoruka.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250607203123_DodajPoruka.cs",
-              "RelativeToolTip": "Migrations\\20250607203123_DodajPoruka.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAswA8AAAAaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:32:33.393Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "Privacy.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Home\\Privacy.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Privacy.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Home\\Privacy.cshtml",
-              "RelativeToolTip": "Views\\Home\\Privacy.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T21:28:17.121Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "wwwroot\\css\\site.css",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-06-07T21:39:05.579Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "SedmicniRaspored.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Cas\\SedmicniRaspored.cshtml",
-              "RelativeDocumentMoniker": "Views\\Cas\\SedmicniRaspored.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Cas\\SedmicniRaspored.cshtml",
-              "RelativeToolTip": "Views\\Cas\\SedmicniRaspored.cshtml",
-              "ViewState": "AgIAADYAAAAAAAAAAAAAADAAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T22:59:29.976Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "CasController.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\CasController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CasController.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\CasController.cs",
-              "RelativeToolTip": "Controllers\\CasController.cs",
-              "ViewState": "AgIAAN8AAAAAAAAAAAAAwOEAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T22:57:42.135Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "20250605114740_sedma.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250605114740_sedma.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250605114740_sedma.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250605114740_sedma.cs",
-              "RelativeToolTip": "Migrations\\20250605114740_sedma.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T11:47:40.71Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T21:28:11.403Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "KorisnikViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\ViewModels\\KorisnikViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\KorisnikViewModel.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\ViewModels\\KorisnikViewModel.cs",
-              "RelativeToolTip": "ViewModels\\KorisnikViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T21:26:35.639Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "AdminDashboardViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\ViewModels\\AdminDashboardViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\AdminDashboardViewModel.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\ViewModels\\AdminDashboardViewModel.cs",
-              "RelativeToolTip": "ViewModels\\AdminDashboardViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T21:26:33.14Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Chat\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Chat\\Index.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Chat\\Index.cshtml",
-              "RelativeToolTip": "Views\\Chat\\Index.cshtml",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAQwAwAAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-07T21:25:27.791Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "Controllers\\HomeController.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T21:10:19.839Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "ChatController.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\ChatController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ChatController.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\ChatController.cs",
-              "RelativeToolTip": "Controllers\\ChatController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAQwDIAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T21:08:51.754Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "ApplicationDbContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "RelativeToolTip": "Migrations\\ApplicationDbContextModelSnapshot.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:32:41.397Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "20250601125426_InitialCreate.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250601125426_InitialCreate.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250601125426_InitialCreate.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250601125426_InitialCreate.cs",
-              "RelativeToolTip": "Migrations\\20250601125426_InitialCreate.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-07T20:12:43.875Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-06-07T19:42:54.189Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "20250602220906_Izmjenevn.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250602220906_Izmjenevn.cs",
-              "RelativeDocumentMoniker": "Migrations\\20250602220906_Izmjenevn.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Migrations\\20250602220906_Izmjenevn.cs",
-              "RelativeToolTip": "Migrations\\20250602220906_Izmjenevn.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-05T11:50:14.453Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "Dodaj.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Dodaj.cshtml",
-              "RelativeDocumentMoniker": "Views\\Ocjena\\Dodaj.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Dodaj.cshtml",
-              "RelativeToolTip": "Views\\Ocjena\\Dodaj.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:38:30.392Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Dodaj.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Roditelji\\Dodaj.cshtml",
-              "RelativeDocumentMoniker": "Views\\Roditelji\\Dodaj.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Roditelji\\Dodaj.cshtml",
-              "RelativeToolTip": "Views\\Roditelji\\Dodaj.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-05T11:41:04.152Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "Ucenici.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Ucenici.cshtml",
-              "RelativeDocumentMoniker": "Views\\Ocjena\\Ucenici.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Ucenici.cshtml",
-              "RelativeToolTip": "Views\\Ocjena\\Ucenici.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:37:44.623Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "Predmeti.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Predmeti.cshtml",
-              "RelativeDocumentMoniker": "Views\\Ocjena\\Predmeti.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Predmeti.cshtml",
-              "RelativeToolTip": "Views\\Ocjena\\Predmeti.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:36:12.493Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "OcjenaController.cs",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\OcjenaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\OcjenaController.cs",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Controllers\\OcjenaController.cs",
-              "RelativeToolTip": "Controllers\\OcjenaController.cs",
-              "ViewState": "AgIAAI8AAAAAAAAAAAAiwLkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T18:35:24.943Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "Razredi.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Razredi.cshtml",
-              "RelativeDocumentMoniker": "Views\\Ocjena\\Razredi.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Razredi.cshtml",
-              "RelativeToolTip": "Views\\Ocjena\\Razredi.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:43:54.137Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "Unos.cshtml",
-              "DocumentMoniker": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Unos.cshtml",
-              "RelativeDocumentMoniker": "Views\\Ocjena\\Unos.cshtml",
-              "ToolTip": "C:\\Users\\tarem\\source\\repos\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Unos.cshtml",
-              "RelativeToolTip": "Views\\Ocjena\\Unos.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T18:39:30.886Z"
             }
           ]
         }

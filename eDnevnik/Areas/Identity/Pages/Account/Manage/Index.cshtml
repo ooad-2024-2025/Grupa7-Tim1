@@ -1,0 +1,75 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Uredi profil";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+
+            <partial name="_StatusMessage" for="StatusMessage" />
+
+            <!-- Telefon sekcija -->
+            <h4 class="text-center mt-4 mb-3">Telefon</h4>
+
+            <!-- Prikaz trenutnog broja telefona (readonly) -->
+            <div class="form-floating mb-4">
+                <input value="@Model.Telefon" class="form-control" disabled />
+                <label class="form-label">Trenutni broj telefona</label>
+            </div>
+
+            <!-- Forma za unos novog broja telefona -->
+            <form method="post" asp-page-handler="ChangeTelefon" class="mb-5">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="text-danger text-center" role="alert"></div>
+
+                <div class="form-floating mb-4">
+                    <input name="Telefon" class="form-control" type="text" placeholder="Unesite svoj novi broj telefona." value="@Model.Telefon" />
+                    <label class="form-label">Novi broj telefona</label>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-lg btn-primary">Ažuriraj broj telefona</button>
+                </div>
+            </form>
+
+            <!-- Lozinka sekcija -->
+            <h4 class="text-center mt-5 mb-3">Lozinka</h4>
+
+            <form method="post" asp-page-handler="ChangePassword">
+                @Html.AntiForgeryToken()
+
+                <div asp-validation-summary="ModelOnly" class="text-danger text-center" role="alert"></div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="ChangePasswordInput.OldPassword" class="form-control" type="password" placeholder="Trenutna lozinka" />
+                    <label asp-for="ChangePasswordInput.OldPassword" class="form-label"></label>
+                    <span asp-validation-for="ChangePasswordInput.OldPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="ChangePasswordInput.NewPassword" class="form-control" type="password" placeholder="Nova lozinka" />
+                    <label asp-for="ChangePasswordInput.NewPassword" class="form-label"></label>
+                    <span asp-validation-for="ChangePasswordInput.NewPassword" class="text-danger"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="ChangePasswordInput.ConfirmPassword" class="form-control" type="password" placeholder="Potvrdite novu lozinku" />
+                    <label asp-for="ChangePasswordInput.ConfirmPassword" class="form-label"></label>
+                    <span asp-validation-for="ChangePasswordInput.ConfirmPassword" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-lg btn-primary">Ažuriraj lozinku</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

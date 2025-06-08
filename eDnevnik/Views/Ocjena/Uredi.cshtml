@@ -1,0 +1,32 @@
+﻿@model eDnevnik.Models.Ocjena
+@{
+    var ucenik = ViewBag.Ucenik as eDnevnik.Models.Korisnik;
+    var predmet = ViewBag.Predmet as eDnevnik.Models.Predmet;
+    ViewData["Title"] = "Uredi ocjenu";
+}
+
+<h2 class="mb-4 text-center">Uredi ocjenu za @ucenik.Ime @ucenik.Prezime iz predmeta @predmet.Naziv</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="UcenikId" />
+    <input type="hidden" asp-for="PredmetId" />
+
+    <div class="mb-3">
+        <label asp-for="Vrijednost" class="form-label">Ocjena (1-5)</label>
+        <input asp-for="Vrijednost" class="form-control" />
+        <span asp-validation-for="Vrijednost" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Komentar" class="form-label">Komentar</label>
+        <textarea asp-for="Komentar" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Spasi izmjene</button>
+    <a asp-action="Razredi" class="btn btn-secondary ms-2">Nazad</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

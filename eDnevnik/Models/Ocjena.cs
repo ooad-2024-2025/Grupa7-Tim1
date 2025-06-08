@@ -12,12 +12,12 @@ namespace eDnevnik.Models
        
         [ForeignKey("Korisnik")]
         public string UcenikId { get; set; }
-        public Korisnik Ucenik { get; set; }
+        public Korisnik? Ucenik { get; set; }
 
        
         [ForeignKey("Predmet")]
         public int PredmetId { get; set; }
-        public Predmet Predmet { get; set; }
+        public Predmet? Predmet { get; set; }
         public int Vrijednost { set; get; }
 
         public string? Komentar { get; set; }

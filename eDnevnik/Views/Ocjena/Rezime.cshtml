@@ -1,0 +1,41 @@
+﻿@model List<eDnevnik.Models.Ocjena>
+@{
+    ViewData["Title"] = "Rezime ocjena";
+    var razred = ViewBag.Razred as eDnevnik.Models.Razred;
+    var predmet = ViewBag.Predmet as eDnevnik.Models.Predmet;
+}
+
+<h2 class="text-center mb-4">Ocjene za @razred.Naziv iz predmeta @predmet.Naziv</h2>
+
+<table class="table table-striped table-bordered text-center">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Ocjena</th>
+            <th>Datum</th>
+            <th>Komentar</th>
+            <th>Akcije</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Model)
+        {
+            <tr>
+                <td>@(o.Ucenik.Ime + " " + o.Ucenik.Prezime)</td>
+                <td>@o.Vrijednost</td>
+                <td>@o.Datum.ToString("yyyy-MM-dd")</td>
+                <td>@o.Komentar</td>
+                <td>
+                    <a class="btn btn-sm btn-warning me-1" asp-action="Uredi" asp-route-id="@o.Id">Uredi</a>
+                    <form asp-action="Obrisi" asp-route-id="@o.Id" method="post" class="d-inline" onsubmit="return confirm('Obrisati ocjenu?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Obriši</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center mt-4">
+    <a class="btn btn-secondary" asp-action="Razredi">Nazad</a>
+</div>

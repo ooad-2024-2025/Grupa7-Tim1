@@ -181,5 +181,78 @@ namespace eDnevnik.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Unos");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Rezime(int razredId, int predmetId)
+        {
+            var nastavnik = await _userManager.GetUserAsync(User);
+
+            var ocjene = await _context.Ocjena
+                .Include(o => o.Ucenik)
+                .Include(o => o.Predmet)
+                .Where(o => o.PredmetId == predmetId && o.Ucenik.RazredId == razredId && o.Predmet.NastavnikId == nastavnik.Id)
+                .ToListAsync();
+
+            ViewBag.Razred = await _context.Razred.FindAsync(razredId);
+            ViewBag.Predmet = await _context.Predmet.FindAsync(predmetId);
+            ViewBag.RazredId = razredId;
+            ViewBag.PredmetId = predmetId;
+
+            return View(ocjene);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Uredi(int id)
+        {
+            var ocjena = await _context.Ocjena.Include(o => o.Ucenik).Include(o => o.Predmet).FirstOrDefaultAsync(o => o.Id == id);
+            if (ocjena == null) return NotFound();
+
+            ViewBag.Ucenik = ocjena.Ucenik;
+            ViewBag.Predmet = ocjena.Predmet;
+
+            return View(ocjena);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Uredi(Ocjena o)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.Ucenik = await _userManager.FindByIdAsync(o.UcenikId);
+                ViewBag.Predmet = await _context.Predmet.FindAsync(o.PredmetId);
+                return View(o);
+            }
+
+            var postojeca = await _context.Ocjena
+                .Include(x => x.Ucenik)
+                .FirstOrDefaultAsync(x => x.Id == o.Id);
+
+            if (postojeca == null)
+                return NotFound();
+
+            postojeca.Vrijednost = o.Vrijednost;
+            postojeca.Komentar = o.Komentar;
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Rezime", new { razredId = postojeca.Ucenik.RazredId, predmetId = postojeca.PredmetId });
+        }
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> Obrisi(int id)
+        {
+            var ocjena = await _context.Ocjena.Include(o => o.Ucenik).FirstOrDefaultAsync(o => o.Id == id);
+            if (ocjena == null) return NotFound();
+
+            int predmetId = ocjena.PredmetId;
+            int? razredId = ocjena.Ucenik.RazredId;
+
+            _context.Ocjena.Remove(ocjena);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Rezime", new { razredId = razredId, predmetId = predmetId });
+        }
     }
 }

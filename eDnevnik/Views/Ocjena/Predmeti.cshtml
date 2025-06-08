@@ -12,15 +12,17 @@
 }
 else
 {
-    <div class="list-group w-50 mx-auto">
+    <div class="list-group w-75 mx-auto">
         @foreach (var p in Model)
         {
-            <a class="list-group-item list-group-item-action"
-               asp-action="Ucenici"
-               asp-route-razredId="@razredId"
-               asp-route-predmetId="@p.Id">
-                @p.Naziv
-            </a>
+            <div class="list-group-item d-flex justify-content-between align-items-center">
+                <strong>@p.Naziv</strong>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-primary btn-sm" asp-action="Ucenici" asp-route-razredId="@razredId" asp-route-predmetId="@p.Id">Unos ocjena</a>
+                    <a class="btn btn-outline-primary btn-sm" asp-action="Rezime" asp-route-razredId="@razredId" asp-route-predmetId="@p.Id">Pregled ocjena</a>
+                </div>
+            </div>
         }
     </div>
+
 }
