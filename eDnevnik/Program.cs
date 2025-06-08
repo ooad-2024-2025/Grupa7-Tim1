@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using eDnevnik.Data;
 using eDnevnik.Models;
 using eDnevnik.Services;
+using eDnevnik.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<eDnevnik.Services.ExcelReportService>();
 builder.Services.AddScoped<eDnevnik.Services.EmailService>();
+
+builder.Services.AddSignalR();
+
 
 var app = builder.Build();
 
@@ -111,6 +115,8 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
     await CreateRoles(services);
 }
+// 7. SIGNALR HUB
+app.MapHub<ChatHub>("/chathub");
 
 app.Run();
 

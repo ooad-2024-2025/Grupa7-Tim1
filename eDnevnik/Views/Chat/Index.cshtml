@@ -10,7 +10,7 @@
         <div class="card-body">
             <h4 class="text-center mb-4">Chat</h4>
 
-            <div style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
+            <div id="chatPoruke" style="max-height: 300px; overflow-y: auto; margin-bottom: 20px;">
                 @foreach (var poruka in Model)
                 {
                     <div class="mb-3">
@@ -28,3 +28,41 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/chathub")
+            .build();
+
+        connection.on("PrimiPoruku", function (korisnik, poruka, vrijeme) {
+            const chatPoruke = document.getElementById("chatPoruke");
+
+            const div = document.createElement("div");
+            div.classList.add("mb-3");
+
+            div.innerHTML = `
+                <strong>${korisnik}</strong>
+                <span class="text-muted" style="font-size: 0.8rem;">${vrijeme}</span>
+                <div>${poruka}</div>
+            `;
+
+            chatPoruke.appendChild(div);
+            chatPoruke.scrollTop = chatPoruke.scrollHeight;
+        });
+
+        connection.start().catch(err => console.error(err.toString()));
+
+        function scrollToBottom() {
+            const chatDiv = document.getElementById('chatPoruke');
+            if (chatDiv) {
+                chatDiv.scrollTop = chatDiv.scrollHeight;
+            }
+        }
+
+        // Automatski scroll na dno kad se stranica učita
+        window.onload = scrollToBottom;
+    </script>
+}
+
+

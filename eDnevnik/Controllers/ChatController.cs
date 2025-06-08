@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using eDnevnik.Hubs;
+using Microsoft.AspNetCore.SignalR;
 
 namespace eDnevnik.Controllers
 {
@@ -12,12 +14,15 @@ namespace eDnevnik.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Korisnik> _userManager;
+        private readonly IHubContext<ChatHub> _hub;
 
-        public ChatController(ApplicationDbContext context, UserManager<Korisnik> userManager)
+        public ChatController(ApplicationDbContext context, UserManager<Korisnik> userManager, IHubContext<ChatHub> hub)
         {
             _context = context;
             _userManager = userManager;
+            _hub = hub;
         }
+
 
         public async Task<IActionResult> Index()
         {
@@ -44,7 +49,13 @@ namespace eDnevnik.Controllers
             _context.Poruka.Add(poruka);
             await _context.SaveChangesAsync();
 
+            await _hub.Clients.All.SendAsync("PrimiPoruku",
+                posiljalac.FullName,
+                sadrzaj,
+                DateTime.Now.ToString("HH:mm"));
+
             return RedirectToAction("Index");
         }
+
     }
 }
