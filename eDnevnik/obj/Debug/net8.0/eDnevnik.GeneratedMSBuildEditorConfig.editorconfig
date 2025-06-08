@@ -17,257 +17,265 @@ build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = eDnevnik
 build_property.RootNamespace = eDnevnik
-build_property.ProjectDir = C:\Users\Desktop\OOAD-PROJEKAT\Grupa7-Tim1\eDnevnik\
+build_property.ProjectDir = C:\Users\tarem\Source\Repos\Grupa7-Tim1\eDnevnik\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Desktop\OOAD-PROJEKAT\Grupa7-Tim1\eDnevnik
+build_property.MSBuildProjectDirectory = C:\Users\tarem\Source\Repos\Grupa7-Tim1\eDnevnik
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/Account/Login.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/Account/Register.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/Account/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/_ViewImports.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/_ViewStart.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Areas/Identity/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Admin/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Admin/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Cas/Create.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Cas/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Cas/Delete.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Cas/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Cas/Details.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Cas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Cas/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Cas/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Cas/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Cas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Cas/SedmicniRaspored.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Cas/SedmicniRaspored.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FzXFNlZG1pY25pUmFzcG9yZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Chat/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Chat/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Home/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Home/Privacy.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Izostanak/Create.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Izostanak/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Izostanak/Delete.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Izostanak/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Izostanak/Details.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Izostanak/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Izostanak/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Izostanak/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Izostanak/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Izostanak/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSXpvc3RhbmFrXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Nastavnici/Dodaj.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Nastavnici/Dodaj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFzdGF2bmljaVxEb2Rhai5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Nastavnici/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Nastavnici/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFzdGF2bmljaVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Nastavnici/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Nastavnici/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmFzdGF2bmljaVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Create.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Delete.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Details.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Dodaj.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Dodaj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXERvZGFqLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Predmeti.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Predmeti.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXFByZWRtZXRpLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Razredi.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Razredi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXFJhenJlZGkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Ucenici.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Ucenici.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXFVjZW5pY2kuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/UnesiZaRazredPredmet.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/UnesiZaRazredPredmet.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXFVuZXNpWmFSYXpyZWRQcmVkbWV0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ocjena/Unos.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ocjena/Unos.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2NqZW5hXFVub3MuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Predmeti/Create.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Predmeti/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Predmeti/Delete.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Predmeti/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Predmeti/Details.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Predmeti/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Predmeti/Dodaj.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Predmeti/Dodaj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcRG9kYWouY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Predmeti/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Predmeti/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Predmeti/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Predmeti/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Create.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Delete.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Details.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Detalji.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Detalji.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxEZXRhbGppLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/DetaljiPredmeti.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/DetaljiPredmeti.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxEZXRhbGppUHJlZG1ldGkuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Dodaj.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Dodaj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxEb2Rhai5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Razredi/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Razredi/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Roditelji/Dodaj.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Report/Greska.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XEdyZXNrYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Report/Potvrda.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XFBvdHZyZGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Roditelji/Dodaj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9kaXRlbGppXERvZGFqLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Roditelji/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Roditelji/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9kaXRlbGppXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Roditelji/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Roditelji/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUm9kaXRlbGppXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Shared/Error.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Shared/_LoginPartial.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Shared/_LoginPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ucenici/Dodaj.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ucenici/Dodaj.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWNlbmljaVxEb2Rhai5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ucenici/Edit.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ucenici/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWNlbmljaVxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Ucenici/Index.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Ucenici/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVWNlbmljaVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/_ViewImports.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/_ViewStart.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Desktop/OOAD-PROJEKAT/Grupa7-Tim1/eDnevnik/Views/Shared/_Layout.cshtml]
+[C:/Users/tarem/Source/Repos/Grupa7-Tim1/eDnevnik/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-p50t2ai9jc

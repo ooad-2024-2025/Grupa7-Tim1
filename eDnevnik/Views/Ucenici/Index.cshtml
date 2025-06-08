@@ -29,15 +29,22 @@
                     <td>@ucenik.Telefon</td>
                     <td>@ucenik.Adresa</td>
                     <td>@(ucenik.Razred != null ? ucenik.Razred.Naziv : "Nema razred")</td>
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a class="btn btn-warning w-100" style="min-width:80px;" asp-action="Edit" asp-route-id="@ucenik.Id">Uredi</a>
-                            <form asp-action="Obrisi" asp-route-id="@ucenik.Id" method="post"
-                                  class="w-100" style="min-width:80px;" onsubmit="return confirm('Da li ste sigurni da želite obrisati učenika?');">
-                                <button type="submit" class="btn btn-danger w-100">Obriši</button>
-                            </form>
-                        </div>
-                    </td>
+                        <td>
+        <div class="d-flex gap-2">
+            <a class="btn btn-warning w-100" style="min-width:80px;" asp-action="Edit" asp-route-id="@ucenik.Id">Uredi</a>
+
+            <form asp-action="Obrisi" asp-route-id="@ucenik.Id" method="post"
+                  class="w-100" style="min-width:80px;" onsubmit="return confirm('Da li ste sigurni da želite obrisati učenika?');">
+                <button type="submit" class="btn btn-danger w-100">Obriši</button>
+            </form>
+
+                        <form asp-controller="Report" asp-action="Send" method="post" class="w-100">
+        <input type="hidden" name="ucenikId" value="@ucenik.Id" />
+        <button type="submit" class="btn btn-success w-100">Izvještaj</button>
+        </form>
+        </div>
+    </td>
+
 
                 </tr>
             }

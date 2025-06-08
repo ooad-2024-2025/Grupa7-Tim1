@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using eDnevnik.Data;
 using eDnevnik.Models;
+using eDnevnik.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +35,10 @@ builder.Services.AddRazorPages(options =>
 });
 
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.AddScoped<eDnevnik.Services.ExcelReportService>();
+builder.Services.AddScoped<eDnevnik.Services.EmailService>();
 
 var app = builder.Build();
 
@@ -108,3 +113,5 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.Run();
+
+
