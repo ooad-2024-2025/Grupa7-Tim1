@@ -9585,17 +9585,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+      "projectUniqueName": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
       "projectName": "eDnevnik",
-      "projectPath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+      "projectPath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
       "packagesPath": "C:\\Users\\mirne\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO\\Grupa7-Tim1\\eDnevnik\\obj\\",
+      "outputPath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO\\Grupa7-Tim1\\eDnevnik\\NuGet.Config",
+        "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\NuGet.Config",
         "C:\\Users\\mirne\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"

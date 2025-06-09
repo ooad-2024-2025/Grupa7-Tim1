@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eDnevnik.Data;
 
@@ -11,9 +12,11 @@ using eDnevnik.Data;
 namespace eDnevnik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250609190240_DodajKoloneUCas")]
+    partial class DodajKoloneUCas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,12 +170,6 @@ namespace eDnevnik.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("DanUSedmici")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("FixniTerminId")
-                        .HasColumnType("int");
-
                     b.Property<string>("NastavnikId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -188,8 +185,6 @@ namespace eDnevnik.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FixniTerminId");
-
                     b.HasIndex("NastavnikId");
 
                     b.HasIndex("PredmetId");
@@ -197,136 +192,6 @@ namespace eDnevnik.Migrations
                     b.HasIndex("RazredId");
 
                     b.ToTable("Cas", (string)null);
-                });
-
-            modelBuilder.Entity("eDnevnik.Models.FixniTermin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("JeOdmor")
-                        .HasColumnType("bit");
-
-                    b.Property<TimeSpan>("KrajVremena")
-                        .HasColumnType("time");
-
-                    b.Property<string>("Naziv")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<TimeSpan>("PocetakVremena")
-                        .HasColumnType("time");
-
-                    b.Property<int>("Redoslijed")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FixniTermini");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 8, 45, 0, 0),
-                            Naziv = "1. čas",
-                            PocetakVremena = new TimeSpan(0, 8, 0, 0, 0),
-                            Redoslijed = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 9, 35, 0, 0),
-                            Naziv = "2. čas",
-                            PocetakVremena = new TimeSpan(0, 8, 50, 0, 0),
-                            Redoslijed = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 10, 25, 0, 0),
-                            Naziv = "3. čas",
-                            PocetakVremena = new TimeSpan(0, 9, 40, 0, 0),
-                            Redoslijed = 3
-                        },
-                        new
-                        {
-                            Id = 100,
-                            JeOdmor = true,
-                            KrajVremena = new TimeSpan(0, 10, 45, 0, 0),
-                            Naziv = "Veliki odmor",
-                            PocetakVremena = new TimeSpan(0, 10, 25, 0, 0),
-                            Redoslijed = 4
-                        },
-                        new
-                        {
-                            Id = 4,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 11, 30, 0, 0),
-                            Naziv = "4. čas",
-                            PocetakVremena = new TimeSpan(0, 10, 45, 0, 0),
-                            Redoslijed = 5
-                        },
-                        new
-                        {
-                            Id = 5,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 12, 20, 0, 0),
-                            Naziv = "5. čas",
-                            PocetakVremena = new TimeSpan(0, 11, 35, 0, 0),
-                            Redoslijed = 6
-                        },
-                        new
-                        {
-                            Id = 6,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 13, 10, 0, 0),
-                            Naziv = "6. čas",
-                            PocetakVremena = new TimeSpan(0, 12, 25, 0, 0),
-                            Redoslijed = 7
-                        },
-                        new
-                        {
-                            Id = 101,
-                            JeOdmor = true,
-                            KrajVremena = new TimeSpan(0, 13, 30, 0, 0),
-                            Naziv = "Veliki odmor",
-                            PocetakVremena = new TimeSpan(0, 13, 10, 0, 0),
-                            Redoslijed = 8
-                        },
-                        new
-                        {
-                            Id = 7,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 14, 15, 0, 0),
-                            Naziv = "7. čas",
-                            PocetakVremena = new TimeSpan(0, 13, 30, 0, 0),
-                            Redoslijed = 9
-                        },
-                        new
-                        {
-                            Id = 8,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 15, 5, 0, 0),
-                            Naziv = "8. čas",
-                            PocetakVremena = new TimeSpan(0, 14, 20, 0, 0),
-                            Redoslijed = 10
-                        },
-                        new
-                        {
-                            Id = 9,
-                            JeOdmor = false,
-                            KrajVremena = new TimeSpan(0, 15, 55, 0, 0),
-                            Naziv = "9. čas",
-                            PocetakVremena = new TimeSpan(0, 15, 10, 0, 0),
-                            Redoslijed = 11
-                        });
                 });
 
             modelBuilder.Entity("eDnevnik.Models.Izostanak", b =>
@@ -663,10 +528,6 @@ namespace eDnevnik.Migrations
 
             modelBuilder.Entity("eDnevnik.Models.Cas", b =>
                 {
-                    b.HasOne("eDnevnik.Models.FixniTermin", "FixniTermin")
-                        .WithMany()
-                        .HasForeignKey("FixniTerminId");
-
                     b.HasOne("eDnevnik.Models.Korisnik", "Nastavnik")
                         .WithMany()
                         .HasForeignKey("NastavnikId")
@@ -684,8 +545,6 @@ namespace eDnevnik.Migrations
                         .HasForeignKey("RazredId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("FixniTermin");
 
                     b.Navigation("Nastavnik");
 

@@ -2,15 +2,224 @@
 
 @{
     ViewData["Title"] = "Dodaj čas";
+    var termini = eDnevnik.Models.FixniTermin.GetStandardniTermini().Where(t => !t.JeOdmor).ToList();
 }
 
-<h3 class="mb-3">Dodaj novi čas</h3>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">➕ Dodaj novi čas</h4>
+                </div>
+                <div class="card-body">
 
-<form asp-action="Create" method="post">
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.Partial("_FormPartial")
-    
+                    @if (TempData["Uspjeh"] != null)
+                    {
+                        <div class="alert alert-success alert-dismissible fade show">
+                            ✅ @TempData["Uspjeh"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
 
-    <button type="submit" class="btn btn-primary">Spasi</button>
-    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
-</form>
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            <h6>⚠️ Molimo ispravite sljedeće greške:</h6>
+                            <ul class="mb-0">
+                                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                                {
+                                    <li>@error.ErrorMessage</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <form asp-action="Create" method="post" id="casForm">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DanUSedmici" class="form-label">📅 Dan u sedmici *</label>
+                                <select asp-for="DanUSedmici" class="form-select" required>
+                                    <option value="">-- Izaberite dan --</option>
+                                    <option value="Monday">Ponedjeljak</option>
+                                    <option value="Tuesday">Utorak</option>
+                                    <option value="Wednesday">Srijeda</option>
+                                    <option value="Thursday">Četvrtak</option>
+                                    <option value="Friday">Petak</option>
+                                </select>
+                                <span asp-validation-for="DanUSedmici" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FixniTerminId" class="form-label">🕐 Termin *</label>
+                                <select asp-for="FixniTerminId" class="form-select" required>
+                                    <option value="">-- Izaberite termin --</option>
+                                    @foreach (var termin in termini)
+                                    {
+                                        <option value="@termin.Id">@termin.Naziv (@termin.FormatiraniTermin)</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="FixniTerminId" class="text-danger"></span>
+                                <div class="form-text">
+                                    Standardni školski časovi od 45 minuta
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RazredId" class="form-label">🏫 Razred *</label>
+                                <select asp-for="RazredId" asp-items="ViewBag.RazredId" class="form-select" required>
+                                    <option value="">-- Izaberite razred --</option>
+                                </select>
+                                <span asp-validation-for="RazredId" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PredmetId" class="form-label">📚 Predmet *</label>
+                                <select asp-for="PredmetId" asp-items="ViewBag.PredmetId" class="form-select" required>
+                                    <option value="">-- Izaberite predmet --</option>
+                                </select>
+                                <span asp-validation-for="PredmetId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="NastavnikId" class="form-label">👨‍🏫 Nastavnik *</label>
+                                <select asp-for="NastavnikId" asp-items="ViewBag.NastavnikId" class="form-select" required>
+                                    <option value="">-- Izaberite nastavnika --</option>
+                                </select>
+                                <span asp-validation-for="NastavnikId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- PREGLED RASPOREDA -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="alert alert-info">
+                                    <h6>📋 Pregled školskog rasporeda:</h6>
+                                    <div class="row small">
+                                        @foreach (var termin in eDnevnik.Models.FixniTermin.GetStandardniTermini())
+                                        {
+                                            @if (termin.JeOdmor)
+                                            {
+                                                <div class="col-md-4 mb-1">
+                                                    <span class="text-muted">🕐 @termin.FormatiraniTermin - <strong>@termin.Naziv</strong></span>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-md-4 mb-1">
+                                                    <span>🕐 @termin.FormatiraniTermin - @termin.Naziv</span>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Upravljanje" class="btn btn-outline-secondary">
+                                ← Nazad na listu
+                            </a>
+                            <div>
+                                <button type="submit" class="btn btn-success" id="submitBtn">
+                                    💾 Spasi čas
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" onclick="previewCas()">
+                                    👁️ Pregled
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PREGLED MODAL -->
+            <div class="modal fade" id="previewModal" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">👁️ Pregled časa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="previewContent">
+                            <!-- Sadržaj se dodaje dinamički -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zatvori</button>
+                            <button type="button" class="btn btn-success" onclick="submitForm()">💾 Spasi čas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        const termini = @Html.Raw(Json.Serialize(termini.ToDictionary(t => t.Id, t => t.Naziv + " (" + t.FormatiraniTermin + ")")));
+        const daniNazivi = {
+            "Monday": "Ponedjeljak",
+            "Tuesday": "Utorak",
+            "Wednesday": "Srijeda",
+            "Thursday": "Četvrtak",
+            "Friday": "Petak"
+        };
+
+        function previewCas() {
+            const razred = document.querySelector('#RazredId option:checked')?.text || 'Nije odabran';
+            const predmet = document.querySelector('#PredmetId option:checked')?.text || 'Nije odabran';
+            const nastavnik = document.querySelector('#NastavnikId option:checked')?.text || 'Nije odabran';
+            const dan = document.querySelector('#DanUSedmici').value;
+            const terminId = document.querySelector('#FixniTerminId').value;
+
+            if (!dan || !terminId) {
+                alert('Molimo odaberite dan i termin časa.');
+                return;
+            }
+
+            const danNaziv = daniNazivi[dan] || dan;
+            const terminNaziv = termini[terminId] || 'Nepoznat termin';
+
+            const previewHtml = `
+                <div class="row">
+                    <div class="col-6"><strong>📅 Dan:</strong></div>
+                    <div class="col-6">${danNaziv}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><strong>🕐 Termin:</strong></div>
+                    <div class="col-6">${terminNaziv}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><strong>🏫 Razred:</strong></div>
+                    <div class="col-6">${razred}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><strong>📚 Predmet:</strong></div>
+                    <div class="col-6">${predmet}</div>
+                </div>
+                <div class="row">
+                    <div class="col-6"><strong>👨‍🏫 Nastavnik:</strong></div>
+                    <div class="col-6">${nastavnik}</div>
+                </div>
+            `;
+
+            document.getElementById('previewContent').innerHTML = previewHtml;
+            new bootstrap.Modal(document.getElementById('previewModal')).show();
+        }
+
+        function submitForm() {
+            document.getElementById('casForm').submit();
+        }
+    </script>
+}

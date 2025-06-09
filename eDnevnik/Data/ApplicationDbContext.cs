@@ -15,12 +15,11 @@ namespace eDnevnik.Data
         public DbSet<Predmet> Predmet { get; set; }
         public DbSet<UcenikPredmet> RazredPredmet { get; set; }
         public DbSet<Cas> Cas { get; set; }
+        public DbSet<FixniTermin> FixniTermini { get; set; }  // DODANO
         public DbSet<Izostanak> Izostanak { get; set; }
         public DbSet<Ocjena> Ocjena { get; set; }
         public DbSet<PredmetRazred> PredmetRazred { get; set; }
-
         public DbSet<Poruka> Poruka { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -43,10 +42,6 @@ namespace eDnevnik.Data
             base.OnModelCreating(modelBuilder);
 
             // CAS
-             // Samo ovde Cascade
-
-             // Ovde Restrict
-
             modelBuilder.Entity<Cas>()
                 .HasOne(c => c.Nastavnik)
                 .WithMany()
@@ -87,8 +82,6 @@ namespace eDnevnik.Data
                 .HasForeignKey(o => o.UcenikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-       
-
             // KORISNIK
             modelBuilder.Entity<Korisnik>()
                 .HasOne(k => k.Razred)
@@ -102,8 +95,7 @@ namespace eDnevnik.Data
                 .HasForeignKey(k => k.RoditeljId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //PORUKA MIKI
-
+            // PORUKA
             modelBuilder.Entity<Poruka>()
                 .HasOne(p => p.Posiljalac)
                 .WithMany()
@@ -116,6 +108,10 @@ namespace eDnevnik.Data
                 .HasForeignKey(p => p.PrimalacId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // FIKSNI TERMINI SEED DATA - DODANO
+            modelBuilder.Entity<FixniTermin>().HasData(
+                FixniTermin.GetStandardniTermini().ToArray()
+            );
         }
     }
 }

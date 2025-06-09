@@ -2,37 +2,179 @@
 
 @{
     ViewData["Title"] = "Raspored časova";
+
+    // Dohvati fiksne termine
+    var sviTermini = eDnevnik.Models.FixniTermin.GetStandardniTermini();
+    var termini = sviTermini.Where(t => !t.JeOdmor).OrderBy(t => t.Redoslijed).ToList();
+    var odmori = sviTermini.Where(t => t.JeOdmor).OrderBy(t => t.Redoslijed).ToList();
+
+    var dani = new List<DayOfWeek> {
+        DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Wednesday,
+        DayOfWeek.Thursday, DayOfWeek.Friday
+    };
+
+    var naziviDana = new Dictionary<DayOfWeek, string> {
+        { DayOfWeek.Monday, "Ponedjeljak" },
+        { DayOfWeek.Tuesday, "Utorak" },
+        { DayOfWeek.Wednesday, "Srijeda" },
+        { DayOfWeek.Thursday, "Četvrtak" },
+        { DayOfWeek.Friday, "Petak" }
+    };
+
+    // Kreiraj matricu rasporeda
+    var rasporedMatrix = new Dictionary<int, Dictionary<DayOfWeek, eDnevnik.Models.Cas>>();
+
+    foreach (var termin in termini)
+    {
+        rasporedMatrix[termin.Id] = new Dictionary<DayOfWeek, eDnevnik.Models.Cas>();
+        foreach (var dan in dani)
+        {
+            rasporedMatrix[termin.Id][dan] = null;
+        }
+    }
+
+    // Popuni matricu sa časovima
+    foreach (var cas in Model)
+    {
+        if (cas.FixniTerminId.HasValue && cas.DanUSedmici.HasValue && rasporedMatrix.ContainsKey(cas.FixniTerminId.Value))
+        {
+            rasporedMatrix[cas.FixniTerminId.Value][cas.DanUSedmici.Value] = cas;
+        }
+    }
 }
 
-<h3 class="mb-4">Pregled rasporeda časova</h3>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">+ Dodaj čas</a>
-</p>
+            @* NASLOV *@
+            <div class="text-center mb-4">
+                <h3 class="mb-0">📅 Raspored časova</h3>
+                @if (!string.IsNullOrEmpty(ViewBag.FilterInfo as string))
+                {
+                    <p class="text-muted">@ViewBag.FilterInfo</p>
+                }
+            </div>
 
-<table class="table table-bordered text-center">
-    <thead class="table-light">
-        <tr>
-            <th>Razred</th>
-            <th>Predmet</th>
-            <th>Nastavnik</th>
-            <th>Termin</th>
-            <th>Akcija</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Razred?.Naziv</td>
-                <td>@item.Predmet?.Naziv</td>
-                <td>@item.Nastavnik?.FullName</td>
-                <td>@item.Termin.ToString("dddd HH:mm")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Uredi</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Obriši</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            @* GLAVNA TABELA RASPOREDA *@
+            <div class="card shadow-sm">
+                <div class="table-responsive">
+                    <table class="table table-bordered mb-0" style="min-width: 800px;">
+                        <thead style="background-color: #2196F3; color: white;">
+                            <tr>
+                                <th class="text-center" style="width: 120px;">Vrijeme</th>
+                                @foreach (var dan in dani)
+                                {
+                                    <th class="text-center">@naziviDana[dan]</th>
+                                }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var termin in termini)
+                            {
+                                <tr>
+                                    <td class="text-center fw-bold" style="background-color: #f8f9fa;">
+                                        <div>@termin.FormatiraniTermin</div>
+                                        <small class="text-muted">@termin.Naziv</small>
+                                    </td>
+                                    @foreach (var dan in dani)
+                                    {
+                                        <td class="text-center" style="height: 60px; vertical-align: middle;">
+                                            @if (rasporedMatrix[termin.Id][dan] != null)
+                                            {
+                                                var cas = rasporedMatrix[termin.Id][dan];
+                                                <div class="p-1">
+                                                    <strong>@cas.Predmet?.Naziv</strong>
+                                                    @if (!User.IsInRole("Ucenik"))
+                                                    {
+                                                        <br>
+                                        
+                                                        <small class="text-muted">@cas.Razred?.Naziv</small>
+                                                    }
+                                                    @if (!User.IsInRole("Nastavnik"))
+                                                    {
+                                                        <br>
+                                        
+                                                        <small class="text-muted">@cas.Nastavnik?.FullName</small>
+                                                    }
+                                                </div>
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+
+                                @* UMETNI ODMOR NAKON 3. I 6. ČASA *@
+                                @if (termin.Redoslijed == 3 || termin.Redoslijed == 7)
+                                {
+                                    var odmor = odmori.FirstOrDefault(o => o.Redoslijed == termin.Redoslijed + 1);
+                                    if (odmor != null)
+                                    {
+                                        <tr style="background-color: #fff3cd;">
+                                            <td class="text-center fw-bold text-warning">
+                                                <div>@odmor.FormatiraniTermin</div>
+                                                <small>@odmor.Naziv</small>
+                                            </td>
+                                            @foreach (var dan in dani)
+                                            {
+                                                <td class="text-center text-muted">
+                                                    <em>Veliki odmor</em>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            @* FILTER SEKCIJA *@
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h6 class="mb-0">🔍 Filter rasporeda</h6>
+                </div>
+                <div class="card-body">
+                    <form method="get" asp-action="Index">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Odaberi dan:</label>
+                                <select name="dan" class="form-select">
+                                    <option value="">Svi dani</option>
+                                    <option value="Monday" selected="@(ViewBag.IzabraniDan == "Monday")">Ponedjeljak</option>
+                                    <option value="Tuesday" selected="@(ViewBag.IzabraniDan == "Tuesday")">Utorak</option>
+                                    <option value="Wednesday" selected="@(ViewBag.IzabraniDan == "Wednesday")">Srijeda</option>
+                                    <option value="Thursday" selected="@(ViewBag.IzabraniDan == "Thursday")">Četvrtak</option>
+                                    <option value="Friday" selected="@(ViewBag.IzabraniDan == "Friday")">Petak</option>
+                                </select>
+                            </div>
+
+                            @if (User.IsInRole("Administrator"))
+                            {
+                                <div class="col-md-6">
+                                    <label class="form-label">Odaberi razred:</label>
+                                    <select name="razredId" asp-items="ViewBag.Razredi" class="form-select">
+                                        <option value="">Svi razredi</option>
+                                    </select>
+                                </div>
+                            }
+                        </div>
+                        <div class="mt-3 text-center">
+                            <button type="submit" class="btn btn-primary px-4">🔍 Filtriraj</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            @* ADMIN DUGMAD *@
+            @if (User.IsInRole("Administrator"))
+            {
+                <div class="text-center mt-4">
+                    <a asp-action="Upravljanje" class="btn btn-success">⚙️ Upravljanje rasporedom</a>
+                    <a asp-action="Create" class="btn btn-outline-primary">➕ Dodaj čas</a>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,245 @@
+﻿@model List<eDnevnik.Models.Cas>
+
+@{
+    ViewData["Title"] = "Upravljanje rasporedom";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h3>⚙️ Upravljanje rasporedom časova</h3>
+                <div>
+                    <a asp-action="Create" class="btn btn-success">➕ Dodaj čas</a>
+                    <a asp-action="Index" class="btn btn-outline-primary">📋 Pregled rasporeda</a>
+                </div>
+            </div>
+
+            <!-- STATISTIKE -->
+            <div class="row mb-4">
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4 class="card-title">@Model.Count</h4>
+                                    <p class="card-text">Ukupno časova</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <h2>📅</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4 class="card-title">@Model.Select(c => c.RazredId).Distinct().Count()</h4>
+                                    <p class="card-text">Aktivnih razreda</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <h2>🏫</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4 class="card-title">@Model.Select(c => c.NastavnikId).Distinct().Count()</h4>
+                                    <p class="card-text">Aktivnih nastavnika</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <h2>👨‍🏫</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <h4 class="card-title">@Model.Select(c => c.PredmetId).Distinct().Count()</h4>
+                                    <p class="card-text">Različitih predmeta</p>
+                                </div>
+                                <div class="align-self-center">
+                                    <h2>📚</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OBAVIJEŠTENJA -->
+            @if (TempData["Uspjeh"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    ✅ @TempData["Uspjeh"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            @if (TempData["Greska"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    ❌ @TempData["Greska"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            }
+
+            <!-- TABELA ČASOVA -->
+            @if (Model.Any())
+            {
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h6 class="mb-0">📋 Svi časovi</h6>
+                        <div>
+                            <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#filterCollapse" aria-expanded="false">
+                                🔍 Filtriraj
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- BRZI FILTERI -->
+                    <div class="collapse" id="filterCollapse">
+                        <div class="card-body border-bottom">
+                            <div class="row g-3">
+                                <div class="col-md-3">
+                                    <input type="text" id="filterRazred" class="form-control" placeholder="Filtriraj po razredu...">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="filterPredmet" class="form-control" placeholder="Filtriraj po predmetu...">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" id="filterNastavnik" class="form-control" placeholder="Filtriraj po nastavniku...">
+                                </div>
+                                <div class="col-md-3">
+                                    <select id="filterDan" class="form-select">
+                                        <option value="">Svi dani</option>
+                                        <option value="Ponedjeljak">Ponedjeljak</option>
+                                        <option value="Utorak">Utorak</option>
+                                        <option value="Srijeda">Srijeda</option>
+                                        <option value="Četvrtak">Četvrtak</option>
+                                        <option value="Petak">Petak</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0" id="casoviTable">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>📅 Dan</th>
+                                        <th>🕐 Termin</th>
+                                        <th>🏫 Razred</th>
+                                        <th>📚 Predmet</th>
+                                        <th>👨‍🏫 Nastavnik</th>
+                                        <th width="120">Akcije</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cas in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <strong>@cas.DanNaziv</strong>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <strong>@cas.FixniTermin?.FormatiraniTermin</strong><br>
+                                                    <small class="text-muted">@cas.FixniTermin?.Naziv</small>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-primary">@cas.Razred?.Naziv</span>
+                                            </td>
+                                            <td>@cas.Predmet?.Naziv</td>
+                                            <td>@cas.Nastavnik?.FullName</td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <a asp-action="Edit" asp-route-id="@cas.Id"
+                                                       class="btn btn-sm btn-outline-warning" title="Uredi čas">
+                                                        ✏️
+                                                    </a>
+                                                    <a asp-action="Delete" asp-route-id="@cas.Id"
+                                                       class="btn btn-sm btn-outline-danger" title="Obriši čas"
+                                                       onclick="return confirm('Da li ste sigurni da želite obrisati ovaj čas?')">
+                                                        🗑️
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <h4>📋 Nema unesenih časova</h4>
+                    <p class="text-muted">Počnite dodavanje časova klikom na dugme "Dodaj čas"</p>
+                    <a asp-action="Create" class="btn btn-primary">➕ Dodaj prvi čas</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Brza pretraga tabele
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterRazred = document.getElementById('filterRazred');
+            const filterPredmet = document.getElementById('filterPredmet');
+            const filterNastavnik = document.getElementById('filterNastavnik');
+            const filterDan = document.getElementById('filterDan');
+            const table = document.getElementById('casoviTable');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+            function filterTable() {
+                const razredFilter = filterRazred.value.toLowerCase();
+                const predmetFilter = filterPredmet.value.toLowerCase();
+                const nastavnikFilter = filterNastavnik.value.toLowerCase();
+                const danFilter = filterDan.value.toLowerCase();
+
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i];
+                    const dan = row.cells[0].textContent.toLowerCase();
+                    const razred = row.cells[2].textContent.toLowerCase();
+                    const predmet = row.cells[3].textContent.toLowerCase();
+                    const nastavnik = row.cells[4].textContent.toLowerCase();
+
+                    let show = true;
+
+                    if (danFilter && !dan.includes(danFilter)) show = false;
+                    if (razredFilter && !razred.includes(razredFilter)) show = false;
+                    if (predmetFilter && !predmet.includes(predmetFilter)) show = false;
+                    if (nastavnikFilter && !nastavnik.includes(nastavnikFilter)) show = false;
+
+                    row.style.display = show ? '' : 'none';
+                }
+            }
+
+            filterRazred.addEventListener('input', filterTable);
+            filterPredmet.addEventListener('input', filterTable);
+            filterNastavnik.addEventListener('input', filterTable);
+            filterDan.addEventListener('change', filterTable);
+        });
+    </script>
+}

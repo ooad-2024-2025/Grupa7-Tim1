@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+VMNox5nHTg=",
+  "dgSpecHash": "SxPFIeKFZvk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+  "projectFilePath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mirne\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\mirne\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
