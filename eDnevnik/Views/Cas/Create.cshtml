@@ -1,45 +1,40 @@
 ﻿@model eDnevnik.Models.Cas
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj čas";
 }
 
-<h1>Create</h1>
+<h3 class="mb-3">Dodaj novi čas</h3>
 
-<h4>Cas</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Termin" class="control-label"></label>
-                <input asp-for="Termin" class="form-control" />
-                <span asp-validation-for="Termin" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RazredId" class="control-label"></label>
-                <select asp-for="RazredId" class ="form-control" asp-items="ViewBag.RazredId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="PredmetId" class="control-label"></label>
-                <select asp-for="PredmetId" class ="form-control" asp-items="ViewBag.PredmetId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="NastavnikId" class="control-label"></label>
-                <select asp-for="NastavnikId" class ="form-control" asp-items="ViewBag.NastavnikId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<form asp-action="Create" method="post">
+    <div class="mb-3">
+        <label asp-for="Termin" class="form-label"></label>
+        <input asp-for="Termin" type="datetime-local" class="form-control" />
+        <span asp-validation-for="Termin" class="text-danger"></span>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <div class="mb-3">
+        <label asp-for="RazredId" class="form-label"></label>
+        <select asp-for="RazredId" class="form-select" asp-items="ViewBag.RazredId"></select>
+        <span asp-validation-for="RazredId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PredmetId" class="form-label"></label>
+        <select asp-for="PredmetId" class="form-select" asp-items="ViewBag.PredmetId"></select>
+        <span asp-validation-for="PredmetId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="NastavnikId" class="form-label"></label>
+        <select asp-for="NastavnikId" class="form-select" asp-items="ViewBag.NastavnikId"></select>
+        <span asp-validation-for="NastavnikId" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Spasi</button>
+    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+</form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

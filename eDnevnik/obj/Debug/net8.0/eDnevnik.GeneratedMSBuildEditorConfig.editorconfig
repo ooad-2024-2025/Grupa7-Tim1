@@ -216,6 +216,26 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJlZG1ldGlcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Desktop/OOAD-PROJEKAT-NOVO/Grupa7-Tim1/eDnevnik/Views/Raspored/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFzcG9yZWRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Desktop/OOAD-PROJEKAT-NOVO/Grupa7-Tim1/eDnevnik/Views/Raspored/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFzcG9yZWRcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Desktop/OOAD-PROJEKAT-NOVO/Grupa7-Tim1/eDnevnik/Views/Raspored/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFzcG9yZWRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Desktop/OOAD-PROJEKAT-NOVO/Grupa7-Tim1/eDnevnik/Views/Raspored/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFzcG9yZWRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Desktop/OOAD-PROJEKAT-NOVO/Grupa7-Tim1/eDnevnik/Views/Raspored/_FormPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFzcG9yZWRcX0Zvcm1QYXJ0aWFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Desktop/OOAD-PROJEKAT-NOVO/Grupa7-Tim1/eDnevnik/Views/Razredi/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF6cmVkaVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

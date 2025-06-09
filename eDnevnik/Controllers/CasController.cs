@@ -223,9 +223,8 @@ namespace eDnevnik.Controllers
         }
 
 
-        // sedmicni raspored i filter po danu
         [Authorize]
-        public async Task<IActionResult> SedmicniRaspored(string dan)
+        public async Task<IActionResult> SedmicniRaspored(string dan, string nastavnikId, int? predmetId, int? razredId)
         {
             var casovi = await _context.Cas
                 .Include(c => c.Predmet)
@@ -233,16 +232,53 @@ namespace eDnevnik.Controllers
                 .Include(c => c.Nastavnik)
                 .ToListAsync();
 
-            DayOfWeek? danFilter = null;
             if (!string.IsNullOrEmpty(dan))
             {
-                danFilter = Enum.Parse<DayOfWeek>(dan);
+                var danFilter = Enum.Parse<DayOfWeek>(dan);
                 casovi = casovi.Where(c => c.Termin.DayOfWeek == danFilter).ToList();
+                ViewBag.IzabraniDan = dan;
             }
 
-            ViewBag.IzabraniDan = dan;
+            if (!string.IsNullOrEmpty(nastavnikId))
+            {
+                casovi = casovi.Where(c => c.NastavnikId == nastavnikId).ToList();
+                ViewBag.IzabraniNastavnik = nastavnikId;
+            }
+
+            if (predmetId.HasValue)
+            {
+                casovi = casovi.Where(c => c.PredmetId == predmetId).ToList();
+                ViewBag.IzabraniPredmet = predmetId;
+            }
+
+            if (razredId.HasValue)
+            {
+                casovi = casovi.Where(c => c.RazredId == razredId).ToList();
+                ViewBag.IzabraniRazred = razredId;
+            }
+
+
+
+
+            var sviKorisnici = await _userManager.Users.ToListAsync();
+            var samoNastavnici = new List<Korisnik>();
+
+            foreach (var korisnik in sviKorisnici)
+            {
+                if (await _userManager.IsInRoleAsync(korisnik, "Nastavnik"))
+                {
+                    samoNastavnici.Add(korisnik);
+                }
+            }
+            ViewBag.Nastavnici = new SelectList(samoNastavnici, "Id", "FullName");
+
+            ViewBag.Predmeti = new SelectList(_context.Predmet, "Id", "Naziv");
+
+            ViewBag.Razredi = new SelectList(_context.Razred, "Id", "Naziv");
+
             return View(casovi);
         }
+
 
 
 

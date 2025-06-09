@@ -1,0 +1,38 @@
+﻿@model List<eDnevnik.Models.Cas>
+
+@{
+    ViewData["Title"] = "Raspored časova";
+}
+
+<h3 class="mb-4">Pregled rasporeda časova</h3>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">+ Dodaj čas</a>
+</p>
+
+<table class="table table-bordered text-center">
+    <thead class="table-light">
+        <tr>
+            <th>Razred</th>
+            <th>Predmet</th>
+            <th>Nastavnik</th>
+            <th>Termin</th>
+            <th>Akcija</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Razred?.Naziv</td>
+                <td>@item.Predmet?.Naziv</td>
+                <td>@item.Nastavnik?.FullName</td>
+                <td>@item.Termin.ToString("dddd HH:mm")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Uredi</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Obriši</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

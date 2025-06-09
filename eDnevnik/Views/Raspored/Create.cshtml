@@ -1,0 +1,16 @@
+﻿@model eDnevnik.Models.Cas
+
+@{
+    ViewData["Title"] = "Dodaj čas";
+}
+
+<h3 class="mb-3">Dodaj novi čas</h3>
+
+<form asp-action="Create" method="post">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.Partial("_FormPartial")
+    
+
+    <button type="submit" class="btn btn-primary">Spasi</button>
+    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+</form>

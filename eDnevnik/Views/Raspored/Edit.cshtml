@@ -1,0 +1,14 @@
+﻿@model eDnevnik.Models.Cas
+
+@{
+    ViewData["Title"] = "Uredi čas";
+}
+
+<h3 class="mb-3">Uredi čas</h3>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+    @Html.Partial("_FormPartial")
+    <button type="submit" class="btn btn-primary">Spasi</button>
+    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
+</form>

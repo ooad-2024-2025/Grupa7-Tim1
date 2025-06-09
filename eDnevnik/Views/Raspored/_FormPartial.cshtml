@@ -1,0 +1,24 @@
+﻿@model eDnevnik.Models.Cas
+
+<div class="mb-3">
+    <label asp-for="RazredId" class="form-label">Razred</label>
+    <select asp-for="RazredId" asp-items="ViewBag.RazredId" class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <label asp-for="PredmetId" class="form-label">Predmet</label>
+    <select asp-for="PredmetId" asp-items="ViewBag.PredmetId" class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <label asp-for="NastavnikId" class="form-label">Nastavnik</label>
+    <select asp-for="NastavnikId" asp-items="ViewBag.NastavnikId" class="form-select"></select>
+</div>
+
+<div class="mb-3">
+    <label asp-for="Termin" class="form-label">Termin</label>
+    <input asp-for="Termin" type="datetime-local" class="form-control"
+           value="@Model.Termin.ToString("yyyy-MM-ddTHH:mm")" />
+    <span asp-validation-for="Termin" class="text-danger"></span>
+
+</div>

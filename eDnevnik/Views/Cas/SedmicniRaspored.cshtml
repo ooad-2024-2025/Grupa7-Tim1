@@ -32,8 +32,8 @@
     <h3 class="text-center mb-4">Raspored časova - Sedmični prikaz</h3>
     <form method="get" asp-action="SedmicniRaspored" class="mb-4">
         <div class="row">
-            <div class="col-md-4">
-                <label for="dan">Odaberi dan:</label>
+            <div class="col-md-3">
+                <label for="dan">Dan:</label>
                 <select class="form-select" name="dan" id="dan">
                     <option value="">Bez filtera</option>
                     @foreach (var d in Enum.GetValues(typeof(DayOfWeek)))
@@ -44,11 +44,53 @@
                     }
                 </select>
             </div>
+
+            <div class="col-md-3">
+                <label for="nastavnikId">Nastavnik:</label>
+                <select class="form-select" name="nastavnikId" id="nastavnikId">
+                    <option value="">Svi</option>
+                    @foreach (var nastavnik in (SelectList)ViewBag.Nastavnici)
+                    {
+                        <option value="@nastavnik.Value" selected="@(ViewBag.IzabraniNastavnik == nastavnik.Value ? "selected" : null)">
+                            @nastavnik.Text
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="predmetId">Predmet:</label>
+                <select class="form-select" name="predmetId" id="predmetId">
+                    <option value="">Svi</option>
+                    @foreach (var predmet in (SelectList)ViewBag.Predmeti)
+                    {
+                        <option value="@predmet.Value" selected="@(ViewBag.IzabraniPredmet?.ToString() == predmet.Value ? "selected" : null)">
+                            @predmet.Text
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="razredId">Razred:</label>
+                <select class="form-select" name="razredId" id="razredId">
+                    <option value="">Svi</option>
+                    @foreach (var razred in (SelectList)ViewBag.Razredi)
+                    {
+                        <option value="@razred.Value" selected="@(ViewBag.IzabraniRazred?.ToString() == razred.Value ? "selected" : null)">
+                            @razred.Text
+                        </option>
+                    }
+                </select>
+            </div>
+
+
             <div class="col-md-2 d-flex align-items-end">
                 <button type="submit" class="btn btn-primary">Filtriraj</button>
             </div>
         </div>
     </form>
+
 
     <table class="table table-bordered text-center">
         <thead class="table-primary">

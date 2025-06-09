@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - eDnevnik</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/eDnevnik1.styles.css" asp-append-version="true" />
+
 </head>
 <body class="d-flex flex-column h-100 bg-light">
 
@@ -40,7 +40,20 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Roditelji" asp-action="Index">Roditelji</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Raspored" asp-action="Index">Rasporedi</a>
+                            </li>
                         }
+
+
+                        @if (User.IsInRole("Ucenik") || User.IsInRole("Nastavnik"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Cas" asp-action="SedmicniRaspored">Raspored časova</a>
+                            </li>
+                        }
+
 
                         @if (User.IsInRole("Administrator") || User.IsInRole("Nastavnik") || User.IsInRole("Ucenik") || User.IsInRole("Roditelj"))
                         {
@@ -48,8 +61,12 @@
                                 <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index">Chat</a>
                             </li>
                         }
+
+                        
+
                         @if (User.IsInRole("Nastavnik"))
                         {
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Ocjena" asp-action="Razredi">Ocjene</a>
                             </li>
