@@ -102,6 +102,25 @@
                     </div>
                 </div>
             </form>
+            @using Microsoft.AspNetCore.Identity
+@inject UserManager<eDnevnik.Models.Korisnik> UserManager
+
+            @{
+                var prijavljeniKorisnik = await UserManager.GetUserAsync(User);
+                var roleList = await UserManager.GetRolesAsync(prijavljeniKorisnik);
+                var isUcenik = roleList.Contains("Ucenik");
+            }
+
+            @if (isUcenik)
+            {
+        <form method="post" asp-controller="Report" asp-action="Send" class="mt-3">
+            <input type="hidden" name="ucenikId" value="@prijavljeniKorisnik.Id" />
+                    @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-outline-primary">
+                📄 Pošalji izvještaj na moj e-mail
+            </button>
+        </form>
+            }
         </div>
     </div>
 

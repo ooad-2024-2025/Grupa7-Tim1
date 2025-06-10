@@ -1,7 +1,9 @@
 ﻿using eDnevnik.Models;
+using eDnevnik.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 
 namespace eDnevnik.Controllers
@@ -109,6 +111,7 @@ namespace eDnevnik.Controllers
             await _userManager.DeleteAsync(korisnik);
             return RedirectToAction("Index");
         }
+        
 
     }
 }
