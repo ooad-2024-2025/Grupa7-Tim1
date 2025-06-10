@@ -1,0 +1,246 @@
+﻿@model List<eDnevnik.Models.Aktivnost>
+
+    @{
+    ViewData["Title"] = "Moje aktivnosti";
+    }
+
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2><i class="fas fa-calendar-check"></i> Moje aktivnosti</h2>
+                <p class="text-muted">Upravljanje nadolazećim aktivnostima i obavještenjima</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Create" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Nova aktivnost
+                </a>
+                <a asp-action="Kalendar" class="btn btn-outline-info">
+                    <i class="fas fa-calendar"></i> Kalendar
+                </a>
+            </div>
+        </div>
+
+        <!-- Success/Error poruke -->
+        @if (TempData["Uspjeh"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+        @if (TempData["Greška"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Greška"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+        <!-- Filteri -->
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Filtriranje aktivnosti</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-2">
+                        <a asp-action="Index" asp-route-filter="nadolazeće"
+                           class="btn btn-@(ViewBag.Filter == "nadolazeće" ? "primary" : "outline-primary") w-100 mb-2">
+                            <i class="fas fa-arrow-right"></i> Nadolazeće
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-action="Index" asp-route-filter="danas"
+                           class="btn btn-@(ViewBag.Filter == "danas" ? "warning" : "outline-warning") w-100 mb-2">
+                            <i class="fas fa-calendar-day"></i> Danas
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-action="Index" asp-route-filter="ovaSedmica"
+                           class="btn btn-@(ViewBag.Filter == "ovaSedmica" ? "info" : "outline-info") w-100 mb-2">
+                            <i class="fas fa-calendar-week"></i> Ova sedmica
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-action="Index" asp-route-filter="prošle"
+                           class="btn btn-@(ViewBag.Filter == "prošle" ? "secondary" : "outline-secondary") w-100 mb-2">
+                            <i class="fas fa-history"></i> Prošle
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-action="Index" asp-route-filter="sve"
+                           class="btn btn-@(ViewBag.Filter == "sve" ? "dark" : "outline-dark") w-100 mb-2">
+                            <i class="fas fa-list"></i> Sve
+                        </a>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="badge bg-info fs-6">
+                            @ViewBag.BrojNadolazećih nadolazećih
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista aktivnosti -->
+        @if (Model.Any())
+    {
+        <div class="row">
+            @foreach (var aktivnost in Model)
+            {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100 border-@aktivnost.TipClass">
+                    <div class="card-header bg-@aktivnost.TipClass text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i class="fas fa-@(aktivnost.Tip.ToString() switch {
+                                        "Test" => "clipboard-check",
+                                        "Zadaca" => "tasks",
+                                        "Takmicenje" => "trophy",
+                                        "SkolarskiDogadjaj" => "school",
+                                        "Prezentacija" => "presentation",
+                                        "Ekskurzija" => "bus",
+                                        _ => "calendar"
+                                    })"></i>
+                                @aktivnost.TipText
+                            </h6>
+                            <span class="badge bg-@aktivnost.PrioritetClass">
+                                @aktivnost.PrioritetText
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">@aktivnost.Naziv</h5>
+                        <p class="card-text">@aktivnost.Opis</p>
+
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-calendar"></i>
+                                @aktivnost.Datum.ToString("dddd, dd.MM.yyyy u HH:mm")
+                            </small>
+                        </div>
+
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-users"></i> @aktivnost.CiljanaGrupa
+                            </small>
+                        </div>
+
+                        @if (aktivnost.Predmet != null)
+                            {
+                        <div class="mb-2">
+                            <small class="text-muted">
+                                <i class="fas fa-book"></i> @aktivnost.Predmet.Naziv
+                            </small>
+                        </div>
+                            }
+
+                        <div class="mb-3">
+                            @if (aktivnost.JeProšla)
+                                {
+                            <span class="badge bg-secondary">Završena</span>
+                                }
+                                else if (aktivnost.JeDanas)
+                                {
+                            <span class="badge bg-warning text-dark">Danas</span>
+                                }
+                                else if (aktivnost.JeSutra)
+                                {
+                            <span class="badge bg-info">Sutra</span>
+                                }
+                                else if (aktivnost.DanaDoAktivnosti <= 7)
+                                {
+                            <span class="badge bg-primary">Za @aktivnost.DanaDoAktivnosti dana</span>
+                                }
+                                else
+                                {
+                            <span class="badge bg-light text-dark">@aktivnost.StatusText</span>
+                                }
+                        </div>
+                    </div>
+                    <div class="card-footer bg-transparent">
+                        <div class="btn-group w-100" role="group">
+                            <a asp-action="Details" asp-route-id="@aktivnost.Id" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-eye"></i> Detalji
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@aktivnost.Id" class="btn btn-outline-warning btn-sm">
+                                <i class="fas fa-edit"></i> Uredi
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@aktivnost.Id" class="btn btn-outline-danger btn-sm">
+                                <i class="fas fa-trash"></i> Obriši
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+ <!-- Statistike -->
+        <div class="row mt-4">
+            <div class="col-md-3">
+                <div class="card border-primary">
+                    <div class="card-body text-center">
+                        <h4 class="text-primary">@Model.Count</h4>
+                        <p class="card-text">Prikazanih aktivnosti</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <h4 class="text-success">@Model.Count(a => a.Tip == eDnevnik.Data.@enum.TipAktivnosti.Test)</h4>
+                        <p class="card-text">Testova</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-warning">
+                    <div class="card-body text-center">
+                        <h4 class="text-warning">@Model.Count(a => a.Tip == eDnevnik.Data.@enum.TipAktivnosti.Takmicenje)</h4>
+                        <p class="card-text">Takmičenja</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-info">
+                    <div class="card-body text-center">
+                        <h4 class="text-info">@Model.Count(a => a.Prioritet == eDnevnik.Data.@enum.PrioritetAktivnosti.Visok)</h4>
+                        <p class="card-text">Visok prioritet</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-body text-center">
+                @if (ViewBag.Filter == "nadolazeće")
+                {
+                <i class="fas fa-calendar-plus fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema nadolazećih aktivnosti</h4>
+                <p class="text-muted">Kreirajte novu aktivnost da obavijestite učenike i roditelje.</p>
+                }
+                else if (ViewBag.Filter == "prošle")
+                {
+                <i class="fas fa-history fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema prošlih aktivnosti</h4>
+                <p class="text-muted">Ovdje će se prikazati završene aktivnosti.</p>
+                }
+                else
+                {
+                <i class="fas fa-calendar fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema aktivnosti</h4>
+                <p class="text-muted">Za odabrani filter nema pronađenih aktivnosti.</p>
+                }
+
+                <a asp-action="Create" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Kreiraj prvu aktivnost
+                </a>
+            </div>
+        </div>
+    }
+    </div>

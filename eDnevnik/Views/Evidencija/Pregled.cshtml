@@ -1,0 +1,143 @@
+﻿@model List<eDnevnik.Models.EvidencijaCasa>
+
+    @{
+    ViewData["Title"] = "Pregled evidencija";
+    var targetDatum = ViewBag.TargetDatum as DateTime? ?? DateTime.Today;
+    }
+
+    <div class="container">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h2><i class="fas fa-history"></i> Pregled evidencija</h2>
+                <p class="text-muted">Pregled evidencija za: @targetDatum.ToString("dddd, dd.MM.yyyy")</p>
+            </div>
+            <div class="col-md-4 text-end">
+                <a asp-action="Index" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Novi unos
+                </a>
+            </div>
+        </div>
+
+        <!-- Filter po datumu -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="get">
+                    <div class="row align-items-end">
+                        <div class="col-md-4">
+                            <label class="form-label">Datum</label>
+                            <input type="date" name="datum" value="@targetDatum.ToString("yyyy-MM-dd")" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-outline-primary">
+                                <i class="fas fa-search"></i> Prikaži
+                            </button>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <a asp-action="Pregled" asp-route-datum="@DateTime.Today.ToString("yyyy-MM-dd")" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-calendar-day"></i> Danas
+                            </a>
+                            <a asp-action="Pregled" asp-route-datum="@DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd")" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-calendar-minus"></i> Jučer
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center">
+            <i class="fas fa-info-circle"></i>
+            <strong>Nema evidencija</strong> za odabrani datum.
+        </div>
+    }
+    else
+    {
+ <!-- Lista evidencija -->
+        <div class="row">
+            @foreach (var evidencija in Model)
+            {
+            <div class="col-md-6 mb-3">
+                <div class="card h-100 @(evidencija.Odrzan ? "border-success" : "border-danger")">
+                    <div class="card-header @(evidencija.Odrzan ? "bg-success" : "bg-danger") text-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0">
+                                <i class="fas fa-@(evidencija.Odrzan ? "check" : "times")"></i>
+                                @evidencija.Cas?.Predmet?.Naziv
+                            </h6>
+                            <span class="badge bg-light text-dark">
+                                @evidencija.Cas?.FixniTermin?.Naziv
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <small class="text-muted">Razred:</small><br>
+                                <strong>@evidencija.Cas?.Razred?.Naziv</strong>
+                            </div>
+                            <div class="col-6">
+                                <small class="text-muted">Vrijeme:</small><br>
+                                <strong>@evidencija.Cas?.FixniTermin?.FormatiraniTermin</strong>
+                            </div>
+                        </div>
+
+                        <div class="mb-2">
+                            <small class="text-muted">Aktivnosti:</small><br>
+                            <p class="mb-1">@evidencija.KratkiOpis</p>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(evidencija.Napomene))
+                            {
+                        <div class="mb-2">
+                            <small class="text-muted">Napomene:</small><br>
+                            <p class="mb-1 text-muted">@evidencija.Napomene</p>
+                        </div>
+                            }
+
+                        <div class="mb-2">
+                            <small class="text-muted">Evidentirano:</small><br>
+                            <small>@evidencija.VrijemeEvidentiranja.ToString("HH:mm")</small>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-action="Detalji" asp-route-id="@evidencija.Id" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-eye"></i> Detalji
+                        </a>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+ <!-- Statistike -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <h5 class="text-success">@Model.Count(e => e.Odrzan)</h5>
+                        <p class="card-text">Održani časovi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-danger">
+                    <div class="card-body text-center">
+                        <h5 class="text-danger">@Model.Count(e => !e.Odrzan)</h5>
+                        <p class="card-text">Otkazani časovi</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-info">
+                    <div class="card-body text-center">
+                        <h5 class="text-info">@Model.Count</h5>
+                        <p class="card-text">Ukupno evidencija</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </div>

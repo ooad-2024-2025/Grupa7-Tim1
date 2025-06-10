@@ -14,6 +14,8 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
+
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<Korisnik>(options => options.SignIn.RequireConfirmedAccount = false)
@@ -43,6 +45,10 @@ builder.Services.AddScoped<eDnevnik.Services.EmailService>();
 
 builder.Services.AddSignalR();
 
+builder.Services.AddScoped<eDnevnik.Services.VladanjeService>();
+
+// Registriraj servise
+builder.Services.AddScoped<eDnevnik.Services.ObavjestenjaService>();
 
 var app = builder.Build();
 

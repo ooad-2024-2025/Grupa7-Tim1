@@ -1,0 +1,299 @@
+﻿@model eDnevnik.Models.EvidencijaCasa
+
+@{
+    ViewData["Title"] = "Evidentiranje časa";
+    var cas = ViewBag.Cas as eDnevnik.Models.Cas;
+    var ucenici = ViewBag.Ucenici as List<eDnevnik.Models.Korisnik>;
+}
+
+<div class="container">
+    <!-- Header sa informacijama o ?asu -->
+    <div class="card border-primary mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4><i class="fas fa-clipboard-check"></i> Evidentiranje časa</h4>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Predmet:</strong><br>
+                    <span class="badge bg-info fs-6">@cas.Predmet?.Naziv</span>
+                </div>
+                <div class="col-md-3">
+                    <strong>Razred:</strong><br>
+                    <span class="badge bg-success fs-6">@cas.Razred?.Naziv</span>
+                </div>
+                <div class="col-md-3">
+                    <strong>Termin:</strong><br>
+                    <span class="badge bg-warning text-dark fs-6">@cas.FixniTermin?.Naziv</span>
+                </div>
+                <div class="col-md-3">
+                    <strong>Vrijeme:</strong><br>
+                    <span class="badge bg-secondary fs-6">@cas.FixniTermin?.FormatiraniTermin</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Forma za evidentiranje -->
+    <form asp-action="Evidentiranje" method="post" id="evidencijaForm">
+        <input type="hidden" asp-for="CasId" />
+        <input type="hidden" asp-for="NastavnikId" />
+
+        <!-- Osnovne informacije o ?asu -->
+        <div class="card mb-4">
+            <div class="card-header bg-light">
+                <h5><i class="fas fa-info-circle"></i> Informacije o času</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Status časa</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="Odrzan" value="true" checked>
+                                    <label class="form-check-label">
+                                        <i class="fas fa-check text-success"></i> Čas je održan
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" asp-for="Odrzan" value="false">
+                                    <label class="form-check-label">
+                                        <i class="fas fa-times text-danger"></i> Čas je otkazan
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label asp-for="DatumOdrzavanja" class="form-label">Datum održavanja</label>
+                            <input asp-for="DatumOdrzavanja" type="datetime-local" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Aktivnosti" class="form-label">
+                        <i class="fas fa-book-open"></i> Nastavne jedinice / Aktivnosti časa
+                    </label>
+                    <textarea asp-for="Aktivnosti" class="form-control" rows="3" 
+                              placeholder="Opišite šta je rađeno na času (obavezno polje)..." required></textarea>
+                    <div class="form-text">Unesite temu, lekciju ili aktivnosti koje su realizovane tokom časa.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Napomene" class="form-label">
+                        <i class="fas fa-sticky-note"></i> Dodatne napomene
+                    </label>
+                    <textarea asp-for="Napomene" class="form-control" rows="2" 
+                              placeholder="Dodatne napomene o času (opcionalno)..."></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evidencija prisustva -->
+        <div class="card mb-4" id="prisustvoCard">
+            <div class="card-header bg-info text-white">
+                <h5><i class="fas fa-user-check"></i> Evidencija prisustva (@ucenici.Count učenika)</h5>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-success btn-sm" onclick="oznaciSve(true)">
+                            <i class="fas fa-check-double"></i> Označi sve prisutne
+                        </button>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <button type="button" class="btn btn-warning btn-sm" onclick="oznaciSve(false)">
+                            <i class="fas fa-times-circle"></i> Označi sve odsutne
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="60">Prisutan</th>
+                                <th>Ime i prezime</th>
+                                <th>Komentar za izostanak</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < ucenici.Count; i++)
+                            {
+                                <tr class="ucenik-red" data-ucenik-id="@ucenici[i].Id">
+                                    <td class="text-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input prisutan-checkbox" 
+                                                   type="checkbox" 
+                                                   name="prisutniUcenici" 
+                                                   value="@ucenici[i].Id" 
+                                                   checked 
+                                                   onchange="toggleIzostanak(this)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <strong>@ucenici[i].Ime @ucenici[i].Prezime</strong>
+                                    </td>
+                                    <td>
+                                        <input type="text" 
+                                               name="komentariIzostanci[@i]" 
+                                               class="form-control form-control-sm izostanak-komentar" 
+                                               placeholder="Razlog izostanka..." 
+                                               disabled>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ocjenjivanje u?enika -->
+        <div class="card mb-4" id="ocjeneCard">
+            <div class="card-header bg-warning text-dark">
+                <h5><i class="fas fa-star"></i> Ocjenjivanje učenika (opcionalno)</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Napomena:</strong> Ocjene možete unijeti odmah ili naknadno kroz standardni sistem ocjenjivanja.
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Ime i prezime</th>
+                                <th width="120">Ocjena (1-5)</th>
+                                <th>Komentar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < ucenici.Count; i++)
+                            {
+                                <tr>
+                                    <td>
+                                        <strong>@ucenici[i].Ime @ucenici[i].Prezime</strong>
+                                        <input type="hidden" name="ucenikIdZaOcjenu[@i]" value="@ucenici[i].Id">
+                                    </td>
+                                    <td>
+                                        <select name="ocjene[@i]" class="form-select form-select-sm">
+                                            <option value="">-- Bez ocjene --</option>
+                                            <option value="1">1 (nedovoljan)</option>
+                                            <option value="2">2 (dovoljan)</option>
+                                            <option value="3">3 (dobar)</option>
+                                            <option value="4">4 (vrlo dobar)</option>
+                                            <option value="5">5 (odličan)</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="text" 
+                                               name="komentariOcjena[@i]" 
+                                               class="form-control form-control-sm" 
+                                               placeholder="Komentar za ocjenu...">
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dugmad za akcije -->
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between">
+                    <a asp-action="Index" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left"></i> Nazad
+                    </a>
+                    
+                    <button type="submit" class="btn btn-success btn-lg" id="spasiBtn">
+                        <i class="fas fa-save"></i> Evidentirati čas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript za funkcionalnost -->
+<script>
+    // Ozna?i sve u?enike kao prisutne/odsutne
+    function oznaciSve(prisutni) {
+        const checkboxes = document.querySelectorAll('.prisutan-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = prisutni;
+            toggleIzostanak(checkbox);
+        });
+    }
+
+    // Uklju?i/isklju?i polje za komentar izostanka
+    function toggleIzostanak(checkbox) {
+        const red = checkbox.closest('.ucenik-red');
+        const komentarPolje = red.querySelector('.izostanak-komentar');
+        
+        if (checkbox.checked) {
+            // U?enik je prisutan
+            komentarPolje.disabled = true;
+            komentarPolje.value = '';
+            red.classList.remove('table-danger');
+            red.classList.add('table-success');
+        } else {
+            // U?enik nije prisutan
+            komentarPolje.disabled = false;
+            red.classList.remove('table-success');
+            red.classList.add('table-danger');
+        }
+    }
+
+    // Potvrda prije slanja forme
+    document.getElementById('evidencijaForm').addEventListener('submit', function(e) {
+        const aktivnosti = document.querySelector('textarea[name="Aktivnosti"]').value.trim();
+        
+        if (!aktivnosti) {
+            e.preventDefault();
+            alert('Molimo unesite aktivnosti časa prije evidentiranja!');
+            return false;
+        }
+
+        const potvrda = confirm('Da li ste sigurni da želite evidentirati ovaj čas? Ova akcija se ne može poništiti.');
+        if (!potvrda) {
+            e.preventDefault();
+        }
+    });
+
+    // Provjera statusa ?asa
+    document.querySelectorAll('input[name="Odrzan"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const prisustvoCard = document.getElementById('prisustvoCard');
+            const ocjeneCard = document.getElementById('ocjeneCard');
+            
+            if (this.value === 'false') {
+                // ?as je otkazan
+                prisustvoCard.style.display = 'none';
+                ocjeneCard.style.display = 'none';
+            } else {
+                // ?as je održan
+                prisustvoCard.style.display = 'block';
+                ocjeneCard.style.display = 'block';
+            }
+        });
+    });
+
+    // Inicijalizuj stanje prilikom u?itavanja stranice
+    document.addEventListener('DOMContentLoaded', function() {
+        // Pripremi sve checkboxe
+        document.querySelectorAll('.prisutan-checkbox').forEach(checkbox => {
+            toggleIzostanak(checkbox);
+        });
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

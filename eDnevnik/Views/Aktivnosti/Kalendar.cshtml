@@ -1,0 +1,206 @@
+﻿@{
+    ViewData["Title"] = "Kalendar aktivnosti";
+    var aktivnostiPoDatumima = ViewBag.AktivnostiPoDatumima as Dictionary<DateTime, List<eDnevnik.Models.Aktivnost>>;
+    var pocetakMjeseca = (DateTime)ViewBag.PocetakMjeseca;
+    var krajMjeseca = (DateTime)ViewBag.KrajMjeseca;
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-calendar"></i> Kalendar aktivnosti</h2>
+            <p class="text-muted">@pocetakMjeseca.ToString("MMMM yyyy")</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Create" class="btn btn-success">
+                <i class="fas fa-plus"></i> Nova aktivnost
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-list"></i> Lista
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigacija mjeseca -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="btn-group" role="group">
+                        <a href="@Url.Action("Kalendar", new { mjesec = pocetakMjeseca.AddMonths(-1).Month, godina = pocetakMjeseca.AddMonths(-1).Year })"
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-chevron-left"></i> @pocetakMjeseca.AddMonths(-1).ToString("MMM yyyy")
+                        </a>
+                        <button class="btn btn-primary" disabled>
+                            @pocetakMjeseca.ToString("MMMM yyyy")
+                        </button>
+                        <a href="@Url.Action("Kalendar", new { mjesec = pocetakMjeseca.AddMonths(1).Month, godina = pocetakMjeseca.AddMonths(1).Year })"
+                           class="btn btn-outline-primary">
+                            @pocetakMjeseca.AddMonths(1).ToString("MMM yyyy") <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kalendar grid -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0" style="table-layout: fixed;">
+                            <thead class="bg-primary text-white">
+                                <tr>
+                                    <th class="text-center py-3">Ponedjeljak</th>
+                                    <th class="text-center py-3">Utorak</th>
+                                    <th class="text-center py-3">Srijeda</th>
+                                    <th class="text-center py-3">Četvrtak</th>
+                                    <th class="text-center py-3">Petak</th>
+                                    <th class="text-center py-3">Subota</th>
+                                    <th class="text-center py-3">Nedjelja</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    var trenutniDatum = pocetakMjeseca;
+                                    // Pronađi prvi ponedjeljak prije ili na početak mjeseca
+                                    while (trenutniDatum.DayOfWeek != DayOfWeek.Monday)
+                                    {
+                                        trenutniDatum = trenutniDatum.AddDays(-1);
+                                    }
+                                }
+
+                                @for (int sedmica = 0; sedmica < 6; sedmica++)
+                                {
+                                    <tr style="height: 120px;">
+                                        @for (int dan = 0; dan < 7; dan++)
+                                        {
+                                            var datum = trenutniDatum.AddDays(sedmica * 7 + dan);
+                                            var jeUTrenutnomMjesecu = datum.Month == pocetakMjeseca.Month;
+                                            var jeDanas = datum.Date == DateTime.Today;
+                                            var aktivnostiDana = aktivnostiPoDatumima?.ContainsKey(datum.Date) == true
+                                            ? aktivnostiPoDatumima[datum.Date]
+                                            : new List<eDnevnik.Models.Aktivnost>();
+
+                                            <td class="p-2 align-top @(jeUTrenutnomMjesecu ? "" : "bg-light text-muted") @(jeDanas ? "bg-warning bg-opacity-25" : "")">
+                                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                                    <strong class="@(jeDanas ? "text-warning" : jeUTrenutnomMjesecu ? "text-dark" : "text-muted")">
+                                                        @datum.Day
+                                                    </strong>
+                                                    @if (jeUTrenutnomMjesecu && aktivnostiDana.Count > 0)
+                                                    {
+                                                        <span class="badge bg-primary rounded-pill">@aktivnostiDana.Count</span>
+                                                    }
+                                                </div>
+
+                                                @if (jeUTrenutnomMjesecu && aktivnostiDana.Any())
+                                                {
+                                                    <div class="aktivnosti-dana">
+                                                        @foreach (var aktivnost in aktivnostiDana.Take(3))
+                                                        {
+                                                            <div class="mb-1">
+                                                                <a href="@Url.Action("Details", new { id = aktivnost.Id })"
+                                                                   class="text-decoration-none">
+                                                                    <small class="badge bg-@aktivnost.TipClass text-truncate d-block"
+                                                                           style="font-size: 0.7em; max-width: 100%;"
+                                                                           title="@aktivnost.Naziv - @aktivnost.Datum.ToString("HH:mm")">
+                                                                        @aktivnost.Datum.ToString("HH:mm") - @(aktivnost.Naziv.Length > 15 ? aktivnost.Naziv.Substring(0, 15) + "..." : aktivnost.Naziv)
+                                                                    </small>
+                                                                </a>
+                                                            </div>
+                                                        }
+                                                        @if (aktivnostiDana.Count > 3)
+                                                        {
+                                                            <small class="text-muted">+@(aktivnostiDana.Count - 3) više...</small>
+                                                        }
+                                                    </div>
+                                                }
+                                            </td>
+                                        }
+                                    </tr>
+
+                                    // Izađi iz petlje ako smo prešli mjesec
+                                    if (sedmica >= 4 && trenutniDatum.AddDays((sedmica + 1) * 7).Month != pocetakMjeseca.Month)
+                                    {
+                                        break;
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legenda -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0"><i class="fas fa-info-circle"></i> Legenda</h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Tipovi aktivnosti:</h6>
+                            <div class="d-flex flex-wrap gap-2">
+                                <span class="badge bg-danger">Test</span>
+                                <span class="badge bg-warning text-dark">Zadaća</span>
+                                <span class="badge bg-success">Takmičenje</span>
+                                <span class="badge bg-primary">Školarski događaj</span>
+                                <span class="badge bg-info">Prezentacija</span>
+                                <span class="badge bg-secondary">Ekskurzija</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Oznake:</h6>
+                            <ul class="list-unstyled small">
+                                <li><span class="badge bg-warning bg-opacity-25 text-dark">Žuta pozadina</span> - Današnji dan</li>
+                                <li><span class="badge bg-primary rounded-pill">Broj</span> - Broj aktivnosti u danu</li>
+                                <li><span class="text-muted">Siva</span> - Dani van trenutnog mjeseca</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .aktivnosti-dana {
+        min-height: 60px;
+        max-height: 80px;
+        overflow: hidden;
+    }
+
+    .table td {
+        vertical-align: top !important;
+        min-height: 120px;
+    }
+
+    .badge {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @@media (max-width: 768px) {
+        .table th, .table td
+
+    {
+        padding: 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    .aktivnosti-dana {
+        min-height: 40px;
+        max-height: 60px;
+    }
+
+    }
+</style>

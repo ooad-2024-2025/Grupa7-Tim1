@@ -1,0 +1,293 @@
+﻿@model eDnevnik.ViewModels.RazrednikIzostanciViewModel
+
+@{
+    ViewData["Title"] = "Upravljanje izostancima";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-user-times"></i> Upravljanje izostancima</h2>
+            <p class="text-muted">Razred: <strong>@Model.Razred.Naziv</strong></p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Nazad na dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    }
+
+    @if (TempData["Greska"] != null)
+    {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    }
+
+    <!-- Filteri -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Filtriranje izostanaka</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4">
+                    <a asp-action="Izostanci" asp-route-status="neodobreni"
+                       class="btn btn-@(Model.SelectedStatus == "neodobreni" ? "danger" : "outline-danger") w-100 mb-2">
+                        <i class="fas fa-exclamation-triangle"></i> Neodobreni izostanci
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-action="Izostanci" asp-route-status="odobreni"
+                       class="btn btn-@(Model.SelectedStatus == "odobreni" ? "success" : "outline-success") w-100 mb-2">
+                        <i class="fas fa-check-circle"></i> Odobreni izostanci
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a asp-action="Izostanci" asp-route-status="svi"
+                       class="btn btn-@(Model.SelectedStatus == "svi" ? "primary" : "outline-primary") w-100 mb-2">
+                        <i class="fas fa-list"></i> Svi izostanci
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lista izostanaka -->
+    @if (Model.Izostanci.Any())
+    {
+    <form asp-action="OpravdajViseIzostanaka" method="post" id="bulkForm">
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h5 class="mb-0">
+                            <i class="fas fa-list"></i> Lista izostanaka (@Model.Izostanci.Count)
+                        </h5>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        @if (Model.SelectedStatus == "neodobreni")
+                            {
+                        <button type="button" class="btn btn-light btn-sm me-2" onclick="selectAll(true)">
+                            <i class="fas fa-check-square"></i> Označi sve
+                        </button>
+                        <button type="button" class="btn btn-light btn-sm me-2" onclick="selectAll(false)">
+                            <i class="fas fa-square"></i> Ukloni sve
+                        </button>
+                        <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Opravdaj označene izostanke?')">
+                            <i class="fas fa-check"></i> Opravdaj označene
+                        </button>
+                            }
+                    </div>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                @if (Model.SelectedStatus == "neodobreni")
+                                    {
+                                <th width="50">
+                                    <input type="checkbox" class="form-check-input" id="selectAllCheckbox" onchange="selectAll(this.checked)">
+                                </th>
+                                    }
+                                <th>Učenik</th>
+                                <th>Predmet</th>
+                                <th>Termin</th>
+                                <th>Datum</th>
+                                <th>Status</th>
+                                <th>Komentar</th>
+                                @if (Model.SelectedStatus == "neodobreni")
+                                    {
+                                <th>Akcija</th>
+                                    }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var izostanak in Model.Izostanci)
+                                {
+                            <tr class="@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan ? "table-danger" : "table-success")">
+                                @if (Model.SelectedStatus == "neodobreni")
+                                        {
+                                <td>
+                                    <input type="checkbox" name="izostanakIds" value="@izostanak.Izostanak.Id" class="form-check-input izostanak-checkbox">
+                                </td>
+                                        }
+                                <td>
+                                    <strong>@izostanak.Izostanak.Ucenik?.FullName</strong>
+                                </td>
+                                <td>@izostanak.PredmetNaziv</td>
+                                <td>
+                                    <small>@izostanak.TerminInfo</small>
+                                </td>
+                                <td>
+                                    @izostanak.DatumCasa.ToString("dd.MM.yyyy")
+                                </td>
+                                <td>
+                                    <span class="badge bg-@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan ? "success" : "danger")">
+                                        @(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan ? "Opravdan" : "Neopravdan")
+                                    </span>
+                                </td>
+                                <td>
+                                    @if (!string.IsNullOrEmpty(izostanak.Izostanak.Komentar))
+                                            {
+                                    <small class="text-muted">@izostanak.Izostanak.Komentar</small>
+                                            }
+                                            else
+                                            {
+                                    <small class="text-muted fst-italic">Bez komentara</small>
+                                            }
+                                </td>
+                                @if (Model.SelectedStatus == "neodobreni")
+                                        {
+                                <td>
+                                    <form asp-action="OpravdajIzostanak" method="post" class="d-inline">
+                                        <input type="hidden" name="izostanakId" value="@izostanak.Izostanak.Id">
+                                        <button type="submit" class="btn btn-success btn-sm"
+                                                onclick="return confirm('Opravdaj izostanak za @izostanak.Izostanak.Ucenik?.FullName?')"
+                                                title="Opravdaj izostanak">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                        }
+                            </tr>
+                                }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+
+ <!-- Statistike -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h4 class="text-primary">@Model.Izostanci.Count</h4>
+                    <p class="card-text">Ukupno prikazano</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-danger">
+                <div class="card-body text-center">
+                    <h4 class="text-danger">
+                        @Model.Izostanci.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan)
+                    </h4>
+                    <p class="card-text">Neopravdani</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <h4 class="text-success">
+                        @Model.Izostanci.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan)
+                    </h4>
+                    <p class="card-text">Opravdani</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h4 class="text-info">
+                        @Model.Izostanci.Select(i => i.Izostanak.UcenikId).Distinct().Count()
+                    </h4>
+                    <p class="card-text">Učenika</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    else
+    {
+    <div class="card">
+        <div class="card-body text-center">
+            @if (Model.SelectedStatus == "neodobreni")
+                {
+            <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+            <h4 class="text-success">Odlično!</h4>
+            <p class="text-muted">Nema neodobrenih izostanaka.</p>
+                }
+                else if (Model.SelectedStatus == "odobreni")
+                {
+            <i class="fas fa-info-circle fa-4x text-info mb-3"></i>
+            <h4 class="text-info">Nema podataka</h4>
+            <p class="text-muted">Nema odobrenih izostanaka.</p>
+                }
+                else
+                {
+            <i class="fas fa-calendar-check fa-4x text-primary mb-3"></i>
+            <h4 class="text-primary">Odličo!</h4>
+            <p class="text-muted">Nema izostanaka u razredu.</p>
+                }
+            <a asp-action="Index" class="btn btn-primary">
+                <i class="fas fa-arrow-left"></i> Nazad na dashboard
+            </a>
+        </div>
+    </div>
+    }
+
+    <!-- Legenda -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-light">
+                <div class="card-body py-2">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="badge bg-danger">Crveno</span> - neopravdan izostanak |
+                        <span class="badge bg-success">Zeleno</span> - opravdan izostanak
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function selectAll(checked) {
+        const checkboxes = document.querySelectorAll('.izostanak-checkbox');
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = checked;
+        });
+
+        if (selectAllCheckbox) {
+            selectAllCheckbox.checked = checked;
+        }
+    }
+
+    // Ažuriraj glavni checkbox kada se mijenjaju pojedinačni
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkboxes = document.querySelectorAll('.izostanak-checkbox');
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+
+        if (selectAllCheckbox) {
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                    const noneChecked = Array.from(checkboxes).every(cb => !cb.checked);
+
+                    selectAllCheckbox.checked = allChecked;
+                    selectAllCheckbox.indeterminate = !allChecked && !noneChecked;
+                });
+            });
+        }
+    });
+</script>

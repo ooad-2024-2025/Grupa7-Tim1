@@ -1,0 +1,301 @@
+﻿@model eDnevnik.Models.Aktivnost
+
+@{
+    ViewData["Title"] = "Nova aktivnost";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4><i class="fas fa-plus"></i> Kreiranje nove aktivnosti</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Napomena:</strong> Obavještenja će biti poslana automatski prema prioritetu:
+                        <ul class="mb-0 mt-2">
+                            <li><strong>Visok</strong> - odmah nakon kreiranja</li>
+                            <li><strong>Srednji</strong> - 3 dana prije aktivnosti</li>
+                            <li><strong>Nizak</strong> - 1 dan prije aktivnosti</li>
+                        </ul>
+                    </div>
+
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <!-- Naziv -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Naziv" class="form-label">Naziv aktivnosti</label>
+                                <input asp-for="Naziv" class="form-control" placeholder="npr. Kontrolni test iz matematike">
+                                <span asp-validation-for="Naziv" class="text-danger"></span>
+                            </div>
+
+                            <!-- Tip aktivnosti -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Tip" class="form-label">Tip aktivnosti</label>
+                                <select asp-for="Tip" asp-items="@ViewBag.TipAktivnosti" class="form-select" id="tipSelect">
+                                    <option value="">-- Izaberi tip --</option>
+                                </select>
+                                <span asp-validation-for="Tip" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Opis -->
+                        <div class="mb-3">
+                            <label asp-for="Opis" class="form-label">Opis aktivnosti</label>
+                            <textarea asp-for="Opis" class="form-control" rows="3"
+                                      placeholder="Detaljni opis aktivnosti, šta učenici trebaju pripremiti, itd."></textarea>
+                            <span asp-validation-for="Opis" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <!-- Datum i vrijeme -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Datum" class="form-label">Datum i vrijeme</label>
+                                <input asp-for="Datum" type="datetime-local" class="form-control" id="datumInput">
+                                <span asp-validation-for="Datum" class="text-danger"></span>
+                            </div>
+
+                            <!-- Prioritet -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Prioritet" class="form-label">Prioritet obavještenja</label>
+                                <select asp-for="Prioritet" asp-items="@ViewBag.PrioritetAktivnosti" class="form-select" id="prioritetSelect">
+                                    <option value="">-- Izaberi prioritet --</option>
+                                </select>
+                                <span asp-validation-for="Prioritet" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Razred -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RazredId" class="form-label">Ciljana grupa</label>
+                                <select asp-for="RazredId" asp-items="@ViewBag.Razredi" class="form-select" id="razredSelect">
+                                    <option value="">Svi razredi</option>
+                                </select>
+                                <span asp-validation-for="RazredId" class="text-danger"></span>
+                                <div class="form-text">Ako nije odabran razred, obavještenje će biti poslano svim razredima.</div>
+                            </div>
+
+                            <!-- Predmet -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PredmetId" class="form-label">Predmet</label>
+                                <select asp-for="PredmetId" asp-items="@ViewBag.Predmeti" class="form-select" id="predmetSelect">
+                                    <option value="">Izaberi predmet</option>
+                                </select>
+                                <span asp-validation-for="PredmetId" class="text-danger"></span>
+                                <div class="form-text" id="predmetHelpText">Obavezno za testove i zadaće.</div>
+                            </div>
+                        </div>
+
+                        <!-- Preview -->
+                        <div class="card mb-3 bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-eye"></i> Preview obavještenja
+                                </h6>
+                                <div id="previewSadržaj">
+                                    <p class="text-muted">Unesite podatke da vidite preview email obavještenja...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dugmad -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Nazad
+                            </a>
+
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-save"></i> Kreiraj aktivnost
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Pomoć -->
+            <div class="card mt-4 border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-question-circle"></i> Pomoć
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Tipovi aktivnosti:</h6>
+                            <ul class="small">
+                                <li><strong>Test</strong> - kontrolni/pismeni testovi</li>
+                                <li><strong>Zadaća</strong> - domaće zadaće</li>
+                                <li><strong>Takmičenje</strong> - školarska takmičenja</li>
+                                <li><strong>Događaj</strong> - školski događaji</li>
+                                <li><strong>Prezentacija</strong> - učenička izlaganja</li>
+                                <li><strong>Ekskurzija</strong> - izleti i posjete</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Prioriteti obavještenja:</h6>
+                            <ul class="small">
+                                <li><strong>Visok</strong> - šalje se odmah (takmičenja, važni događaji)</li>
+                                <li><strong>Srednji</strong> - šalje se 3 dana prije (testovi)</li>
+                                <li><strong>Nizak</strong> - šalje se 1 dan prije (zadaće)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Elementi forme
+        const nazivInput = document.querySelector('input[name="Naziv"]');
+        const opisTextarea = document.querySelector('textarea[name="Opis"]');
+        const datumInput = document.getElementById('datumInput');
+        const tipSelect = document.getElementById('tipSelect');
+        const razredSelect = document.getElementById('razredSelect');
+        const predmetSelect = document.getElementById('predmetSelect');
+        const prioritetSelect = document.getElementById('prioritetSelect');
+        const previewDiv = document.getElementById('previewSadržaj');
+        const predmetHelpText = document.getElementById('predmetHelpText');
+
+        // Postavi minimalni datum na danas
+        const danas = new Date();
+        danas.setMinutes(danas.getMinutes() - danas.getTimezoneOffset());
+        datumInput.min = danas.toISOString().slice(0, 16);
+
+        // Automatski fokus na naziv
+        nazivInput.focus();
+
+        // Funkcija za ažuriranje preview-a
+        function updatePreview() {
+            const naziv = nazivInput.value.trim();
+            const opis = opisTextarea.value.trim();
+            const datum = datumInput.value;
+            const tipValue = tipSelect.value;
+            const razredValue = razredSelect.value;
+            const predmetValue = predmetSelect.value;
+            const prioritetValue = prioritetSelect.value;
+
+            if (naziv && opis && datum && tipValue && prioritetValue) {
+                // Dobij tekst umjesto vrijednosti
+                const tipText = tipSelect.options[tipSelect.selectedIndex].text;
+                const razredText = razredValue ? razredSelect.options[razredSelect.selectedIndex].text : 'Svi razredi';
+                const predmetText = predmetValue ? predmetSelect.options[predmetSelect.selectedIndex].text : '';
+                const prioritetText = prioritetSelect.options[prioritetSelect.selectedIndex].text;
+
+                // Formatiraj datum
+                const datumObj = new Date(datum);
+                const formatiraniDatum = datumObj.toLocaleDateString('bs-BA', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                // Kreiraj preview
+                previewDiv.innerHTML = `
+                <div class="border p-3 rounded bg-white">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="text-primary mb-0">${tipText}: ${naziv}</h6>
+                        <span class="badge bg-${getPrioritetClass(prioritetValue)}">${prioritetText}</span>
+                    </div>
+                    <p class="mb-2">${opis}</p>
+                    <small class="text-muted d-block">
+                        <i class="fas fa-calendar me-1"></i> ${formatiraniDatum}<br>
+                        <i class="fas fa-users me-1"></i> ${razredText}
+                        ${predmetText ? `<br><i class="fas fa-book me-1"></i> ${predmetText}` : ''}
+                    </small>
+                    <hr class="my-2">
+                    <small class="text-info">
+                        <i class="fas fa-info-circle me-1"></i>
+                        ${getPrioritetInfo(prioritetValue)}
+                    </small>
+                </div>
+            `;
+            } else {
+                previewDiv.innerHTML = '<p class="text-muted">Unesite sve potrebne podatke da vidite preview email obavještenja...</p>';
+            }
+        }
+
+        // Funkcija za dobijanje CSS klase za prioritet
+        function getPrioritetClass(prioritetValue) {
+            switch (prioritetValue) {
+                case '3': return 'danger';   // Visok
+                case '2': return 'warning';  // Srednji
+                case '1': return 'info';     // Nizak
+                default: return 'secondary';
+            }
+        }
+
+        // Funkcija za dobijanje info teksta o prioritetu
+        function getPrioritetInfo(prioritetValue) {
+            switch (prioritetValue) {
+                case '3': return 'Obavještenje će biti poslano odmah nakon kreiranja aktivnosti.';
+                case '2': return 'Obavještenje će biti poslano 3 dana prije aktivnosti.';
+                case '1': return 'Obavještenje će biti poslano 1 dan prije aktivnosti.';
+                default: return '';
+            }
+        }
+
+        // Funkcija za validaciju predmeta
+        function validatePredmet() {
+            const tipValue = tipSelect.value;
+
+            if (tipValue === '1' || tipValue === '2') { // Test ili Zadaća
+                predmetSelect.required = true;
+                predmetSelect.disabled = false;
+                predmetHelpText.innerHTML = '<strong class="text-danger">Predmet je obavezan za testove i zadaće!</strong>';
+                predmetSelect.parentElement.classList.add('required-field');
+            } else {
+                predmetSelect.required = false;
+                predmetSelect.disabled = false;
+                predmetHelpText.innerHTML = 'Izborni za ostale tipove aktivnosti.';
+                predmetSelect.parentElement.classList.remove('required-field');
+            }
+        }
+
+        // Event listeneri
+        nazivInput.addEventListener('input', updatePreview);
+        opisTextarea.addEventListener('input', updatePreview);
+        datumInput.addEventListener('change', updatePreview);
+        tipSelect.addEventListener('change', function () {
+            validatePredmet();
+            updatePreview();
+        });
+        razredSelect.addEventListener('change', updatePreview);
+        predmetSelect.addEventListener('change', updatePreview);
+        prioritetSelect.addEventListener('change', updatePreview);
+
+        // Pozovi validaciju predmeta na početku
+        validatePredmet();
+    });
+</script>
+
+<style>
+    .required-field {
+        position: relative;
+    }
+
+        .required-field::after {
+            content: '*';
+            color: red;
+            position: absolute;
+            top: 0;
+            right: 10px;
+            font-weight: bold;
+        }
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

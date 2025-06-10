@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Moj razred";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <i class="fas fa-info-circle fa-4x text-info mb-4"></i>
+                    <h4 class="text-info">Informacija</h4>
+                    <p class="text-muted">
+                        Niste dodijeljeni kao razrednik nijednom razredu.
+                    </p>
+                    <p class="text-muted">
+                        Kontaktirajte administratora za dodjelu razreda.
+                    </p>
+                    <a asp-controller="Evidencija" asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-clipboard-check"></i> Evidencija časova
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

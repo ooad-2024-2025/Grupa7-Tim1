@@ -1,0 +1,230 @@
+﻿@model eDnevnik.Models.Aktivnost
+
+@{
+    ViewData["Title"] = "Uredi aktivnost";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4><i class="fas fa-edit"></i> Uređivanje aktivnosti</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Napomena:</strong> Promjene neće utjecati na već poslana obavještenja.
+                        Nova obavještenja će se poslati prema ažuriranom prioritetu.
+                    </div>
+
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="hidden" asp-for="DatumKreiranja" />
+                        <input type="hidden" asp-for="NastavnikId" />
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row">
+                            <!-- Naziv -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Naziv" class="form-label">Naziv aktivnosti</label>
+                                <input asp-for="Naziv" class="form-control">
+                                <span asp-validation-for="Naziv" class="text-danger"></span>
+                            </div>
+
+                            <!-- Tip aktivnosti -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Tip" class="form-label">Tip aktivnosti</label>
+                                <select asp-for="Tip" asp-items="@ViewBag.TipAktivnosti" class="form-select" id="tipSelect">
+                                    <option value="">-- Izaberi tip --</option>
+                                </select>
+                                <span asp-validation-for="Tip" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <!-- Opis -->
+                        <div class="mb-3">
+                            <label asp-for="Opis" class="form-label">Opis aktivnosti</label>
+                            <textarea asp-for="Opis" class="form-control" rows="3"></textarea>
+                            <span asp-validation-for="Opis" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <!-- Datum i vrijeme -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Datum" class="form-label">Datum i vrijeme</label>
+                                <input asp-for="Datum" type="datetime-local" class="form-control" id="datumInput">
+                                <span asp-validation-for="Datum" class="text-danger"></span>
+                            </div>
+
+                            <!-- Prioritet -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Prioritet" class="form-label">Prioritet obavještenja</label>
+                                <select asp-for="Prioritet" asp-items="@ViewBag.PrioritetAktivnosti" class="form-select">
+                                    <option value="">-- Izaberi prioritet --</option>
+                                </select>
+                                <span asp-validation-for="Prioritet" class="text-danger"></span>
+                                <div class="form-text">
+                                    <small class="text-warning">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                        Promjena prioriteta može pokrenuti novo slanje obavještenja.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!-- Razred -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RazredId" class="form-label">Ciljana grupa</label>
+                                <select asp-for="RazredId" asp-items="@ViewBag.Razredi" class="form-select">
+                                    <option value="">Svi razredi</option>
+                                </select>
+                                <span asp-validation-for="RazredId" class="text-danger"></span>
+                            </div>
+
+                            <!-- Predmet -->
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PredmetId" class="form-label">Predmet</label>
+                                <select asp-for="PredmetId" asp-items="@ViewBag.Predmeti" class="form-select" id="predmetSelect">
+                                    <option value="">Izaberi predmet</option>
+                                </select>
+                                <span asp-validation-for="PredmetId" class="text-danger"></span>
+                                <div class="form-text" id="predmetHelpText">Obavezno za testove i zadaće.</div>
+                            </div>
+                        </div>
+
+                        <!-- Status aktivnosti -->
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input asp-for="Aktivna" class="form-check-input" type="checkbox">
+                                <label asp-for="Aktivna" class="form-check-label">
+                                    Aktivnost je aktivna
+                                </label>
+                                <div class="form-text">Neaktivne aktivnosti neće slati obavještenja.</div>
+                            </div>
+                        </div>
+
+                        <!-- Trenutno stanje -->
+                        <div class="card mb-3 bg-light">
+                            <div class="card-body">
+                                <h6 class="card-title">
+                                    <i class="fas fa-info"></i> Trenutno stanje
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <small class="text-muted">
+                                            <strong>Kreirana:</strong> @Model.DatumKreiranja.ToString("dd.MM.yyyy u HH:mm")<br>
+                                            <strong>Status:</strong> @Model.StatusText<br>
+                                            <strong>Trenutni prioritet:</strong>
+                                            <span class="badge bg-@Model.PrioritetClass">@Model.PrioritetText</span>
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <small class="text-muted">
+                                            <strong>Ciljana grupa:</strong> @Model.CiljanaGrupa<br>
+                                            @if (Model.Predmet != null)
+                                            {
+                                            <strong>Predmet:</strong>  @Model.Predmet.Naziv<br>
+                                            }
+                                            <strong>Dana do aktivnosti:</strong> @Model.DanaDoAktivnosti
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dugmad -->
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Nazad
+                            </a>
+
+                            <button type="submit" class="btn btn-warning">
+                                <i class="fas fa-save"></i> Sačuvaj promjene
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Upozorenja -->
+            <div class="card mt-4 border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i> Važne napomene
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="small mb-0">
+                        <li>Promjene datuma ili prioriteta mogu pokrenuti novo automatsko slanje obavještenja</li>
+                        <li>Već poslana obavještenja neće biti promijenjena</li>
+                        <li>Promjena ciljane grupe neće utjecati na već poslana obavještenja</li>
+                        <li>Za hitne promjene, preporučujemo slanje novog obavještenja putem "Pošalji obavještenje sada"</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tipSelect = document.getElementById('tipSelect');
+        const predmetSelect = document.getElementById('predmetSelect');
+        const predmetHelpText = document.getElementById('predmetHelpText');
+        const datumInput = document.getElementById('datumInput');
+
+        // Postavi minimalni datum na danas
+        const danas = new Date();
+        danas.setMinutes(danas.getMinutes() - danas.getTimezoneOffset());
+        datumInput.min = danas.toISOString().slice(0, 16);
+
+        function validatePredmet() {
+            const tipValue = tipSelect.value;
+
+            if (tipValue === '1' || tipValue === '2') { // Test ili Zadaća
+                predmetSelect.required = true;
+                predmetHelpText.innerHTML = '<strong class="text-danger">Predmet je obavezan za testove i zadaće!</strong>';
+            } else {
+                predmetSelect.required = false;
+                predmetHelpText.innerHTML = 'Izborni za ostale tipove aktivnosti.';
+            }
+        }
+
+        tipSelect.addEventListener('change', validatePredmet);
+        validatePredmet(); // Pozovi prilikom učitavanja
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function (e) {
+            const tipValue = tipSelect.value;
+
+            if ((tipValue === '1' || tipValue === '2') && !predmetSelect.value) {
+                e.preventDefault();
+                alert('Molimo odaberite predmet za testove i zadaće!');
+                predmetSelect.focus();
+                return false;
+            }
+
+            // Provjeri datum samo ako je aktivnost aktivna
+            const aktivnaCheckbox = document.querySelector('input[name="Aktivna"]');
+            if (aktivnaCheckbox.checked) {
+                const odabraniDatum = new Date(datumInput.value);
+                const sada = new Date();
+
+                if (odabraniDatum <= sada) {
+                    e.preventDefault();
+                    alert('Datum aktivne aktivnosti mora biti u budućnosti!');
+                    datumInput.focus();
+                    return false;
+                }
+            }
+        });
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

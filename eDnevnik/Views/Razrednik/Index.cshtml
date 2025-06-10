@@ -1,0 +1,281 @@
+﻿@model eDnevnik.ViewModels.RazrednikDashboardViewModel
+
+@{
+    ViewData["Title"] = "Moj razred";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-primary">
+                <div class="card-body bg-primary text-white">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="mb-1">
+                                <i class="fas fa-users"></i> Razred @Model.Razred.Naziv
+                            </h3>
+                            <p class="mb-0 opacity-75">
+                                Razrednik: @Model.Nastavnik.FullName |
+                                Učenika: @Model.Statistike.BrojUcenika
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div class="me-3">
+                                    <span class="badge bg-light text-dark fs-6">
+                                        Prosjek: @Model.Statistike.ProsjekRazredaText
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    }
+
+    @if (TempData["Greska"] != null)
+    {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    }
+
+    <!-- Statistike kartice -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-success h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-chart-line text-success fa-2x mb-2"></i>
+                    <h4 class="@Model.Statistike.ProsjekRazredaClass">@Model.Statistike.ProsjekRazredaText</h4>
+                    <p class="card-text">Prosjek razreda</p>
+                    <small class="text-muted">@Model.Statistike.UkupnoOcjena ukupno ocjena</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-users text-info fa-2x mb-2"></i>
+                    <h4 class="text-info">@Model.Statistike.BrojUcenika</h4>
+                    <p class="card-text">Učenika</p>
+                    <small class="text-muted">u razredu</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-user-times text-warning fa-2x mb-2"></i>
+                    <h4 class="text-warning">@Model.Statistike.UkupnoIzostanaka</h4>
+                    <p class="card-text">Ukupno izostanaka</p>
+                    <small class="text-muted">@Model.Statistike.NeopravdaniIzostanci neopravdanih</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-danger h-100">
+                <div class="card-body text-center">
+                    <i class="fas fa-exclamation-triangle text-danger fa-2x mb-2"></i>
+                    <h4 class="text-danger">@Model.NeodobreniIzostanci.Count</h4>
+                    <p class="card-text">Čeka odobravanje</p>
+                    <small class="text-muted">izostanaka</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Leva kolona -->
+        <div class="col-lg-8">
+            <!-- Vladanje statistike -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-award"></i> Vladanje razreda
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        @foreach (var vladanje in Model.VladanjeStatistike)
+                        {
+                            var vladanjeText = vladanje.Key.ToString() switch
+                            {
+                                "Primjereno" => "Primjerno",
+                                "VrloDobro" => "Vrlo dobro",
+                                "Dobro" => "Dobro",
+                                "Zadovoljava" => "Zadovoljava",
+                                "Neprimjereno" => "Ne zadovoljava",
+                                _ => vladanje.Key.ToString()
+                            };
+
+                            var vladanjeClass = vladanje.Key.ToString() switch
+                            {
+                                "Primjereno" => "success",
+                                "VrloDobro" => "info",
+                                "Dobro" => "primary",
+                                "Zadovoljava" => "warning",
+                                "Neprimjereno" => "danger",
+                                _ => "secondary"
+                            };
+
+                        <div class="col-md-2 mb-2">
+                            <div class="card border-@vladanjeClass">
+                                <div class="card-body text-center p-2">
+                                    <h5 class="text-@vladanjeClass">@vladanje.Value</h5>
+                                    <small>@vladanjeText</small>
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top učenici -->
+            <div class="card mb-4">
+                <div class="card-header bg-success text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-star"></i> Top učenici razreda
+                        </h5>
+                        <a asp-action="Ucenici" class="btn btn-light btn-sm">
+                            <i class="fas fa-eye"></i> Svi učenici
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Model.Ucenici.Any())
+                    {
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Ime i prezime</th>
+                                    <th>Prosjek</th>
+                                    <th>Ocjena</th>
+                                    <th>Izostanci</th>
+                                    <th>Vladanje</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var ucenik in Model.Ucenici.OrderByDescending(u => u.OpciProsjek).Take(5))
+                                    {
+                                <tr>
+                                    <td><strong>@ucenik.Ucenik.FullName</strong></td>
+                                    <td>
+                                        <span class="badge bg-primary">@ucenik.OpciProsjekText</span>
+                                    </td>
+                                    <td>@ucenik.UkupnoOcjena</td>
+                                    <td>
+                                        <span class="badge bg-@(ucenik.NeopravdaniIzostanci > 0 ? "danger" : "success")">
+                                            @ucenik.UkupnoIzostanaka (@ucenik.NeopravdaniIzostanci)
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">@ucenik.Ucenik.Vladanje</span>
+                                    </td>
+                                </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="text-center text-muted">
+                        <i class="fas fa-users fa-3x mb-3"></i>
+                        <p>Nema učenika u razredu</p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Desna kolona -->
+        <div class="col-lg-4">
+            <!-- Neodobreni izostanci -->
+            <div class="card mb-4">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i> Neodobreni izostanci
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.NeodobreniIzostanci.Any())
+                    {
+                    @foreach (var izostanak in Model.NeodobreniIzostanci.Take(5))
+                        {
+                    <div class="d-flex justify-content-between align-items-center mb-2 p-2 border rounded">
+                        <div>
+                            <strong>@izostanak.Izostanak.Ucenik?.FullName</strong><br>
+                            <small class="text-muted">@izostanak.PredmetNaziv - @izostanak.TerminInfo</small>
+                        </div>
+                        <div>
+                            <form asp-action="OpravdajIzostanak" method="post" class="d-inline">
+                                <input type="hidden" name="izostanakId" value="@izostanak.Izostanak.Id">
+                                <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Opravdaj izostanak?')">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                        }
+
+                    @if (Model.NeodobreniIzostanci.Count > 5)
+                        {
+                    <div class="text-center mt-3">
+                        <a asp-action="Izostanci" class="btn btn-outline-danger btn-sm">
+                            <i class="fas fa-eye"></i> Sve (@Model.NeodobreniIzostanci.Count)
+                        </a>
+                    </div>
+                        }
+                    }
+                    else
+                    {
+                    <div class="text-center text-muted">
+                        <i class="fas fa-check-circle fa-2x mb-2"></i>
+                        <p class="small">Nema neodobrenih izostanaka</p>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Brze akcije -->
+            <div class="card">
+                <div class="card-header bg-dark text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt"></i> Brze akcije
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-action="Ucenici" class="btn btn-outline-success btn-sm">
+                            <i class="fas fa-users"></i> Svi učenici
+                        </a>
+                        <a asp-action="Izostanci" class="btn btn-outline-warning btn-sm">
+                            <i class="fas fa-user-times"></i> Upravljanje izostancima
+                        </a>
+                        <a asp-action="Statistike" class="btn btn-outline-info btn-sm">
+                            <i class="fas fa-chart-bar"></i> Detaljne statistike
+                        </a>
+                        <a asp-controller="Evidencija" asp-action="Index" class="btn btn-outline-primary btn-sm">
+                            <i class="fas fa-clipboard-check"></i> Evidencija časova
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

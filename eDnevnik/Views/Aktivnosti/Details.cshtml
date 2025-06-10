@@ -1,0 +1,332 @@
+﻿@model eDnevnik.Models.Aktivnost
+
+@{
+    ViewData["Title"] = "Detalji aktivnosti";
+    var obavještenja = ViewBag.ObavjestenjaLogovi as List<eDnevnik.Models.ObavjestenjeLog>;
+}
+
+<div class="container">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2>
+                <i class="fas fa-@(Model.Tip.ToString() switch {
+                    "Test" => "clipboard-check",
+                    "Zadaca" => "tasks",
+                    "Takmicenje" => "trophy",
+                    "SkolarskiDogadjaj" => "school",
+                    "Prezentacija" => "presentation",
+                    "Ekskurzija" => "bus",
+                    _ => "calendar"
+                })"></i>
+                @Model.Naziv
+            </h2>
+            <p class="text-muted">@Model.TipText - kreirana @Model.DatumKreiranja.ToString("dd.MM.yyyy u HH:mm")</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Uredi
+            </a>
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left"></i> Nazad
+            </a>
+        </div>
+    </div>
+
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    }
+
+    @if (TempData["Greška"] != null)
+    {
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-circle"></i> @TempData["Greška"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    }
+
+    <div class="row">
+        <!-- Leva kolona - Detalji aktivnosti -->
+        <div class="col-lg-8">
+            <!-- Osnovne informacije -->
+            <div class="card mb-4">
+                <div class="card-header bg-@Model.TipClass text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Osnovne informacije
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <strong>Tip:</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <span class="badge bg-@Model.TipClass fs-6">@Model.TipText</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <strong>Datum i vrijeme:</strong>
+                        </div>
+                        <div class="col-md-9">
+                            @Model.Datum.ToString("dddd, dd.MM.yyyy u HH:mm")
+                            <br>
+                            <small class="text-muted">@Model.StatusText</small>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <strong>Prioritet:</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <span class="badge bg-@Model.PrioritetClass fs-6">@Model.PrioritetText</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <strong>Ciljana grupa:</strong>
+                        </div>
+                        <div class="col-md-9">
+                            @Model.CiljanaGrupa
+                        </div>
+                    </div>
+
+                    @if (Model.Predmet != null)
+                    {
+                    <div class="row mb-3">
+                        <div class="col-md-3">
+                            <strong>Predmet:</strong>
+                        </div>
+                        <div class="col-md-9">
+                            @Model.Predmet.Naziv
+                        </div>
+                    </div>
+                    }
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <strong>Opis:</strong>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="mb-0">@Model.Opis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistike obavještenja -->
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar"></i> Statistike obavještenja
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (obavještenja?.Any() == true)
+                    {
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="border rounded p-3">
+                                <h4 class="text-primary">@obavještenja.Count</h4>
+                                <small>Ukupno poslano</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border rounded p-3">
+                                <h4 class="text-success">@obavještenja.Count(o => o.Status == eDnevnik.Data.@enum.StatusObavjestenja.Poslano)</h4>
+                                <small>Uspješno</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border rounded p-3">
+                                <h4 class="text-danger">@obavještenja.Count(o => o.Status == eDnevnik.Data.@enum.StatusObavjestenja.Greška)</h4>
+                                <small>Greške</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border rounded p-3">
+                                <h4 class="text-warning">@obavještenja.Count(o => o.Status == eDnevnik.Data.@enum.StatusObavjestenja.Čeka)</h4>
+                                <small>Čeka slanje</small>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    else
+                    {
+                    <div class="text-center text-muted">
+                        <i class="fas fa-envelope fa-3x mb-3"></i>
+                        <h5>Obavještenja još nisu poslana</h5>
+                        <p>Obavještenja će biti poslana automatski prema prioritetu ili možete poslati odmah.</p>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Lista obavještenja -->
+            @if (obavještenja?.Any() == true)
+            {
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-list"></i> Poslana obavještenja (@obavještenja.Count)
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Korisnik</th>
+                                    <th>Email adresa</th>
+                                    <th>Vrijeme slanja</th>
+                                    <th>Status</th>
+                                    <th>Pokušaji</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var log in obavještenja.OrderByDescending(o => o.VrijemeSlanja))
+                                    {
+                                <tr class="@(log.Status == eDnevnik.Data.@enum.StatusObavjestenja.Poslano ? "table-success" :
+                                                   log.Status == eDnevnik.Data.@enum.StatusObavjestenja.Greška ? "table-danger" : "")">
+                                    <td>
+                                        <strong>@log.Korisnik?.FullName</strong>
+                                    </td>
+                                    <td>
+                                        <small>@log.EmailAdresa</small>
+                                    </td>
+                                    <td>
+                                        @log.VrijemeSlanja.ToString("dd.MM.yyyy HH:mm")
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@log.StatusClass">
+                                            @log.StatusText
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @log.BrojPokušaja
+                                        @if (!string.IsNullOrEmpty(log.Greska))
+                                                {
+                                        <br><small class="text-danger">@log.Greska</small>
+                                                }
+                                    </td>
+                                </tr>
+                                    }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <!-- Desna kolona - Akcije -->
+        <div class="col-lg-4">
+            <!-- Brze akcije -->
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt"></i> Brze akcije
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        @if (!Model.JeProšla)
+                        {
+                        <form asp-action="PošaljiObavještenjeSada" method="post" class="d-inline">
+                            <input type="hidden" name="id" value="@Model.Id">
+                            <button type="submit" class="btn btn-success w-100"
+                                    onclick="return confirm('Poslati obavještenje svim korisnicima?')">
+                                <i class="fas fa-paper-plane"></i> Pošalji obavještenje sada
+                            </button>
+                        </form>
+                        }
+
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Uredi aktivnost
+                        </a>
+
+                        <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">
+                            <i class="fas fa-trash"></i> Obriši aktivnost
+                        </a>
+
+                        <hr>
+
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="fas fa-list"></i> Sve aktivnosti
+                        </a>
+
+                        <a asp-action="Create" class="btn btn-outline-success">
+                            <i class="fas fa-plus"></i> Nova aktivnost
+                        </a>
+
+                        <a asp-action="Kalendar" class="btn btn-outline-info">
+                            <i class="fas fa-calendar"></i> Kalendar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informacije o slanju -->
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Informacije o slanju
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3">
+                        <strong>Prioritet: @Model.PrioritetText</strong>
+                        <br>
+                        <small class="text-muted">
+                            @switch (Model.Prioritet)
+                            {
+                                case eDnevnik.Data.@enum.PrioritetAktivnosti.Visok:
+                            <text>Obavještenje se šalje odmah nakon kreiranja aktivnosti.</text>
+                                    break;
+                                case eDnevnik.Data.@enum.PrioritetAktivnosti.Srednji:
+                            <text>Obavještenje se šalje 3 dana prije aktivnosti.</text>
+                                    break;
+                                case eDnevnik.Data.@enum.PrioritetAktivnosti.Nizak:
+                            <text>Obavještenje se šalje 1 dan prije aktivnosti.</text>
+                                    break;
+                            }
+                        </small>
+                    </div>
+
+                    <div class="mb-3">
+                        <strong>Ciljana grupa:</strong><br>
+                        <small class="text-muted">@Model.CiljanaGrupa</small>
+                    </div>
+
+                    @if (!Model.JeProšla && obavještenja?.Any() != true)
+                    {
+                    <div class="alert alert-warning">
+                        <i class="fas fa-clock"></i>
+                        <strong>Automatsko slanje:</strong>
+                        @switch (Model.Prioritet)
+                        {
+                            case eDnevnik.Data.@enum.PrioritetAktivnosti.Visok:
+                                                <small>Obavještenje je trebalo biti poslano odmah.</small>
+                                break;
+                            case eDnevnik.Data.@enum.PrioritetAktivnosti.Srednji:
+                                                <small>Obavještenje će biti poslano @Model.Datum.AddDays(-3).ToString("dd.MM.yyyy u HH:mm")</small>
+                                break;
+                            case eDnevnik.Data.@enum.PrioritetAktivnosti.Nizak:
+                                                <small>Obavještenje će biti poslano @Model.Datum.AddDays(-1).ToString("dd.MM.yyyy u HH:mm")</small>
+                                break;
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

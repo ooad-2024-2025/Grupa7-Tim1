@@ -159,6 +159,60 @@ namespace eDnevnik.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("eDnevnik.Models.Aktivnost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Aktivna")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Datum")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DatumKreiranja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NastavnikId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("Opis")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<int?>("PredmetId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Prioritet")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RazredId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Tip")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NastavnikId");
+
+                    b.HasIndex("PredmetId");
+
+                    b.HasIndex("RazredId");
+
+                    b.ToTable("Aktivnost");
+                });
+
             modelBuilder.Entity("eDnevnik.Models.Cas", b =>
                 {
                     b.Property<int>("Id")
@@ -197,6 +251,45 @@ namespace eDnevnik.Migrations
                     b.HasIndex("RazredId");
 
                     b.ToTable("Cas", (string)null);
+                });
+
+            modelBuilder.Entity("eDnevnik.Models.EvidencijaCasa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Aktivnosti")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CasId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DatumOdrzavanja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Napomene")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NastavnikId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("Odrzan")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("VrijemeEvidentiranja")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CasId");
+
+                    b.HasIndex("NastavnikId");
+
+                    b.ToTable("EvidencijaCasa");
                 });
 
             modelBuilder.Entity("eDnevnik.Models.FixniTermin", b =>
@@ -451,6 +544,52 @@ namespace eDnevnik.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("eDnevnik.Models.ObavjestenjeLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AktivnostId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BrojPokušaja")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmailAdresa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Greska")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("KorisnikId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SadržajEmaila")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("VrijemeSlanja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("VrijemeSlijedecegPokušaja")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AktivnostId");
+
+                    b.HasIndex("KorisnikId");
+
+                    b.ToTable("ObavjestenjeLog");
+                });
+
             modelBuilder.Entity("eDnevnik.Models.Ocjena", b =>
                 {
                     b.Property<int>("Id")
@@ -661,6 +800,31 @@ namespace eDnevnik.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("eDnevnik.Models.Aktivnost", b =>
+                {
+                    b.HasOne("eDnevnik.Models.Korisnik", "Nastavnik")
+                        .WithMany()
+                        .HasForeignKey("NastavnikId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("eDnevnik.Models.Predmet", "Predmet")
+                        .WithMany()
+                        .HasForeignKey("PredmetId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("eDnevnik.Models.Razred", "Razred")
+                        .WithMany()
+                        .HasForeignKey("RazredId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Nastavnik");
+
+                    b.Navigation("Predmet");
+
+                    b.Navigation("Razred");
+                });
+
             modelBuilder.Entity("eDnevnik.Models.Cas", b =>
                 {
                     b.HasOne("eDnevnik.Models.FixniTermin", "FixniTermin")
@@ -692,6 +856,25 @@ namespace eDnevnik.Migrations
                     b.Navigation("Predmet");
 
                     b.Navigation("Razred");
+                });
+
+            modelBuilder.Entity("eDnevnik.Models.EvidencijaCasa", b =>
+                {
+                    b.HasOne("eDnevnik.Models.Cas", "Cas")
+                        .WithMany()
+                        .HasForeignKey("CasId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("eDnevnik.Models.Korisnik", "Nastavnik")
+                        .WithMany()
+                        .HasForeignKey("NastavnikId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Cas");
+
+                    b.Navigation("Nastavnik");
                 });
 
             modelBuilder.Entity("eDnevnik.Models.Izostanak", b =>
@@ -728,6 +911,25 @@ namespace eDnevnik.Migrations
                     b.Navigation("Razred");
 
                     b.Navigation("Roditelj");
+                });
+
+            modelBuilder.Entity("eDnevnik.Models.ObavjestenjeLog", b =>
+                {
+                    b.HasOne("eDnevnik.Models.Aktivnost", "Aktivnost")
+                        .WithMany()
+                        .HasForeignKey("AktivnostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eDnevnik.Models.Korisnik", "Korisnik")
+                        .WithMany()
+                        .HasForeignKey("KorisnikId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Aktivnost");
+
+                    b.Navigation("Korisnik");
                 });
 
             modelBuilder.Entity("eDnevnik.Models.Ocjena", b =>

@@ -21,6 +21,11 @@ namespace eDnevnik.Data
         public DbSet<PredmetRazred> PredmetRazred { get; set; }
         public DbSet<Poruka> Poruka { get; set; }
 
+        public DbSet<EvidencijaCasa> EvidencijaCasa { get; set; }
+
+        public DbSet<Aktivnost> Aktivnost { get; set; }
+        public DbSet<ObavjestenjeLog> ObavjestenjeLog { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Razred>().ToTable("Razred");
@@ -29,6 +34,18 @@ namespace eDnevnik.Data
             modelBuilder.Entity<Cas>().ToTable("Cas");
             modelBuilder.Entity<Izostanak>().ToTable("Izostanak");
             modelBuilder.Entity<Ocjena>().ToTable("Ocjena");
+
+            modelBuilder.Entity<EvidencijaCasa>()
+                .HasOne(e => e.Cas)
+                .WithMany()
+                .HasForeignKey(e => e.CasId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<EvidencijaCasa>()
+                .HasOne(e => e.Nastavnik)
+                .WithMany()
+                .HasForeignKey(e => e.NastavnikId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Korisnik>(b =>
             {
@@ -106,6 +123,37 @@ namespace eDnevnik.Data
                 .HasOne(p => p.Primalac)
                 .WithMany()
                 .HasForeignKey(p => p.PrimalacId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Aktivnost>()
+                .HasOne(a => a.Nastavnik)
+                .WithMany()
+                .HasForeignKey(a => a.NastavnikId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Aktivnost>()
+                .HasOne(a => a.Razred)
+                .WithMany()
+                .HasForeignKey(a => a.RazredId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Aktivnost>()
+                .HasOne(a => a.Predmet)
+                .WithMany()
+                .HasForeignKey(a => a.PredmetId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // OBAVJEŠTENJE LOG
+            modelBuilder.Entity<ObavjestenjeLog>()
+                .HasOne(o => o.Aktivnost)
+                .WithMany()
+                .HasForeignKey(o => o.AktivnostId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ObavjestenjeLog>()
+                .HasOne(o => o.Korisnik)
+                .WithMany()
+                .HasForeignKey(o => o.KorisnikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // FIKSNI TERMINI SEED DATA - DODANO

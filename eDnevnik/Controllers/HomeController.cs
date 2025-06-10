@@ -21,9 +21,22 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         var user = await _userManager.GetUserAsync(User);
-        if (user != null && await _userManager.IsInRoleAsync(user, "Administrator"))
+        if (user != null)
         {
-            return RedirectToAction("Index", "Admin");
+            var roles = await _userManager.GetRolesAsync(user);
+
+            if (roles.Contains("Administrator"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
+            else if (roles.Contains("Ucenik"))
+            {
+                return RedirectToAction("Index", "Ucenik");
+            }
+            else if (roles.Contains("Nastavnik"))
+            {
+                return RedirectToAction("Index", "Evidencija");
+            }
         }
 
         return View(); // za neulogovane i ostale korisnike

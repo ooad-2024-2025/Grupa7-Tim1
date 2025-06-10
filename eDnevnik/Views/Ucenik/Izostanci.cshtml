@@ -1,0 +1,274 @@
+﻿@model eDnevnik.ViewModels.UcenikIzostanciViewModel
+
+@{
+    ViewData["Title"] = "Moji izostanci";
+    
+    // Mapiranje vladanja na bosanski
+    string vladanjeText = Model.VladanjeInfo.TrenutnoVladanje.ToString() switch
+    {
+        "Primjereno" => "Primjerno",
+        "VrloDobro" => "Vrlo dobro",
+        "Dobro" => "Dobro", 
+        "Zadovoljava" => "Zadovoljava",
+        "Neprimjereno" => "Ne zadovoljava",
+        _ => Model.VladanjeInfo.TrenutnoVladanje.ToString()
+    };
+    
+    string vladanjeSlijedeciNivo = "";
+    if (Model.VladanjeInfo.SlijedeciNivo.HasValue)
+    {
+        vladanjeSlijedeciNivo = Model.VladanjeInfo.SlijedeciNivo.ToString() switch
+        {
+            "Primjereno" => "Primjerno",
+            "VrloDobro" => "Vrlo dobro",
+            "Dobro" => "Dobro", 
+            "Zadovoljava" => "Zadovoljava",
+            "Neprimjereno" => "Ne zadovoljava",
+            _ => Model.VladanjeInfo.SlijedeciNivo.ToString()
+        };
+    }
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-user-times"></i> Moji izostanci</h2>
+            <p class="text-muted">Pregled svih izostanaka i status vladanja</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Nazad na dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Status vladanja -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <i class="fas fa-award text-primary fa-2x mb-2"></i>
+                    <h4 class="text-primary">@vladanjeText</h4>
+                    <p class="card-text">Trenutno vladanje</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <i class="fas fa-exclamation-triangle text-warning fa-2x mb-2"></i>
+                    <h4 class="text-warning">@Model.VladanjeInfo.UkupnoIzostanaka</h4>
+                    <p class="card-text">Ukupno izostanaka</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-danger">
+                <div class="card-body text-center">
+                    <i class="fas fa-times-circle text-danger fa-2x mb-2"></i>
+                    <h4 class="text-danger">@Model.VladanjeInfo.NeopravdaniIzostanci</h4>
+                    <p class="card-text">Neopravdani</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <i class="fas fa-check-circle text-success fa-2x mb-2"></i>
+                    <h4 class="text-success">@Model.VladanjeInfo.OpravdaniIzostanci</h4>
+                    <p class="card-text">Opravdani</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upozorenje za vladanje -->
+    @if (Model.VladanjeInfo.SlijedeciNivo.HasValue)
+    {
+        <div class="alert alert-warning mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Pažnja!</strong> 
+                    Još <strong>@Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa izostanaka</strong> 
+                    do promjene vladanja na "@vladanjeSlijedeciNivo".
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="progress" style="height: 25px;">
+                        @{
+                            var maxIzostanci = Model.VladanjeInfo.UkupnoIzostanaka + Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa;
+                            var procenat = maxIzostanci > 0 ? (Model.VladanjeInfo.UkupnoIzostanaka * 100 / maxIzostanci) : 0;
+                        }
+                        <div class="progress-bar bg-warning" style="width: @procenat%">
+                            @procenat%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Model.VladanjeInfo.TrenutnoVladanje.ToString() == "NeZadovoljava")
+    {
+        <div class="alert alert-danger mb-4">
+            <i class="fas fa-exclamation-circle"></i>
+            <strong>Upozorenje!</strong> Vladanje je na najnižem nivou. Potrebno je smanjiti broj izostanaka.
+        </div>
+    }
+
+    <!-- Filteri -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Filtriranje izostanaka</h5>
+        </div>
+        <div class="card-body">
+            <form method="get">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label class="form-label">Status</label>
+                        <select name="status" class="form-select">
+                            <option value="svi" selected="@(Model.SelectedStatus == "svi")">Svi izostanci</option>
+                            <option value="Neopravdan" selected="@(Model.SelectedStatus == "Neopravdan")">Neopravdani</option>
+                            <option value="Opravdan" selected="@(Model.SelectedStatus == "Opravdan")">Opravdani</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Od datuma</label>
+                        <input type="date" name="odDatuma" value="@Model.OdDatuma?.ToString("yyyy-MM-dd")" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Do datuma</label>
+                        <input type="date" name="doDatuma" value="@Model.DoDatuma?.ToString("yyyy-MM-dd")" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-filter"></i> Filtriraj
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lista izostanaka -->
+    @if (Model.Izostanci.Any())
+    {
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="fas fa-list"></i> Lista izostanaka (@Model.Izostanci.Count)
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Datum</th>
+                                <th>Predmet</th>
+                                <th>Termin</th>
+                                <th>Status</th>
+                                <th>Komentar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var izostanak in Model.Izostanci)
+                            {
+                                <tr class="@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan ? "table-danger" : "table-warning")">
+                                    <td>
+                                        <strong>@izostanak.DatumCasa.ToString("dd.MM.yyyy")</strong><br>
+                                        <small class="text-muted">@izostanak.DatumCasa.ToString("dddd")</small>
+                                    </td>
+                                    <td>
+                                        <strong>@izostanak.PredmetNaziv</strong>
+                                    </td>
+                                    <td>
+                                        <small>@izostanak.TerminInfo</small>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan ? "success" : "danger")">
+                                            @(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan ? "Opravdan" : "Neopravdan")
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(izostanak.Izostanak.Komentar))
+                                        {
+                                            <small class="text-muted">@izostanak.Izostanak.Komentar</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted fst-italic">Bez komentara</small>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Statistike po mjesecima -->
+        @if (Model.IzostanciPoMjesecima.Any(kvp => kvp.Value > 0))
+        {
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar"></i> Izostanci po mjesecima
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @foreach (var mjesec in Model.IzostanciPoMjesecima.Where(kvp => kvp.Value > 0))
+                        {
+                            <div class="col-md-2 mb-2">
+                                <div class="text-center">
+                                    <div class="badge bg-primary fs-6 mb-1">@mjesec.Value</div>
+                                    <small class="d-block">@mjesec.Key</small>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-body text-center">
+                <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+                <h4 class="text-success">Odlično!</h4>
+                <p class="text-muted">
+                    @if (Model.SelectedStatus == "svi")
+                    {
+                        <text>Nemate izostanaka za odabrani period.</text>
+                    }
+                    else
+                    {
+                        <text>Nemate @(Model.SelectedStatus == "Neopravdan" ? "neopravdanih" : "opravdanih") izostanaka za odabrani period.</text>
+                    }
+                </p>
+                <a asp-action="Index" class="btn btn-success">
+                    <i class="fas fa-arrow-left"></i> Nazad na dashboard
+                </a>
+            </div>
+        </div>
+    }
+
+    <!-- Legenda -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-light">
+                <div class="card-body py-2">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle"></i> 
+                        <span class="badge bg-danger">Crveno</span> - neopravdan izostanak | 
+                        <span class="badge bg-success">Zeleno</span> - opravdan izostanak
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

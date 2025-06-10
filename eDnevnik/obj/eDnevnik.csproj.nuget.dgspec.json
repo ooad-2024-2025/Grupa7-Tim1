@@ -1,24 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {}
+    "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {
+    "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+        "projectUniqueName": "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
         "projectName": "eDnevnik",
-        "projectPath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
-        "packagesPath": "C:\\Users\\mirne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\obj\\",
+        "projectPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+        "packagesPath": "C:\\Users\\emirb\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Desktop\\OOAD-PROJEKAT-NOVO-PULLANO-JER-SAM-DEBIL\\Grupa7-Tim1\\eDnevnik\\NuGet.Config",
-          "C:\\Users\\mirne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\NuGet.Config",
+          "C:\\Users\\emirb\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +27,6 @@
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

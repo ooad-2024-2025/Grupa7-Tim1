@@ -32,7 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="NewFolder1\" />
     <Folder Include="NewFolder\" />
+    <Folder Include="Views\NewFolder1\" />
+    <Folder Include="Views\NewFolder\" />
   </ItemGroup>
 
 </Project>

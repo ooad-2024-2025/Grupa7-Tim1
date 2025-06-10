@@ -1,0 +1,133 @@
+﻿@model eDnevnik.Models.Aktivnost
+
+@{
+    ViewData["Title"] = "Obriši aktivnost";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4><i class="fas fa-trash"></i> Potvrdi brisanje aktivnosti</h4>
+                </div>
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Pažnja!</strong> Da li ste sigurni da želite obrisati ovu aktivnost?
+                        <strong>Ova akcija se ne može poništiti!</strong>
+                    </div>
+
+                    <!-- Detalji aktivnosti -->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title text-danger">
+                                <i class="fas fa-@(Model.Tip.ToString() switch {
+                                    "Test" => "clipboard-check",
+                                    "Zadaca" => "tasks",
+                                    "Takmicenje" => "trophy",
+                                    "SkolarskiDogadjaj" => "school",
+                                    "Prezentacija" => "presentation",
+                                    "Ekskurzija" => "bus",
+                                    _ => "calendar"
+                                })"></i>
+                                @Model.Naziv
+                            </h5>
+
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><strong>Tip:</strong></div>
+                                <div class="col-sm-8">
+                                    <span class="badge bg-@Model.TipClass">@Model.TipText</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><strong>Datum:</strong></div>
+                                <div class="col-sm-8">
+                                    @Model.Datum.ToString("dddd, dd.MM.yyyy u HH:mm")
+                                    <br><small class="text-muted">@Model.StatusText</small>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><strong>Prioritet:</strong></div>
+                                <div class="col-sm-8">
+                                    <span class="badge bg-@Model.PrioritetClass">@Model.PrioritetText</span>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><strong>Ciljana grupa:</strong></div>
+                                <div class="col-sm-8">@Model.CiljanaGrupa</div>
+                            </div>
+
+                            @if (Model.Predmet != null)
+                            {
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><strong>Predmet:</strong></div>
+                                <div class="col-sm-8">@Model.Predmet.Naziv</div>
+                            </div>
+                            }
+
+                            <div class="row mb-2">
+                                <div class="col-sm-4"><strong>Opis:</strong></div>
+                                <div class="col-sm-8">@Model.Opis</div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-4"><strong>Kreirana:</strong></div>
+                                <div class="col-sm-8">
+                                    <small class="text-muted">
+                                        @Model.DatumKreiranja.ToString("dd.MM.yyyy u HH:mm")
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upozorenje o obavještenjima -->
+                    <div class="alert alert-danger">
+                        <i class="fas fa-envelope"></i>
+                        <strong>Upozorenje:</strong> Brisanjem aktivnosti će biti obrisana i sva povezana obavještenja.
+                        Korisnici koji su već primili obavještenje neće biti obaviješteni o ukidanju aktivnosti.
+                    </div>
+
+                    <!-- Forma za brisanje -->
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Odustani
+                            </a>
+
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Da li ste potpuno sigurni da želite obrisati aktivnost \'@Model.Naziv\'? Ova akcija se ne može poništiti!')">
+                                <i class="fas fa-trash"></i> Obriši aktivnost
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Dodatne informacije -->
+            <div class="card mt-3 border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-info-circle"></i> Što se dešava kad obrišete aktivnost?
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="small mb-0">
+                        <li>Aktivnost će biti potpuno uklonjena iz sistema</li>
+                        <li>Sva povezana obavještenja će biti obrisana</li>
+                        <li>Korisnici neće biti obaviješteni o ukidanju</li>
+                        <li>Ova akcija se ne može poništiti</li>
+                        <li>Ako trebate aktivnost u budućnosti, kreirajte novu</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,228 @@
+﻿@model eDnevnik.Models.EvidencijaCasa
+
+@{
+    ViewData["Title"] = "Detalji evidencije";
+    var izostanci = ViewBag.Izostanci as List<eDnevnik.Models.Izostanak>;
+    var ocjene = ViewBag.Ocjene as List<eDnevnik.Models.Ocjena>;
+}
+
+<div class="container">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-info-circle"></i> Detalji evidencije</h2>
+            <p class="text-muted">@Model.DatumOdrzavanja.ToString("dddd, dd.MM.yyyy HH:mm")</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Pregled" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Nazad
+            </a>
+        </div>
+    </div>
+
+    <!-- Osnovne informacije -->
+    <div class="card mb-4">
+        <div class="card-header @(Model.Odrzan ? "bg-success" : "bg-danger") text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-@(Model.Odrzan ? "check" : "times")"></i>
+                @Model.Cas?.Predmet?.Naziv - @Model.Cas?.Razred?.Naziv
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <strong>Termin:</strong><br>
+                    <span class="badge bg-primary fs-6">@Model.Cas?.FixniTermin?.Naziv</span><br>
+                    <small class="text-muted">@Model.Cas?.FixniTermin?.FormatiraniTermin</small>
+                </div>
+                <div class="col-md-3">
+                    <strong>Status:</strong><br>
+                    <span class="badge bg-@(Model.Odrzan ? "success" : "danger") fs-6">
+                        @Model.StatusTekst
+                    </span>
+                </div>
+                <div class="col-md-3">
+                    <strong>Evidentirano:</strong><br>
+                    @Model.VrijemeEvidentiranja.ToString("HH:mm")
+                </div>
+                <div class="col-md-3">
+                    <strong>Nastavnik:</strong><br>
+                    @Model.Nastavnik?.FullName
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.Odrzan)
+    {
+        <!-- Aktivnosti ?asa -->
+    <div class="card mb-4">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-book-open"></i> Aktivnosti časa
+            </h5>
+        </div>
+        <div class="card-body">
+            <p class="mb-0">@(Model.Aktivnosti ?? "Nisu unesene aktivnosti")</p>
+
+            @if (!string.IsNullOrEmpty(Model.Napomene))
+                {
+            <hr>
+            <strong>Napomene:</strong><br>
+            <p class="text-muted mb-0">@Model.Napomene</p>
+                }
+        </div>
+    </div>
+
+ <!-- Prisustvo -->
+    <div class="card mb-4">
+        <div class="card-header bg-warning text-dark">
+            <h5 class="mb-0">
+                <i class="fas fa-user-check"></i> Prisustvo učenika
+            </h5>
+        </div>
+        <div class="card-body">
+            @if (izostanci?.Any() == true)
+                {
+            <div class="alert alert-warning">
+                <i class="fas fa-exclamation-triangle"></i>
+                <strong>Odsutni učenici (@izostanci.Count):</strong>
+            </div>
+
+            <div class="table-responsive">
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>Ime i prezime</th>
+                            <th>Status</th>
+                            <th>Komentar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var izostanak in izostanci)
+                                {
+                        <tr>
+                            <td>@izostanak.Ucenik?.FullName</td>
+                            <td>
+                                <span class="badge bg-@(izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan ? "success" : "danger")">
+                                    @izostanak.status
+                                </span>
+                            </td>
+                            <td>@(izostanak.Komentar ?? "-")</td>
+                        </tr>
+                                }
+                    </tbody>
+                </table>
+            </div>
+                }
+                else
+                {
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle"></i>
+                <strong>Svi učenici su bili prisutni!</strong>
+            </div>
+                }
+        </div>
+    </div>
+
+ <!-- Ocjene -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">
+                <i class="fas fa-star"></i> Ocjene date na ovom času
+            </h5>
+        </div>
+        <div class="card-body">
+            @if (ocjene?.Any() == true)
+                {
+            <div class="table-responsive">
+                <table class="table table-sm table-striped">
+                    <thead>
+                        <tr>
+                            <th>Ime i prezime</th>
+                            <th>Ocjena</th>
+                            <th>Komentar</th>
+                            <th>Vrijeme</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ocjena in ocjene)
+                                {
+                        <tr>
+                            <td>@ocjena.Ucenik?.FullName</td>
+                            <td>
+                                <span class="badge bg-@(ocjena.Vrijednost >= 3 ? "success" : "danger") fs-6">
+                                    @ocjena.Vrijednost
+                                </span>
+                            </td>
+                            <td>@(ocjena.Komentar ?? "-")</td>
+                            <td>
+                                <small>@ocjena.Datum.ToString("HH:mm")</small>
+                            </td>
+                        </tr>
+                                }
+                    </tbody>
+                </table>
+            </div>
+
+ <!-- Statistike ocjena -->
+            <div class="row mt-3">
+                <div class="col-md-6">
+                    <strong>Prosječna ocjena:</strong>
+                    @Math.Round(ocjene.Average(o => o.Vrijednost), 2)
+                </div>
+                <div class="col-md-6">
+                    <strong>Ukupno ocjena:</strong> @ocjene.Count
+                </div>
+            </div>
+                }
+                else
+                {
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle"></i>
+                Nisu date ocjene na ovom času.
+            </div>
+                }
+        </div>
+    </div>
+    }
+    else
+    {
+ <!-- ?as je otkazan -->
+    <div class="alert alert-danger">
+        <i class="fas fa-times-circle"></i>
+        <strong>Čas je otkazan</strong>
+        @if (!string.IsNullOrEmpty(Model.Napomene))
+            {
+        <br><strong>Razlog:</strong>  @Model.Napomene
+            }
+    </div>
+    }
+
+    <!-- Brze akcije -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Povezane akcije</h6>
+                    <a asp-controller="Ocjena" asp-action="Unos" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-plus"></i> Dodaj ocjene
+                    </a>
+                    <a asp-controller="Raspored" asp-action="Index" class="btn btn-outline-info btn-sm">
+                        <i class="fas fa-calendar"></i> Raspored
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h6 class="card-title">Izvještaji</h6>
+                    <button class="btn btn-outline-success btn-sm" onclick="window.print()">
+                        <i class="fas fa-print"></i> Printaj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
