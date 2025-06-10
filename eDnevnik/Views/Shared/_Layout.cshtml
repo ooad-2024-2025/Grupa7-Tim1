@@ -93,6 +93,12 @@
                                 <a class="nav-link text-dark" asp-controller="Chat" asp-action="Index">Chat</a>
                             </li>
                         }
+                        @if (User.IsInRole("Roditelj"))
+                        {
+        <li class="nav-item">
+            <a class="nav-link" asp-controller="Roditelj" asp-action="OcjeneDjeteta">Ocjene mog djeteta</a>
+        </li>
+                        }
                        
 
                     </ul>

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using eDnevnik.Models;
 using eDnevnik.Services;
-using eDnevnik.Data; // ako ti je tu DbContext
+using eDnevnik.Data;
+using Microsoft.EntityFrameworkCore; // ako ti je tu DbContext
 
 namespace eDnevnik.Controllers
 {
@@ -100,5 +101,39 @@ namespace eDnevnik.Controllers
             ViewBag.Message = "Niste ovlašteni za pregled izvještaja.";
             return View();
         }
+        [HttpPost]
+        [Authorize(Roles = "Roditelj")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendToParent(string ucenikId)
+        {
+            var roditelj = await _userManager.GetUserAsync(User);
+            if (roditelj == null)
+                return Unauthorized();
+
+            var ucenik = await _userManager.Users
+                .Include(u => u.Razred)
+                .FirstOrDefaultAsync(u => u.Id == ucenikId && u.RoditeljId == roditelj.Id);
+
+            if (ucenik == null)
+                return NotFound("Dijete nije pronađeno.");
+
+            var report = await _reportService.GenerateReportAsync(ucenik.Id);
+            if (report == null)
+                return BadRequest("Greška pri generisanju izvještaja.");
+
+            await _emailService.SendEmailAsync(
+                toEmail: roditelj.Email,
+                subject: $"Izvještaj za dijete {ucenik.Ime} {ucenik.Prezime}",
+                body: $"Poštovani, u prilogu se nalazi izvještaj za Vaše dijete {ucenik.Ime} {ucenik.Prezime}.",
+                attachment: report,
+                filename: $"Izvjestaj_{ucenik.Ime}_{ucenik.Prezime}.xlsx"
+            );
+
+            // Umesto TempData, koristi istu Potvrda stranicu kao prva metoda
+            return RedirectToAction("Potvrda");
+        }
+
+
+
     }
 }

@@ -1,0 +1,266 @@
+﻿@model eDnevnik.ViewModels.UcenikOcjeneViewModel
+
+@{
+    ViewData["Title"] = "Moje ocjene";
+}
+
+<div class="container-fluid">
+    @if (TempData["SuccessMessage"] != null)
+    {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle"></i> @TempData["SuccessMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle"></i> @TempData["ErrorMessage"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+    }
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-star"></i> Ocjene – @Model.Ucenik.Ime @Model.Ucenik.Prezime</h2>
+<p class="text-muted">Pregled svih ocjena po predmetima za vaše dijete</p>
+
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Index" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Nazad na dashboard
+            </a>
+        </div>
+    </div>
+
+    <!-- Statistike -->
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <h4 class="@Model.Statistike.OpciProsjekClass">@Model.Statistike.OpciProsjekText</h4>
+                    <p class="card-text">Opći prosjek</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h4 class="text-info">@Model.Statistike.UkupnoOcjena</h4>
+                    <p class="card-text">Ukupno ocjena</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h4 class="text-primary">@Model.Statistike.BrojPredmeta</h4>
+                    <p class="card-text">Predmeta</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <h4 class="text-warning">
+                        @if (Model.Statistike.UkupnoOcjena > 0)
+                        {
+                            @Math.Round(Model.Statistike.OcjeneDistribucija.Where(kvp => kvp.Key >= 2).Sum(kvp => kvp.Value) * 100.0 / Model.Statistike.UkupnoOcjena, 1)
+
+                            <text>%</text>
+                        }
+                        else
+                        {
+                            <text>0%</text>
+                        }
+                    </h4>
+                    <p class="card-text">Pozitivnih ocjena</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filteri -->
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Filtriranje ocjena</h5>
+        </div>
+        <div class="card-body">
+            <form method="get">
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="form-label">Predmet</label>
+                        <select name="predmet" class="form-select">
+                            <option value="svi" selected="@(Model.SelectedPredmet == "svi")">Svi predmeti</option>
+                            @if (ViewBag.Predmeti != null)
+                            {
+                                @foreach (var predmet in ViewBag.Predmeti as List<eDnevnik.Models.Predmet>)
+                                {
+                                            <option value="@predmet.Id" selected="@(Model.SelectedPredmet == predmet.Id.ToString())">
+                                        @predmet.Naziv
+                                            </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Od datuma</label>
+                        <input type="date" name="odDatuma" value="@Model.OdDatuma?.ToString("yyyy-MM-dd")" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label">Do datuma</label>
+                        <input type="date" name="doDatuma" value="@Model.DoDatuma?.ToString("yyyy-MM-dd")" class="form-control">
+                    </div>
+                    <div class="col-md-2">
+                        <label class="form-label">&nbsp;</label>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-filter"></i> Filtriraj
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <form method="post" asp-controller="Report" asp-action="SendToParent" class="mt-3">
+    <input type="hidden" name="ucenikId" value="@Model.Ucenik.Id" />
+                @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-outline-success">
+        📧 Pošalji izvještaj roditelju na e-mail
+    </button>
+</form>
+
+            @using Microsoft.AspNetCore.Identity
+@inject UserManager<eDnevnik.Models.Korisnik> UserManager
+
+            @{
+                var prijavljeniKorisnik = await UserManager.GetUserAsync(User);
+                var roleList = await UserManager.GetRolesAsync(prijavljeniKorisnik);
+                var isUcenik = roleList.Contains("Ucenik");
+            }
+
+            @if (isUcenik)
+            {
+            <form method="post" asp-controller="Report" asp-action="Send" class="mt-3">
+                <input type="hidden" name="ucenikId" value="@prijavljeniKorisnik.Id" />
+                    @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-outline-primary">
+                    📄 Pošalji izvještaj na moj e-mail
+                </button>
+            </form>
+            }
+        </div>
+    </div>
+
+    <!-- Ocjene po predmetima -->
+    @if (Model.OcjenePoPremetima.Any())
+    {
+        @foreach (var predmet in Model.OcjenePoPremetima)
+        {
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <div class="row align-items-center">
+                                <div class="col-md-6">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-book"></i> @predmet.Predmet?.Naziv
+                                    </h5>
+                                </div>
+                                <div class="col-md-6 text-end">
+                                    <span class="badge bg-light text-dark fs-6 me-2">
+                                        Prosjek: @predmet.ProsjekText
+                                    </span>
+                                    <span class="badge bg-info fs-6">
+                                @predmet.BrojOcjena ocjena
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                    @if (predmet.Ocjene.Any())
+                    {
+                                    <div class="table-responsive">
+                                        <table class="table table-sm table-hover">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th width="100">Ocjena</th>
+                                                    <th width="150">Datum</th>
+                                                    <th>Komentar</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                    @foreach (var ocjena in predmet.Ocjene)
+                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <span class="badge bg-@(ocjena.Vrijednost >= 3 ? "success" : "danger") fs-6">
+                                                    @ocjena.Vrijednost
+                                                                </span>
+                                                            </td>
+                                                            <td>
+                                                                <small>@ocjena.Datum.ToString("dd.MM.yyyy")</small>
+                                                            </td>
+                                                            <td>
+                                                @if (!string.IsNullOrEmpty(ocjena.Komentar))
+                                                {
+                                                                        <small class="text-muted">@ocjena.Komentar</small>
+                                                }
+                                                else
+                                                {
+                                                                        <small class="text-muted fst-italic">Bez komentara</small>
+                                                }
+                                                            </td>
+                                                        </tr>
+                                    }
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Mini statistika za predmet -->
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <small class="text-muted">
+                                                Distribucija ocjena: 
+                                    @foreach (var i in Enumerable.Range(1, 5))
+                                    {
+                                        var broj = predmet.Ocjene.Count(o => o.Vrijednost == i);
+                                        if (broj > 0)
+                                        {
+                                                                <span class="badge bg-@(i >= 3 ? "success" : "danger") me-1">@i: @broj</span>
+                                        }
+                                    }
+                                            </small>
+                                        </div>
+                                        <div class="col-md-6 text-end">
+                                @if (predmet.NajnovijaOcjena != null)
+                                {
+                                                    <small class="text-muted">
+                                                        Najnovija: <strong>@predmet.NajnovijaOcjena.Vrijednost</strong> 
+                                                        (@predmet.NajnovijaOcjena.Datum.ToString("dd.MM.yyyy"))
+                                                    </small>
+                                }
+                                        </div>
+                                    </div>
+                    }
+                    else
+                    {
+                                    <div class="text-center text-muted py-3">
+                                        <i class="fas fa-star fa-2x mb-2"></i>
+                                        <p>Nema ocjena za ovaj predmet</p>
+                                    </div>
+                    }
+                        </div>
+                    </div>
+        }
+    }
+    else
+    {
+            <div class="card">
+                <div class="card-body text-center">
+                    <i class="fas fa-star fa-4x text-muted mb-3"></i>
+                    <h4 class="text-muted">Nema ocjena</h4>
+                    <p class="text-muted">Za odabrane kriterije nema pronađenih ocjena.</p>
+                    <a asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-arrow-left"></i> Nazad na dashboard
+                    </a>
+                </div>
+            </div>
+    }
+</div>

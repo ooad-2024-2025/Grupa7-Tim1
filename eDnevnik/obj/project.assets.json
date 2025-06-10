@@ -9583,17 +9583,17 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\tarem\\source\\repos\\New folder (2)\\eDnevnik\\eDnevnik.csproj",
+      "projectUniqueName": "C:\\Users\\tarem\\source\\repos\\New5\\eDnevnik\\eDnevnik.csproj",
       "projectName": "eDnevnik",
-      "projectPath": "C:\\Users\\tarem\\source\\repos\\New folder (2)\\eDnevnik\\eDnevnik.csproj",
+      "projectPath": "C:\\Users\\tarem\\source\\repos\\New5\\eDnevnik\\eDnevnik.csproj",
       "packagesPath": "C:\\Users\\tarem\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\tarem\\source\\repos\\New folder (2)\\eDnevnik\\obj\\",
+      "outputPath": "C:\\Users\\tarem\\source\\repos\\New5\\eDnevnik\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\tarem\\source\\repos\\New folder (2)\\eDnevnik\\NuGet.Config",
+        "C:\\Users\\tarem\\source\\repos\\New5\\eDnevnik\\NuGet.Config",
         "C:\\Users\\tarem\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
