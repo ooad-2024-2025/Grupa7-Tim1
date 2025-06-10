@@ -113,6 +113,16 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Redirect}/{action=Index}/{id?}");
 
+app.MapControllerRoute(
+    name: "report",
+    pattern: "Report/Generate/{dijeteId}",
+    defaults: new { controller = "Report", action = "Generate" });
+
+app.MapControllerRoute(
+    name: "reportGenerate",
+    pattern: "Report/Generate/{id}",
+    defaults: new { controller = "Report", action = "Generate" });
+
 app.MapRazorPages();
 
 // 6. SEED

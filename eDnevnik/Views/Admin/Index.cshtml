@@ -73,7 +73,6 @@
                 <th>Prezime</th>
                 <th>Email</th>
                 <th>Uloga/e</th>
-                <th>Akcija</th>
             </tr>
         </thead>
         <tbody>
@@ -84,14 +83,6 @@
                     <td>@korisnik.Prezime</td>
                     <td>@korisnik.Email</td>
                     <td>@korisnik.Uloge</td>
-                    <td>
-                        <a asp-controller="Poruke"
-                           asp-action="Razgovor"
-                           asp-route-id="@korisnik.Id"
-                           class="btn btn-sm btn-outline-primary">
-                            Poruka
-                        </a>
-                    </td>
                 </tr>
             }
         </tbody>

@@ -1,0 +1,362 @@
+﻿@model eDnevnik.ViewModels.RoditeljDashboardViewModel
+
+@{
+    ViewData["Title"] = "Roditelj Dashboard";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-home"></i> Dobrodošli, @Model.Roditelj.FullName</h2>
+            <p class="text-muted">Pregled napretka vaše djece u školi</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <div class="btn-group">
+                <button type="button" class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                    <i class="fas fa-chart-bar"></i> Izvještaji
+                </button>
+                <ul class="dropdown-menu">
+                    @if (Model.Djeca.Any())
+                    {
+                        @foreach (var dijete in Model.Djeca)
+                        {
+                            <li>
+                                <a class="dropdown-item" asp-controller="Report" asp-action="GenerateReport" asp-route-dijeteId="@dijete.Ucenik.Id" target="_blank">
+                                    <i class="fas fa-file-pdf"></i> PDF Izvještaj - @dijete.Ucenik.FullName
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @if (ViewBag.NemaDjece == true)
+    {
+        <!-- Nema registrovane djece -->
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-warning">
+                    <div class="card-body text-center">
+                        <i class="fas fa-child fa-4x text-warning mb-3"></i>
+                        <h4 class="text-warning">Nema registrovane djece</h4>
+                        <p class="text-muted">Nemate djecu registrovanu u sistemu. Kontaktirajte administratora škole da poveže vaš račun sa računom vašeg djeteta.</p>
+                        <a href="mailto:admin@skola.ba" class="btn btn-warning">
+                            <i class="fas fa-envelope"></i> Kontaktiraj administratora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Opće statistike -->
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <div class="card border-primary">
+                    <div class="card-body text-center">
+                        <i class="fas fa-users fa-2x text-primary mb-2"></i>
+                        <h4 class="text-primary">@Model.Statistike.UkupnoDjece</h4>
+                        <p class="card-text">@(Model.Statistike.UkupnoDjece == 1 ? "Dijete" : "Djece")</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-success">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-2x @Model.Statistike.ProsjekSveDjeceClass mb-2"></i>
+                        <h4 class="@Model.Statistike.ProsjekSveDjeceClass">@Model.Statistike.ProsjekSveDjeceText</h4>
+                        <p class="card-text">Prosjek sve djece</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-info">
+                    <div class="card-body text-center">
+                        <i class="fas fa-star fa-2x text-info mb-2"></i>
+                        <h4 class="text-info">@Model.Statistike.UkupnoOcjena</h4>
+                        <p class="card-text">Ukupno ocjena</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card border-warning">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user-times fa-2x text-warning mb-2"></i>
+                        <h4 class="text-warning">@Model.Statistike.UkupnoIzostanaka</h4>
+                        <p class="card-text">Ukupno izostanaka</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Leva kolona - Djeca -->
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-graduation-cap"></i> Moja djeca
+                        </h5>
+                    </div>
+                    <div class="card-body p-0">
+                        @foreach (var dijete in Model.Djeca)
+                        {
+                            <div class="border-bottom p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-circle bg-primary text-white me-3">
+                                                @dijete.Ucenik.Ime.First()@dijete.Ucenik.Prezime.First()
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">@dijete.Ucenik.FullName</h6>
+                                                <small class="text-muted">@dijete.RazredNaziv</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <h5 class="@dijete.OpciProsjekClass mb-0">@dijete.OpciProsjekText</h5>
+                                        <small class="text-muted">Prosjek</small>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <h6 class="text-info mb-0">@dijete.BrojOcjena</h6>
+                                        <small class="text-muted">Ocjena</small>
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <h6 class="@(dijete.BrojIzostanaka > 0 ? "text-warning" : "text-success") mb-0">@dijete.BrojIzostanaka</h6>
+                                        <small class="text-muted">Izostanaka</small>
+                                    </div>
+                                    <div class="col-md-3 text-end">
+                                        <div class="btn-group btn-group-sm">
+                                            <a asp-action="OcjeneDjeteta" asp-route-dijeteId="@dijete.Ucenik.Id" 
+                                               class="btn btn-outline-primary">
+                                                <i class="fas fa-star"></i> Ocjene
+                                            </a>
+                                            <a asp-action="IzostanciDjeteta" asp-route-dijeteId="@dijete.Ucenik.Id" 
+                                               class="btn btn-outline-warning">
+                                                <i class="fas fa-user-times"></i> Izostanci
+                                            </a>
+                                            <a asp-controller="Report" asp-action="GenerateReport" asp-route-dijeteId="@dijete.Ucenik.Id" 
+                                               target="_blank"
+                                               class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-file-pdf"></i> PDF
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Posledne ocjene -->
+                                @if (dijete.PosledneOcjene.Any())
+                                {
+                                    <div class="row mt-2">
+                                        <div class="col-12">
+                                            <small class="text-muted">Posledne ocjene: </small>
+                                            @foreach (var ocjena in dijete.PosledneOcjene)
+                                            {
+                                                <span class="badge bg-@(ocjena.Vrijednost >= 3 ? "success" : "danger") me-1" 
+                                                      title="@ocjena.Predmet?.Naziv - @ocjena.Datum.ToString("dd.MM.yyyy")">
+                                                    @ocjena.Vrijednost
+                                                </span>
+                                            }
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Vladanje -->
+                                <div class="row mt-1">
+                                    <div class="col-12">
+                                        <small class="text-muted">Vladanje: </small>
+                                        <span class="badge bg-light @dijete.VladanjeClass">@dijete.VladanjeText</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Najbolje dijete -->
+                @if (Model.Statistike.NajboljeDijete != null)
+                {
+                    <div class="card mt-4 border-success">
+                        <div class="card-header bg-success text-white">
+                            <h6 class="mb-0">
+                                <i class="fas fa-trophy"></i> Najbolji uspjeh
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-circle bg-success text-white me-3">
+                                    @Model.Statistike.NajboljeDijete.Ucenik.Ime.First()@Model.Statistike.NajboljeDijete.Ucenik.Prezime.First()
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">@Model.Statistike.NajboljeDijete.Ucenik.FullName</h6>
+                                    <small class="text-muted">
+                                        Prosjek: <strong class="text-success">@Model.Statistike.NajboljeDijete.OpciProsjekText</strong>
+                                        (@Model.Statistike.NajboljeDijete.BrojOcjena @(Model.Statistike.NajboljeDijete.BrojOcjena == 1 ? "ocjena" : "ocjena"))
+                                    </small>
+                                </div>
+                                <div class="ms-auto">
+                                    <a asp-action="OcjeneDjeteta" asp-route-dijeteId="@Model.Statistike.NajboljeDijete.Ucenik.Id" 
+                                       class="btn btn-success btn-sm">
+                                        <i class="fas fa-eye"></i> Pogledaj
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- Desna kolona - Recentne aktivnosti -->
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-clock"></i> Recentne aktivnosti
+                        </h6>
+                    </div>
+                    <div class="card-body p-0" style="max-height: 500px; overflow-y: auto;">
+                        @if (Model.RecentneAktivnosti.Any())
+                        {
+                            @foreach (var aktivnost in Model.RecentneAktivnosti)
+                            {
+                                <div class="border-bottom p-3">
+                                    <div class="d-flex align-items-start">
+                                        <div class="me-3">
+                                            <i class="@aktivnost.IkonaKlasa @aktivnost.BojaKlase"></i>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <p class="mb-1">
+                                                <small class="text-muted">@aktivnost.DijeteIme</small>
+                                            </p>
+                                            <p class="mb-1">@aktivnost.Opis</p>
+                                            <small class="text-muted">@aktivnost.RelativnoVrijeme</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="p-3 text-center text-muted">
+                                <i class="fas fa-clock fa-2x mb-2"></i>
+                                <p>Nema recentnih aktivnosti</p>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Brzi linkovi -->
+                <div class="card mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-link"></i> Brzi linkovi
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-calendar"></i> Raspored časova
+                            </a>
+                            <a href="#" class="btn btn-outline-info btn-sm">
+                                <i class="fas fa-envelope"></i> Poruke nastavnicima
+                            </a>
+                            <a href="#" class="btn btn-outline-success btn-sm">
+                                <i class="fas fa-chart-pie"></i> Godišnji izvještaj
+                            </a>
+                            <a href="#" class="btn btn-outline-warning btn-sm">
+                                <i class="fas fa-bell"></i> Obavještenja
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.btn-group-sm .btn {
+    font-size: 0.8rem;
+}
+</style>
+
+<script>
+function generateReport(dijeteId) {
+    console.log('Generating report for:', dijeteId);
+    
+    // Provjeri da li je dijeteId valjan
+    if (!dijeteId) {
+        alert('Greška: ID djeteta nije valjan');
+        return;
+    }
+    
+    // Pokaži loading na button-u
+    const button = event.target.closest('a') || event.target;
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generiram...';
+    button.style.pointerEvents = 'none';
+    
+    // Kreiraj URL
+    const url = '/Report/Generate/' + dijeteId;
+    console.log('Opening URL:', url);
+    
+    // Kreiraj privremeni link za download
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.target = '_blank';
+    downloadLink.download = 'izvjestaj.pdf';
+    
+    // Dodaj u DOM, klikni, ukloni
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+    
+    // Vrati button u normalno stanje nakon 3 sekunde
+    setTimeout(() => {
+        button.innerHTML = originalText;
+        button.style.pointerEvents = 'auto';
+    }, 3000);
+}
+
+// Auto-refresh svakih 5 minuta
+setInterval(function() {
+    location.reload();
+}, 300000);
+
+// Dodaj loading za email button-e
+document.addEventListener('DOMContentLoaded', function() {
+    const emailForms = document.querySelectorAll('form[action*="SendToParent"], form[action*="Send"]');
+    
+    emailForms.forEach(form => {
+        form.addEventListener('submit', function() {
+            const submitButton = form.querySelector('button[type="submit"]');
+            if (submitButton) {
+                const originalText = submitButton.innerHTML;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Šalje...';
+                submitButton.disabled = true;
+            }
+        });
+    });
+});
+</script>

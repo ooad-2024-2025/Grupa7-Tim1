@@ -274,10 +274,13 @@ namespace eDnevnik.Controllers
         {
             var ucenici = await GetUceniciRazreda(razredId);
 
+            // Filtriranje učenika koji imaju ocjene
+            var uceniciSaOcjenama = ucenici.Where(u => u.OpciProsjek > 0).ToList();
+
             return new RazredStatistike
             {
                 BrojUcenika = ucenici.Count,
-                ProsjekRazreda = ucenici.Any() ? ucenici.Where(u => u.OpciProsjek > 0).Average(u => u.OpciProsjek) : 0,
+                ProsjekRazreda = uceniciSaOcjenama.Any() ? uceniciSaOcjenama.Average(u => u.OpciProsjek) : 0,
                 UkupnoOcjena = ucenici.Sum(u => u.UkupnoOcjena),
                 UkupnoIzostanaka = ucenici.Sum(u => u.UkupnoIzostanaka),
                 NeopravdaniIzostanci = ucenici.Sum(u => u.NeopravdaniIzostanci)

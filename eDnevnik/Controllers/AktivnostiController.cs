@@ -153,7 +153,7 @@ namespace eDnevnik.Controllers
                         TipAktivnosti.Test => "Test",
                         TipAktivnosti.Zadaca => "Zadaća",
                         TipAktivnosti.Takmicenje => "Takmičenje",
-                        TipAktivnosti.SkolarskiDogadjaj => "Školarski događaj",
+                        TipAktivnosti.SkolarskiDogadjaj => "Školski događaj",
                         TipAktivnosti.Prezentacija => "Prezentacija",
                         TipAktivnosti.Ekskurzija => "Ekskurzija",
                         _ => x.ToString()
@@ -509,7 +509,7 @@ namespace eDnevnik.Controllers
                         TipAktivnosti.Test => "Test",
                         TipAktivnosti.Zadaca => "Zadaća",
                         TipAktivnosti.Takmicenje => "Takmičenje",
-                        TipAktivnosti.SkolarskiDogadjaj => "Školarski događaj",
+                        TipAktivnosti.SkolarskiDogadjaj => "Školski događaj",
                         TipAktivnosti.Prezentacija => "Prezentacija",
                         TipAktivnosti.Ekskurzija => "Ekskurzija",
                         _ => x.ToString()
