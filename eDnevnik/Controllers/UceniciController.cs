@@ -183,7 +183,6 @@ namespace eDnevnik.Controllers
             await _userManager.UpdateAsync(ucenik);
             return RedirectToAction("Index");
         }
-
         [HttpPost]
         public async Task<IActionResult> Obrisi(string id)
         {
@@ -195,8 +194,28 @@ namespace eDnevnik.Controllers
             if (!roles.Contains("Ucenik"))
                 return Forbid();
 
+            // 1. Obriši sve povezane izostanke
+            var izostanci = _context.Izostanak.Where(i => i.UcenikId == korisnik.Id);
+            _context.Izostanak.RemoveRange(izostanci);
+
+            // 2. Obriši sve povezane ocjene
+            var ocjene = _context.Ocjena.Where(o => o.UcenikId == korisnik.Id);
+            _context.Ocjena.RemoveRange(ocjene);
+
+            // 3. Obriši sve povezane logove obavještenja
+            var logovi = _context.ObavjestenjeLog.Where(o => o.KorisnikId == korisnik.Id);
+            _context.ObavjestenjeLog.RemoveRange(logovi);
+
+            // 4. Sačuvaj sve brisane entitete prije nego obrišeš korisnika
+            await _context.SaveChangesAsync();
+
+            // 5. Obriši korisnika iz baze
             await _userManager.DeleteAsync(korisnik);
+
             return RedirectToAction("Index");
         }
+
+
+
     }
 }

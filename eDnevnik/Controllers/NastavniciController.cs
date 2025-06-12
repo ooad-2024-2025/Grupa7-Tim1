@@ -104,19 +104,27 @@ namespace eDnevnik.Controllers
             if (!roles.Contains("Nastavnik"))
                 return Forbid();
 
-            // Provjera: da li je razrednik
+            // 1. Provjera da li je razrednik
             bool jeRazrednik = _context.Razred.Any(r => r.NastavnikId == korisnik.Id);
-
             if (jeRazrednik)
             {
-                TempData["Greska"] = "Nije moguće obrisati nastavnika jer je razrednik u jednom ili više razreda.";
+                TempData["Greska"] = "Ne možete obrisati nastavnika jer je razrednik u jednom ili više razreda.";
                 return RedirectToAction("Index");
             }
 
+            // 2. Provjera da li je dodijeljen kao nastavnik na nekom predmetu
+            bool imaPredmete = _context.Predmet.Any(p => p.NastavnikId == korisnik.Id);
+            if (imaPredmete)
+            {
+                TempData["Greska"] = "Ne možete obrisati nastavnika jer ima predmete.";
+                return RedirectToAction("Index");
+            }
+
+            // 3. Ako nije ni razrednik ni nosilac predmeta, može se obrisati
             await _userManager.DeleteAsync(korisnik);
             return RedirectToAction("Index");
-
         }
+
 
     }
 }
