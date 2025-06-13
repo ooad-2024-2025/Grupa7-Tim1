@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\zavrsnepopravke\\grupa7-tim1\\ednevnik\\controllers\\evidencijacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\evidencijacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\zavrsnepopravke\\grupa7-tim1\\ednevnik\\views\\evidencija\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\evidencija\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\zavrsnepopravke\\grupa7-tim1\\ednevnik\\controllers\\evidencijacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\evidencijacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\zavrsnepopravke\\grupa7-tim1\\ednevnik\\services\\vladanjeservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -101,7 +101,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -109,13 +109,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\Views\\Evidencija\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Evidencija\\Index.cshtml",
               "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\Views\\Evidencija\\Index.cshtml",
               "RelativeToolTip": "Views\\Evidencija\\Index.cshtml",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAEwBoAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAJgAAAAAAAAAAAAEwKcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-06-13T08:08:38.664Z",
               "EditorCaption": ""
@@ -135,12 +135,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "EvidencijaController.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\Controllers\\EvidencijaController.cs",
               "RelativeDocumentMoniker": "Controllers\\EvidencijaController.cs",
-              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\Controllers\\EvidencijaController.cs*",
-              "RelativeToolTip": "Controllers\\EvidencijaController.cs*",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\Controllers\\EvidencijaController.cs",
+              "RelativeToolTip": "Controllers\\EvidencijaController.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAYwEMAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-13T07:50:25.933Z",
