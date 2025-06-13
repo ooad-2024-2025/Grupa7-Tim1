@@ -3,38 +3,114 @@
     ViewData["Title"] = "Dodaj roditelja";
 }
 
-<h2 class="text-center mb-4">Dodaj roditelja</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-info text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-users"></i> Dodaj novog roditelja
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Dodaj" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Ime" class="form-label">
+                                    <i class="fas fa-user text-info"></i> Ime *
+                                </label>
+                                <input asp-for="Ime" class="form-control" placeholder="Unesite ime" maxlength="50" />
+                                <span asp-validation-for="Ime" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Prezime" class="form-label">
+                                    <i class="fas fa-user text-info"></i> Prezime *
+                                </label>
+                                <input asp-for="Prezime" class="form-control" placeholder="Unesite prezime" maxlength="50" />
+                                <span asp-validation-for="Prezime" class="text-danger"></span>
+                            </div>
+                        </div>
 
-<form asp-action="Dodaj" method="post" class="w-50 mx-auto">
-    <div class="mb-3">
-        <label asp-for="Ime" class="form-label"></label>
-        <input asp-for="Ime" class="form-control" />
-        <span asp-validation-for="Ime" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Prezime" class="form-label"></label>
-        <input asp-for="Prezime" class="form-control" />
-        <span asp-validation-for="Prezime" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Telefon" class="form-label"></label>
-        <input asp-for="Telefon" class="form-control" />
-        <span asp-validation-for="Telefon" class="text-danger"></span>
-    </div>
-    <div class="mb-3">
-        <label asp-for="Adresa" class="form-label"></label>
-        <input asp-for="Adresa" class="form-control" />
-        <span asp-validation-for="Adresa" class="text-danger"></span>
-    </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">
+                                <i class="fas fa-envelope text-info"></i> Email adresa *
+                            </label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="ime.prezime@email.com" maxlength="100" />
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Email će biti korišten za pristup sistemu i obavještenja
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
 
-    <button type="submit" class="btn btn-primary w-100">Sačuvaj</button>
-</form>
+                        <div class="mb-3">
+                            <label asp-for="Telefon" class="form-label">
+                                <i class="fas fa-phone text-info"></i> Broj telefona
+                            </label>
+                            <input asp-for="Telefon" type="tel" class="form-control" placeholder="061/123-456 ili +387 61 123 456" maxlength="20" />
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Kontakt telefon za hitne slučajeve
+                            </div>
+                            <span asp-validation-for="Telefon" class="text-danger"></span>
+                        </div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+                        <div class="mb-4">
+                            <label asp-for="Adresa" class="form-label">
+                                <i class="fas fa-home text-info"></i> Adresa stanovanja
+                            </label>
+                            <textarea asp-for="Adresa" class="form-control" rows="3" placeholder="Ulica i broj, grad, poštanski broj" maxlength="200"></textarea>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Adresa stanovanja porodice
+                            </div>
+                            <span asp-validation-for="Adresa" class="text-danger"></span>
+                        </div>
+
+                        <div class="alert alert-warning">
+                            <i class="fas fa-child"></i>
+                            <strong>Napomena:</strong> Nakon dodavanja roditelja, možete mu dodijeliti djecu u sekciji "Učenici".
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-key"></i>
+                            <strong>Napomena:</strong> Lozinka će biti automatski generisana: Roditelj123!.
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-info flex-fill">
+                                <i class="fas fa-save"></i> Dodaj roditelja
+                            </button>
+                            <a href="/Roditelji" class="btn btn-secondary flex-fill">
+                                <i class="fas fa-times"></i> Odustani
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #0dcaf0;
+        box-shadow: 0 0 0 0.2rem rgba(13, 202, 240, 0.25);
+    }
+
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .btn {
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+    }
+</style>

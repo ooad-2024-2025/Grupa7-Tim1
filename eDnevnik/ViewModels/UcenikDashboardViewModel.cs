@@ -93,5 +93,8 @@ namespace eDnevnik.ViewModels
         public string PredmetNaziv { get; set; } = string.Empty;
         public string TerminInfo { get; set; } = string.Empty;
         public DateTime DatumCasa { get; set; }
+
+        public string FormatiraniDatumCasa => DatumCasa.ToString("dd.MM.yyyy (HH:mm)");
+        public string DanUSedmici => DatumCasa.ToString("dddd", new System.Globalization.CultureInfo("hr-HR"));
     }
 }

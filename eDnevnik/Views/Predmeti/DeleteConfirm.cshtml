@@ -1,0 +1,125 @@
+﻿@model eDnevnik.Models.Predmet
+
+@{
+    ViewData["Title"] = "Potvrdi brisanje predmeta";
+}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i> Potvrdi brisanje predmeta
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-warning"></i>
+                        <strong>UPOZORENJE:</strong> Ova akcija će trajno obrisati sve podatke povezane sa ovim predmetom!
+                    </div>
+
+                    <!-- Informacije o predmetu -->
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <strong>Naziv predmeta:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            <span class="badge bg-primary fs-6">@Model.Naziv</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <strong>Opis:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @(string.IsNullOrEmpty(Model.Opis) ? "Nema opisa" : Model.Opis)
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <strong>Nastavnik:</strong>
+                        </div>
+                        <div class="col-md-8">
+                            @(Model.Nastavnik?.FullName ?? "Nije dodijeljen")
+                        </div>
+                    </div>
+
+                    <!-- Statistike povezanih podataka -->
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Podaci koji će biti obrisani:</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-calendar text-primary"></i> <strong>@ViewBag.BrojCasova</strong> časova</li>
+                                    <li><i class="fas fa-star text-warning"></i> <strong>@ViewBag.BrojOcjena</strong> ocjena</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-user-times text-danger"></i> <strong>@ViewBag.BrojIzostanaka</strong> izostanaka</li>
+                                    <li><i class="fas fa-clipboard-check text-success"></i> <strong>@ViewBag.BrojEvidencija</strong> evidencija</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (ViewBag.BrojOcjena > 0 || ViewBag.BrojCasova > 0 || ViewBag.BrojIzostanaka > 0)
+                    {
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <strong>PAŽNJA:</strong> Ovaj predmet ima povezane podatke. Brisanje će ukloniti sve gore navedene podatke!
+                        </div>
+                    }
+
+                    <!-- Potvrda checkbox -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="confirmDelete" required>
+                        <label class="form-check-label" for="confirmDelete">
+                            <strong>Razumijem da će se svi povezani podaci trajno obrisati</strong>
+                        </label>
+                    </div>
+
+                    <!-- Dugmad -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a asp-action="Index" class="btn btn-secondary w-100">
+                                <i class="fas fa-arrow-left"></i> Odustani
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <form asp-action="Delete" asp-route-id="@Model.Id" method="post" id="deleteForm">
+                                <button type="submit" class="btn btn-danger w-100" id="deleteButton" disabled>
+                                    <i class="fas fa-trash"></i> Obriši predmet
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('confirmDelete');
+        const deleteButton = document.getElementById('deleteButton');
+
+        checkbox.addEventListener('change', function() {
+            deleteButton.disabled = !this.checked;
+        });
+
+        document.getElementById('deleteForm').addEventListener('submit', function(e) {
+            if (!checkbox.checked) {
+                e.preventDefault();
+                alert('Morate potvrditi da razumijete posljedice brisanja!');
+                return false;
+            }
+
+            return confirm('Jeste li apsolutno sigurni da želite obrisati ovaj predmet i sve povezane podatke?');
+        });
+    });
+</script>

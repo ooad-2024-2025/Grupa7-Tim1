@@ -52,7 +52,8 @@ namespace eDnevnik.Controllers
             // Dohvati izostanke za svu djecu
             var izostanci = await _context.Izostanak
                 .Include(i => i.Ucenik)
-                .Include(i => i.Cas) // DODANO - ovo je nedostajalo
+                .Include(i => i.Cas)
+                    .ThenInclude(c => c.Predmet)
                 .Where(i => djecaIds.Contains(i.UcenikId))
                 .ToListAsync();
 
@@ -107,29 +108,19 @@ namespace eDnevnik.Controllers
                 });
             }
 
-            // Dodaj recentne izostanke - samo ako postoje
-            if (izostanci.Any())
-            {
-                foreach (var izostanak in izostanci.Where(i => i.Cas != null).OrderByDescending(i => i.Cas.Termin).Take(5))
-                {
-                    recentneAktivnosti.Add(new RecentnaAktivnost
-                    {
-                        Tip = "izostanak",
-                        Opis = $"Izostanak - {GetStatusIzostankaText(izostanak.status)}",
-                        Datum = izostanak.Cas.Termin,
-                        DijeteIme = izostanak.Ucenik?.FullName ?? "Nepoznato",
-                        IkonaKlasa = "fas fa-user-times",
-                        BojaKlase = izostanak.status == StatusIzostanka.Opravdan ? "text-warning" : "text-danger"
-                    });
-                }
-            }
+            // Dodaj recentne izostanke sa pravilnim datumima
+            await DodajRecentneIzostanke(recentneAktivnosti, izostanci);
 
             var viewModel = new RoditeljDashboardViewModel
             {
                 Roditelj = roditelj,
                 Djeca = djecaInfo,
                 Statistike = statistike,
-                RecentneAktivnosti = recentneAktivnosti.OrderByDescending(a => a.Datum).Take(15).ToList()
+                RecentneAktivnosti = recentneAktivnosti
+                    .Where(a => a.Datum > DateTime.MinValue) // Filtriraj aktivnosti sa validnim datumima
+                    .OrderByDescending(a => a.Datum)
+                    .Take(15)
+                    .ToList()
             };
 
             return View(viewModel);
@@ -200,77 +191,186 @@ namespace eDnevnik.Controllers
         }
 
         // IZOSTANCI ODREĐENOG DJETETA
+        private async Task<List<IzostanakSaDetaljima>> GetIzostanciDjetetaSaTerminima(string dijeteId)
+        {
+            var izostanci = await _context.Izostanak
+                .Include(i => i.Ucenik)
+                .Include(i => i.Cas)
+                    .ThenInclude(c => c.Predmet)
+                .Include(i => i.Cas)
+                    .ThenInclude(c => c.FixniTermin)
+                .Where(i => i.UcenikId == dijeteId)
+                .OrderByDescending(i => i.Id)
+                .ToListAsync();
+
+            var rezultat = new List<IzostanakSaDetaljima>();
+
+            foreach (var i in izostanci)
+            {
+                // Pronađi evidenciju časa da dohvatiš pravi datum
+                var evidencija = await _context.EvidencijaCasa
+                    .Where(e => e.CasId == i.CasId)
+                    .OrderByDescending(e => e.DatumOdrzavanja)
+                    .FirstOrDefaultAsync();
+
+                DateTime datumCasa;
+                if (evidencija != null)
+                {
+                    // Ako postoji evidencija, koristi datum iz evidencije + vrijeme iz FixniTermin
+                    datumCasa = evidencija.DatumOdrzavanja.Date;
+                    if (i.Cas?.FixniTermin != null)
+                    {
+                        datumCasa = datumCasa.Add(i.Cas.FixniTermin.PocetakVremena);
+                    }
+                }
+                else
+                {
+                    // Fallback - koristi postojeći Termin iz časa
+                    datumCasa = i.Cas?.Termin ?? DateTime.Now;
+                }
+
+                rezultat.Add(new IzostanakSaDetaljima
+                {
+                    Izostanak = i,
+                    PredmetNaziv = i.Cas?.Predmet?.Naziv ?? "Nepoznat predmet",
+                    TerminInfo = i.Cas?.FixniTermin?.FormatiraniTermin ?? "Nepoznat termin",
+                    DatumCasa = datumCasa
+                });
+            }
+
+            return rezultat;
+        }
+
         public async Task<IActionResult> IzostanciDjeteta(string dijeteId)
         {
             var roditelj = await _userManager.GetUserAsync(User);
-            if (roditelj == null)
-                return Unauthorized("Niste prijavljeni.");
+            var dijete = await _userManager.FindByIdAsync(dijeteId);
 
-            var ucenik = await _context.Users
-                .Include(u => u.Razred)
-                .FirstOrDefaultAsync(u => u.Id == dijeteId && u.RoditeljId == roditelj.Id);
+            if (dijete == null || dijete.RoditeljId != roditelj.Id)
+            {
+                TempData["Greska"] = "Dijete nije pronađeno ili nemate dozvolu.";
+                return RedirectToAction("Index");
+            }
 
-            if (ucenik == null)
-                return NotFound("Dijete nije pronađeno.");
+            // Koristi novu helper metodu
+            var izostanci = await GetIzostanciDjetetaSaTerminima(dijete.Id);
 
-            var izostanci = await _context.Izostanak
-                .Include(i => i.Cas)
-                .ThenInclude(c => c.Predmet)
-                .Where(i => i.UcenikId == ucenik.Id)
-                .OrderByDescending(i => i.Cas.Termin)
-                .ToListAsync();
-
-            ViewBag.Ucenik = ucenik;
+            ViewBag.Ucenik = dijete;
             return View(izostanci);
+        }
+
+        // HELPER METODA ZA RECENTNE IZOSTANKE
+        private async Task DodajRecentneIzostanke(List<RecentnaAktivnost> recentneAktivnosti, List<Izostanak> izostanci)
+        {
+            // Procesaj maksimalno 15 najnovijih izostanaka
+            var izostanciZaProcesiranje = izostanci.OrderByDescending(i => i.Id).Take(15);
+
+            foreach (var izostanak in izostanciZaProcesiranje)
+            {
+                try
+                {
+                    DateTime datumIzostanka;
+
+                    // Pronađi evidenciju časa za pravi datum
+                    var evidencija = await _context.EvidencijaCasa
+                        .Where(e => e.CasId == izostanak.CasId)
+                        .OrderByDescending(e => e.DatumOdrzavanja)
+                        .FirstOrDefaultAsync();
+
+                    if (evidencija != null)
+                    {
+                        // Koristi datum iz evidencije
+                        datumIzostanka = evidencija.DatumOdrzavanja.Date;
+
+                        // Dodaj vrijeme iz FixniTermin ako postoji
+                        var casTermin = await _context.Cas
+                            .Include(c => c.FixniTermin)
+                            .FirstOrDefaultAsync(c => c.Id == izostanak.CasId);
+
+                        if (casTermin?.FixniTermin != null)
+                        {
+                            datumIzostanka = datumIzostanka.Add(casTermin.FixniTermin.PocetakVremena);
+                        }
+                    }
+                    else
+                    {
+                        // Fallback - koristi Cas.Termin ili preskači ako je prazan
+                        if (izostanak.Cas?.Termin != null && izostanak.Cas.Termin > DateTime.MinValue)
+                        {
+                            datumIzostanka = izostanak.Cas.Termin;
+                        }
+                        else
+                        {
+                            // Preskači izostanke bez validnog datuma
+                            continue;
+                        }
+                    }
+
+                    // Dodaj samo ako je u zadnjih 30 dana
+                    if (datumIzostanka >= DateTime.Now.AddDays(-30))
+                    {
+                        // Dohvati naziv predmeta
+                        string predmetNaziv = "Nepoznat predmet";
+                        if (izostanak.Cas?.Predmet != null)
+                        {
+                            predmetNaziv = izostanak.Cas.Predmet.Naziv;
+                        }
+                        else if (izostanak.CasId > 0)
+                        {
+                            var cas = await _context.Cas
+                                .Include(c => c.Predmet)
+                                .FirstOrDefaultAsync(c => c.Id == izostanak.CasId);
+                            predmetNaziv = cas?.Predmet?.Naziv ?? "Nepoznat predmet";
+                        }
+
+                        var statusText = GetStatusIzostankaText(izostanak.status);
+                        var statusClass = izostanak.status == StatusIzostanka.Opravdan ? "text-warning" : "text-danger";
+
+                        recentneAktivnosti.Add(new RecentnaAktivnost
+                        {
+                            Tip = "izostanak",
+                            Opis = $"Izostanak ({statusText}) - {predmetNaziv}",
+                            Datum = datumIzostanka,
+                            DijeteIme = izostanak.Ucenik?.FullName ?? "Nepoznato",
+                            IkonaKlasa = "fas fa-user-times",
+                            BojaKlase = statusClass
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Log greška i nastavi sa sljedećim izostankom
+                    Console.WriteLine($"Greška pri procesiranju izostanka {izostanak.Id}: {ex.Message}");
+                    continue;
+                }
+            }
         }
 
         // HELPER METODE
         private string GetVladanjeText(StatusVladanja vladanje)
-
         {
-
             return vladanje switch
-
             {
-
                 StatusVladanja.Primjereno => "Primjerno",
-
                 StatusVladanja.VrloDobro => "Vrlo dobro",
-
                 StatusVladanja.Dobro => "Dobro",
-
                 StatusVladanja.Zadovoljava => "Dovoljno",
-
                 StatusVladanja.Neprimjereno => "Nedovoljno",
-
                 _ => "Neocijenjeno"
-
             };
-
         }
 
         private string GetVladanjeClass(StatusVladanja vladanje)
-
         {
-
             return vladanje switch
-
             {
-
                 StatusVladanja.Primjereno => "text-success",
-
                 StatusVladanja.VrloDobro => "text-success",
-
                 StatusVladanja.Dobro => "text-warning",
-
                 StatusVladanja.Zadovoljava => "text-danger",
-
                 StatusVladanja.Neprimjereno => "text-danger",
-
                 _ => "text-muted"
-
             };
-
         }
 
         private string GetStatusIzostankaText(StatusIzostanka status)

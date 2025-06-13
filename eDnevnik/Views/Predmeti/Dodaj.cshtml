@@ -4,30 +4,173 @@
     var nastavnici = ViewBag.Nastavnici as List<eDnevnik.Models.Korisnik>;
 }
 
-<h2 class="text-center mb-4">Dodaj novi predmet</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-book"></i> Dodaj novi predmet
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <!-- Validation Summary -->
+                    <div asp-validation-summary="All" class="alert alert-danger" style="display: none;"></div>
 
-<form asp-action="Dodaj" method="post" class="w-50 mx-auto">
-    <div class="form-group mb-3">
-        <label asp-for="Naziv" class="form-label">Naziv predmeta</label>
-        <input asp-for="Naziv" class="form-control" />
-        <span asp-validation-for="Naziv" class="text-danger"></span>
+                    <form asp-action="Dodaj" method="post">
+                        <div class="mb-3">
+                            <label asp-for="Naziv" class="form-label">
+                                <i class="fas fa-tag text-primary"></i> Naziv predmeta *
+                            </label>
+                            <input asp-for="Naziv" class="form-control" placeholder="Unesite naziv predmeta" maxlength="100" />
+                            <span asp-validation-for="Naziv" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Opis" class="form-label">
+                                <i class="fas fa-align-left text-primary"></i> Opis
+                            </label>
+                            <textarea asp-for="Opis" class="form-control" rows="4" placeholder="Kratki opis predmeta (opciono)" maxlength="500"></textarea>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Kratki opis sadržaja predmeta
+                            </div>
+                            <span asp-validation-for="Opis" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                <i class="fas fa-chalkboard-teacher text-primary"></i> Nastavnik
+                            </label>
+                            <select asp-for="NastavnikId" class="form-select">
+                                <option value="">-- Odaberi nastavnika --</option>
+                                @if (nastavnici != null)
+                                {
+                                    @foreach (var n in nastavnici)
+                                    {
+                                        <option value="@n.Id">@n.Ime @n.Prezime (@n.Email)</option>
+                                    }
+                                }
+                            </select>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Odaberite nastavnika koji će predavati ovaj predmet
+                            </div>
+                            <span asp-validation-for="NastavnikId" class="text-danger"></span>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-lightbulb"></i>
+                            <strong>Napomena:</strong> Nakon dodavanja predmeta, možete ga dodijeliti razredima u sekciji "Razredi".
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary flex-fill">
+                                <i class="fas fa-save"></i> Dodaj predmet
+                            </button>
+                            <a href="/Predmeti" class="btn btn-secondary flex-fill">
+                                <i class="fas fa-times"></i> Odustani
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="form-group mb-3">
-        <label asp-for="Opis" class="form-label">Opis</label>
-        <textarea asp-for="Opis" class="form-control"></textarea>
-    </div>
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
 
-    <div class="form-group mb-4">
-        <label class="form-label">Nastavnik</label>
-        <select asp-for="NastavnikId" class="form-select">
-            <option value="">-- Odaberi nastavnika --</option>
-            @foreach (var n in nastavnici)
-            {
-                <option value="@n.Id">@n.Ime @n.Prezime (@n.Email)</option>
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    .form-control.is-invalid, .form-select.is-invalid {
+        border-color: #dc3545;
+    }
+
+    .invalid-feedback {
+        display: none;
+        color: #dc3545;
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+    }
+
+    .form-control.is-invalid ~ .invalid-feedback,
+    .form-select.is-invalid ~ .invalid-feedback {
+        display: block;
+    }
+
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .btn {
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        const nazivInput = document.querySelector('input[name="Naziv"]');
+        const nastavnikSelect = document.querySelector('select[name="NastavnikId"]');
+
+        function showError(element, message) {
+            element.classList.add('is-invalid');
+            const feedback = element.parentNode.querySelector('.invalid-feedback');
+            if (feedback) {
+                feedback.textContent = message;
             }
-        </select>
-    </div>
+        }
 
-    <button type="submit" class="btn btn-primary w-100">Dodaj</button>
-</form>
+        function clearError(element) {
+            element.classList.remove('is-invalid');
+            const feedback = element.parentNode.querySelector('.invalid-feedback');
+            if (feedback) {
+                feedback.textContent = '';
+            }
+        }
+
+        function validateForm() {
+            let isValid = true;
+
+            // Validacija naziva
+            if (!nazivInput.value.trim()) {
+                showError(nazivInput, 'Naziv predmeta je obavezan');
+                isValid = false;
+            } else if (nazivInput.value.trim().length < 2) {
+                showError(nazivInput, 'Naziv mora imati najmanje 2 karaktera');
+                isValid = false;
+            } else {
+                clearError(nazivInput);
+            }
+
+            return isValid;
+        }
+
+        // Validacija na submit
+        form.addEventListener('submit', function(e) {
+            if (!validateForm()) {
+                e.preventDefault();
+            }
+        });
+
+        // Real-time validacija
+        nazivInput.addEventListener('blur', validateForm);
+        nazivInput.addEventListener('input', function() {
+            if (this.classList.contains('is-invalid')) {
+                validateForm();
+            }
+        });
+    });
+</script>

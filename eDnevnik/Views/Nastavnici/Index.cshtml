@@ -3,52 +3,181 @@
     ViewData["Title"] = "Pregled nastavnika";
 }
 
-@if (TempData["Greska"] != null)
-{
-    <div class="alert alert-danger text-center">
-        @TempData["Greska"]
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-chalkboard-teacher text-primary"></i> Pregled nastavnika</h2>
+            <p class="text-muted">Upravljanje nastavnicima u sistemu</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a class="btn btn-primary btn-lg" asp-action="Dodaj">
+                <i class="fas fa-plus"></i> Dodaj nastavnika
+            </a>
+        </div>
     </div>
-}
+
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Greska"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
 
-<h2 class="text-center mb-4">Pregled nastavnika</h2>
-
-<div style="max-height: 300px; overflow-y: auto;">
-    <table class="table table-striped table-bordered">
-        <thead class="table-primary">
-            <tr>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th>Adresa</th>
-                <th>Akcija</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var nastavnik in Model)
-            {
-                <tr>
-                    <td>@nastavnik.Ime</td>
-                    <td>@nastavnik.Prezime</td>
-                    <td>@nastavnik.Email</td>
-                    <td>@nastavnik.Telefon</td>
-                    <td>@nastavnik.Adresa</td>
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a class="btn btn-warning w-100" style="min-width:80px;" asp-action="Edit" asp-route-id="@nastavnik.Id">Uredi</a>
-                            <form asp-action="Obrisi" asp-route-id="@nastavnik.Id" method="post"
-                                  class="w-100" style="min-width:80px;" onsubmit="return confirm('Da li ste sigurni da želite obrisati nastavnika?');">
-                                <button type="submit" class="btn btn-danger w-100">Obriši</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @if (Model.Any())
+    {
+        <!-- Tabela nastavnika -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-list"></i> Lista nastavnika (@Model.Count)
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light sticky-top">
+                            <tr>
+                                <th><i class="fas fa-user"></i> Ime i prezime</th>
+                                <th><i class="fas fa-envelope"></i> Email</th>
+                                <th><i class="fas fa-phone"></i> Telefon</th>
+                                <th><i class="fas fa-map-marker-alt"></i> Adresa</th>
+                                <th class="text-center"><i class="fas fa-cogs"></i> Akcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var nastavnik in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-circle bg-primary text-white me-3">
+                                                @nastavnik.Ime.First()@nastavnik.Prezime.First()
+                                            </div>
+                                            <div>
+                                                <strong>@nastavnik.Ime @nastavnik.Prezime</strong>
+                                                <br>
+                                                <small class="text-muted">ID: @nastavnik.Id.Substring(0, 8)...</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(nastavnik.Email))
+                                        {
+                                            <a href="mailto:@nastavnik.Email" class="text-decoration-none">
+                                                <i class="fas fa-envelope text-primary me-1"></i>
+                                                @nastavnik.Email
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema email
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(nastavnik.Telefon))
+                                        {
+                                            <a href="tel:@nastavnik.Telefon" class="text-decoration-none">
+                                                <i class="fas fa-phone text-success me-1"></i>
+                                                @nastavnik.Telefon
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema telefon
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(nastavnik.Adresa))
+                                        {
+                                            <i class="fas fa-map-marker-alt text-info me-1"></i>
+                                            @nastavnik.Adresa
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema adresu
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-2 justify-content-center">
+                                            <a class="btn btn-warning btn-sm"
+                                               asp-action="Edit"
+                                               asp-route-id="@nastavnik.Id"
+                                               title="Uredi nastavnika">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form asp-action="Obrisi"
+                                                  asp-route-id="@nastavnik.Id"
+                                                  method="post"
+                                                  onsubmit="return confirm('Da li ste sigurni da želite obrisati nastavnika @nastavnik.FullName?');">
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm"
+                                                        title="Obriši nastavnika">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Prazno stanje -->
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-chalkboard-teacher fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema nastavnika</h4>
+                <p class="text-muted">Dodajte prvog nastavnika klikom na dugme ispod.</p>
+                <a class="btn btn-primary btn-lg" asp-action="Dodaj">
+                    <i class="fas fa-plus"></i> Dodaj prvog nastavnika
+                </a>
+            </div>
+        </div>
+    }
 </div>
 
-<div class="text-center mt-3">
-    <a class="btn btn-primary btn-lg" asp-action="Dodaj">+ Dodaj nastavnika</a>
-</div>
+<style>
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+</style>

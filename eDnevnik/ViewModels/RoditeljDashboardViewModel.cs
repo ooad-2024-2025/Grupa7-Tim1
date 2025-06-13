@@ -67,12 +67,24 @@ namespace eDnevnik.ViewModels
         {
             get
             {
+                // Provjeri da li je datum valjan
+                if (Datum == DateTime.MinValue || Datum == default(DateTime))
+                {
+                    return "Nepoznato vrijeme";
+                }
+
                 var razlika = DateTime.Now - Datum;
-                if (razlika.TotalDays >= 1)
+
+                if (razlika.TotalMinutes < 60)
+                    return $"Prije {(int)razlika.TotalMinutes} min";
+                if (razlika.TotalHours < 24)
+                    return $"Prije {(int)razlika.TotalHours} h";
+                if (razlika.TotalDays < 7)
                     return $"Prije {(int)razlika.TotalDays} dana";
-                if (razlika.TotalHours >= 1)
-                    return $"Prije {(int)razlika.TotalHours} sati";
-                return "Upravo";
+                if (razlika.TotalDays < 30)
+                    return $"Prije {(int)(razlika.TotalDays / 7)} sedmica";
+
+                return Datum.ToString("dd.MM.yyyy");
             }
         }
     }

@@ -39,7 +39,7 @@ namespace eDnevnik.Data
                 .HasOne(e => e.Cas)
                 .WithMany()
                 .HasForeignKey(e => e.CasId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade); // PROMIJENI sa Restrict na Cascade
 
             modelBuilder.Entity<EvidencijaCasa>()
                 .HasOne(e => e.Nastavnik)
@@ -58,7 +58,13 @@ namespace eDnevnik.Data
 
             base.OnModelCreating(modelBuilder);
 
-            // CAS
+            // CAS - DODAJ VEZU PREDMET -> CAS
+            modelBuilder.Entity<Cas>()
+                .HasOne(c => c.Predmet)
+                .WithMany()
+                .HasForeignKey(c => c.PredmetId)
+                .OnDelete(DeleteBehavior.Cascade); // DODANO - kada se obriše predmet, obrišu se i časovi
+
             modelBuilder.Entity<Cas>()
                 .HasOne(c => c.Nastavnik)
                 .WithMany()
@@ -76,7 +82,7 @@ namespace eDnevnik.Data
                 .HasOne(i => i.Cas)
                 .WithMany()
                 .HasForeignKey(i => i.CasId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade); // PROMIJENI sa Restrict na Cascade
 
             // PREDMET
             modelBuilder.Entity<Predmet>()
@@ -84,6 +90,13 @@ namespace eDnevnik.Data
                 .WithMany()
                 .HasForeignKey(p => p.NastavnikId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // OCJENA - DODAJ VEZU PREDMET -> OCJENA
+            modelBuilder.Entity<Ocjena>()
+                .HasOne(o => o.Predmet)
+                .WithMany()
+                .HasForeignKey(o => o.PredmetId)
+                .OnDelete(DeleteBehavior.Cascade); // DODANO - kada se obriše predmet, obrišu se i ocjene
 
             // RAZRED
             modelBuilder.Entity<Razred>()

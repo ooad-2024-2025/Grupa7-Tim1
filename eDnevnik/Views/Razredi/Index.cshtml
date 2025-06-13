@@ -3,47 +3,207 @@
     ViewData["Title"] = "Pregled razreda";
 }
 
-@if (TempData["Greska"] != null)
-{
-    <div class="alert alert-danger text-center">
-        @TempData["Greska"]
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-school text-warning"></i> Pregled razreda</h2>
+            <p class="text-muted">Upravljanje razredima u sistemu</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a class="btn btn-warning btn-lg" asp-action="Dodaj">
+                <i class="fas fa-plus"></i> Dodaj razred
+            </a>
+        </div>
     </div>
-}
 
-<h2 class="text-center mb-4">Pregled razreda</h2>
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-<div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
-    <table class="table table-bordered table-striped mb-0">
-        <thead class="table-primary">
-            <tr>
-                <th>Naziv</th>
-                <th>Razrednik</th>
-                <th>Akcije</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var r in Model)
-            {
-                <tr>
-                    <td>@r.Naziv</td>
-                    <td>@(r.Nastavnik?.Ime + " " + r.Nastavnik?.Prezime)</td>
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a class="btn btn-warning w-100" style="min-width:80px;" asp-action="Edit" asp-route-id="@r.Id">Uredi</a>
-                            <a class="btn btn-primary w-100" style="min-width:80px;" asp-action="DetaljiPredmeti" asp-route-id="@r.Id">Predmeti</a>
-                            <a class="btn btn-info w-100" style="min-width:80px;" asp-action="Detalji" asp-route-id="@r.Id">Učenici</a>
-                            <form asp-action="Delete" asp-route-id="@r.Id" method="post"
-                                  class="w-100" style="min-width:80px;" onsubmit="return confirm('Da li ste sigurni da želite obrisati ovaj razred?');">
-                                <button type="submit" class="btn btn-danger w-100">Obriši</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @if (TempData["Greska"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <!-- Tabela razreda -->
+        <div class="card">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="fas fa-list"></i> Lista razreda (@Model.Count)
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light sticky-top">
+                            <tr>
+                                <th><i class="fas fa-school"></i> Razred</th>
+                                <th><i class="fas fa-user-tie"></i> Razrednik</th>
+                                <th class="text-center"><i class="fas fa-cogs"></i> Akcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var razred in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="class-icon bg-warning text-dark me-3">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </div>
+                                            <div>
+                                                <strong class="fs-5">@razred.Naziv</strong>
+                                                <br>
+                                                <small class="text-muted">ID: @razred.Id</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (razred.Nastavnik != null)
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-circle bg-success text-white me-3">
+                                                    @razred.Nastavnik.Ime.First()@razred.Nastavnik.Prezime.First()
+                                                </div>
+                                                <div>
+                                                    <strong>@razred.Nastavnik.Ime @razred.Nastavnik.Prezime</strong>
+                                                    <br>
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-envelope"></i> @razred.Nastavnik.Email
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger">
+                                                <i class="fas fa-exclamation-triangle"></i> Bez razrednika
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-1 justify-content-center flex-wrap">
+                                            <a class="btn btn-warning btn-sm"
+                                               asp-action="Edit"
+                                               asp-route-id="@razred.Id"
+                                               title="Uredi razred">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-primary btn-sm"
+                                               asp-action="DetaljiPredmeti"
+                                               asp-route-id="@razred.Id"
+                                               title="Predmeti razreda">
+                                                <i class="fas fa-book"></i>
+                                            </a>
+                                            <a class="btn btn-info btn-sm"
+                                               asp-action="Detalji"
+                                               asp-route-id="@razred.Id"
+                                               title="Učenici razreda">
+                                                <i class="fas fa-users"></i>
+                                            </a>
+                                            <form asp-action="Delete"
+                                                  asp-route-id="@razred.Id"
+                                                  method="post"
+                                                  class="d-inline"
+                                                  onsubmit="return confirm('Da li ste sigurni da želite obrisati razred @razred.Naziv?');">
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm"
+                                                        title="Obriši razred">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Prazno stanje -->
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-school fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema razreda</h4>
+                <p class="text-muted">Dodajte prvi razred klikom na dugme ispod.</p>
+                <a class="btn btn-warning btn-lg" asp-action="Dodaj">
+                    <i class="fas fa-plus"></i> Dodaj prvi razred
+                </a>
+            </div>
+        </div>
+    }
 </div>
 
-<div class="text-center mt-3">
-    <a class="btn btn-primary btn-lg" asp-action="Dodaj">+ Dodaj razred</a>
-</div>
+<style>
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .class-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .table th {
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    @@media (max-width: 768px) {
+        .d-flex.gap-1
+
+    {
+        flex-direction: column;
+        gap: 0.25rem !important;
+    }
+
+    .btn-sm {
+        width: 100%;
+        margin-bottom: 0.25rem;
+    }
+
+    }
+</style>

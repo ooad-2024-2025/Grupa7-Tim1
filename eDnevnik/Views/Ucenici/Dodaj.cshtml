@@ -1,66 +1,147 @@
 ﻿@model eDnevnik.Models.Korisnik
-
 @{
     ViewData["Title"] = "Dodaj učenika";
 }
 
-<h2 class="text-center mb-4">Dodaj učenika</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-10 col-lg-8">
+            <div class="card shadow">
+                <div class="card-header bg-success text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-graduation-cap"></i> Dodaj novog učenika
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <!-- Prikaz grešaka -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <strong>Molimo ispravite sljedeće greške:</strong>
+                            <ul class="mb-0 mt-2">
+                                @foreach (var modelState in ViewData.ModelState.Values)
+                                {
+                                    @foreach (var error in modelState.Errors)
+                                    {
+                                        <li>@error.ErrorMessage</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
 
-<form asp-action="Dodaj" method="post" class="w-50 mx-auto">
+                    <form asp-action="Dodaj" method="post">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Ime" class="form-label">
+                                    <i class="fas fa-user text-success"></i> Ime *
+                                </label>
+                                <input asp-for="Ime" class="form-control" placeholder="Unesite ime" maxlength="50" />
+                                <span asp-validation-for="Ime" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Prezime" class="form-label">
+                                    <i class="fas fa-user text-success"></i> Prezime *
+                                </label>
+                                <input asp-for="Prezime" class="form-control" placeholder="Unesite prezime" maxlength="50" />
+                                <span asp-validation-for="Prezime" class="text-danger"></span>
+                            </div>
+                        </div>
 
-    @* Prikaz grešaka na vrhu forme *@
-    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label">
+                                <i class="fas fa-envelope text-success"></i> Email adresa *
+                            </label>
+                            <input asp-for="Email" type="email" class="form-control" placeholder="ime.prezime@email.com" maxlength="100" />
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Email će biti korišten za pristup sistemu
+                            </div>
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
 
-    <div class="mb-3">
-        <label asp-for="Ime" class="form-label"></label>
-        <input asp-for="Ime" class="form-control" />
-        <span asp-validation-for="Ime" class="text-danger"></span>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Telefon" class="form-label">
+                                    <i class="fas fa-phone text-success"></i> Broj telefona
+                                </label>
+                                <input asp-for="Telefon" type="tel" class="form-control" placeholder="061/123-456" maxlength="20" />
+                                <span asp-validation-for="Telefon" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RazredId" class="form-label">
+                                    <i class="fas fa-school text-success"></i> Razred *
+                                </label>
+                                <select asp-for="RazredId" class="form-select" asp-items="ViewBag.Razredi">
+                                    <option value="">-- Odaberi razred --</option>
+                                </select>
+                                <span asp-validation-for="RazredId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="RoditeljId" class="form-label">
+                                <i class="fas fa-user-friends text-success"></i> Roditelj
+                            </label>
+                            <select asp-for="RoditeljId" class="form-select" asp-items="ViewBag.Roditelji">
+                                <option value="">-- Odaberi roditelja --</option>
+                            </select>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Roditelj će moći pristupiti podacima o učeniku
+                            </div>
+                            <span asp-validation-for="RoditeljId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Adresa" class="form-label">
+                                <i class="fas fa-home text-success"></i> Adresa stanovanja
+                            </label>
+                            <textarea asp-for="Adresa" class="form-control" rows="3" placeholder="Ulica i broj, grad, poštanski broj" maxlength="200"></textarea>
+                            <span asp-validation-for="Adresa" class="text-danger"></span>
+                        </div>
+
+                        <div class="alert alert-info">
+                            <i class="fas fa-graduation-cap"></i>
+                            <strong>Napomena:</strong> Lozinka će biti automatski generisana: Ucenik123!.
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-success flex-fill">
+                                <i class="fas fa-save"></i> Dodaj učenika
+                            </button>
+                            <a href="/Ucenici" class="btn btn-secondary flex-fill">
+                                <i class="fas fa-times"></i> Odustani
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="Prezime" class="form-label"></label>
-        <input asp-for="Prezime" class="form-control" />
-        <span asp-validation-for="Prezime" class="text-danger"></span>
-    </div>
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
 
-    <div class="mb-3">
-        <label asp-for="Adresa" class="form-label"></label>
-        <input asp-for="Adresa" class="form-control" />
-        <span asp-validation-for="Adresa" class="text-danger"></span>
-    </div>
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
 
-    <div class="mb-3">
-        <label asp-for="Telefon" class="form-label"></label>
-        <input asp-for="Telefon" class="form-control" />
-        <span asp-validation-for="Telefon" class="text-danger"></span>
-    </div>
+    .form-control:focus, .form-select:focus {
+        border-color: #198754;
+        box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+    }
 
-    <div class="mb-3">
-        <label asp-for="Email" class="form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
-    </div>
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
 
-    <div class="mb-3">
-        <label asp-for="RazredId" class="form-label">Razred</label>
-        <select asp-for="RazredId" class="form-select" asp-items="ViewBag.Razredi">
-            <option value="">-- Odaberi razred --</option>
-        </select>
-        <span asp-validation-for="RazredId" class="text-danger"></span>
-    </div>
-
-    <div class="mb-3">
-        <label asp-for="RoditeljId" class="form-label">Roditelj</label>
-        <select asp-for="RoditeljId" class="form-select" asp-items="ViewBag.Roditelji">
-            <option value="">-- Odaberi roditelja --</option>
-        </select>
-        <span asp-validation-for="RoditeljId" class="text-danger"></span>
-    </div>
-
-
-    <button type="submit" class="btn btn-primary w-100">Dodaj</button>
-</form>
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+    .btn {
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+    }
+</style>

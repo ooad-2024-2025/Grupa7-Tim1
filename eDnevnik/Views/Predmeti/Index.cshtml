@@ -4,40 +4,186 @@
     ViewData["Title"] = "Pregled predmeta";
 }
 
-<h2 class="text-center mb-4">Pregled predmeta</h2>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-book text-primary"></i> Pregled predmeta</h2>
+            <p class="text-muted">Upravljanje predmetima u sistemu</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a class="btn btn-primary btn-lg" asp-action="Dodaj">
+                <i class="fas fa-plus"></i> Dodaj predmet
+            </a>
+        </div>
+    </div>
 
-<div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
-    <table class="table table-bordered table-striped">
-        <thead class="table-primary">
-            <tr>
-                <th>Naziv</th>
-                <th>Opis</th>
-                <th>Nastavnik</th>
-                <th>Akcije</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var predmet in Model)
-            {
-                <tr>
-                    <td>@predmet.Naziv</td>
-                    <td>@predmet.Opis</td>
-                    <td>@(predmet.Nastavnik != null ? predmet.Nastavnik.Ime + " " + predmet.Nastavnik.Prezime : "-")</td>
-                    <td>
-                        <div class="d-flex gap-2">
-                            <a class="btn btn-warning w-100" style="min-width: 80px;" asp-controller="Predmeti" asp-action="Edit" asp-route-id="@predmet.Id">Uredi</a>
-                            <form asp-controller="Predmeti" asp-action="Delete" asp-route-id="@predmet.Id" method="post" onsubmit="return confirm('Da li ste sigurni da želite obrisati ovaj predmet?');">
-                                <button type="submit" class="btn btn-danger w-100" style="min-width: 80px;">Obriši</button>
-                            </form>
-                        </div>
-                    </td>
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-                </tr>
-            }
-        </tbody>
-    </table>
+    @if (TempData["Greska"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <!-- Tabela predmeta -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-list"></i> Lista predmeta (@Model.Count)
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light sticky-top">
+                            <tr>
+                                <th><i class="fas fa-book"></i> Naziv predmeta</th>
+                                <th><i class="fas fa-align-left"></i> Opis</th>
+                                <th><i class="fas fa-chalkboard-teacher"></i> Nastavnik</th>
+                                <th class="text-center"><i class="fas fa-cogs"></i> Akcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var predmet in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="subject-icon bg-primary text-white me-3">
+                                                <i class="fas fa-book"></i>
+                                            </div>
+                                            <div>
+                                                <strong>@predmet.Naziv</strong>
+                                                <br>
+                                                <small class="text-muted">ID: @predmet.Id</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(predmet.Opis))
+                                        {
+                                            <span title="@predmet.Opis">
+                                                @(predmet.Opis.Length > 50 ? predmet.Opis.Substring(0, 50) + "..." : predmet.Opis)
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema opisa
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (predmet.Nastavnik != null)
+                                        {
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-circle bg-success text-white me-2">
+                                                    @predmet.Nastavnik.Ime.First()@predmet.Nastavnik.Prezime.First()
+                                                </div>
+                                                <span>@predmet.Nastavnik.Ime @predmet.Nastavnik.Prezime</span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="fas fa-exclamation-triangle"></i> Bez nastavnika
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-1 justify-content-center">
+                                            <a class="btn btn-warning btn-sm"
+                                               asp-controller="Predmeti"
+                                               asp-action="Edit"
+                                               asp-route-id="@predmet.Id"
+                                               title="Uredi predmet">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a class="btn btn-danger btn-sm"
+                                               asp-controller="Predmeti"
+                                               asp-action="DeleteConfirm"
+                                               asp-route-id="@predmet.Id"
+                                               title="Obriši predmet">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Prazno stanje -->
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-book fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema predmeta</h4>
+                <p class="text-muted">Dodajte prvi predmet klikom na dugme ispod.</p>
+                <a class="btn btn-primary btn-lg" asp-action="Dodaj">
+                    <i class="fas fa-plus"></i> Dodaj prvi predmet
+                </a>
+            </div>
+        </div>
+    }
 </div>
 
-<div class="text-center mt-3">
-    <a class="btn btn-primary btn-lg" asp-action="Dodaj">+ Dodaj predmet</a>
-</div>
+<style>
+    .avatar-circle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    .subject-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .table th {
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+</style>

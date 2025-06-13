@@ -4,88 +4,385 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<h2 class="mb-4">Dobrodošli, Administrator!</h2>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1><i class="fas fa-tachometer-alt text-primary"></i> Admin Dashboard</h1>
+            <p class="text-muted fs-5">Dobrodošli, Administrator! Pregled ključnih statistika sistema</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <div class="d-flex gap-2 justify-content-end">
+                <button class="btn btn-outline-primary" onclick="location.reload()">
+                    <i class="fas fa-sync-alt"></i> Osvježi
+                </button>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-plus"></i> Brzo dodavanje
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/Ucenici/Dodaj"><i class="fas fa-graduation-cap"></i> Dodaj učenika</a></li>
+                        <li><a class="dropdown-item" href="/Nastavnici/Dodaj"><i class="fas fa-chalkboard-teacher"></i> Dodaj nastavnika</a></li>
+                        <li><a class="dropdown-item" href="/Roditelji/Dodaj"><i class="fas fa-users"></i> Dodaj roditelja</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/Razredi/Dodaj"><i class="fas fa-school"></i> Dodaj razred</a></li>
+                        <li><a class="dropdown-item" href="/Predmeti/Dodaj"><i class="fas fa-book"></i> Dodaj predmet</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="card bg-primary text-white mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Učenici</h5>
-                <p class="card-text fs-4">@Model.BrojUcenika</p>
+    <!-- Glavne statistike -->
+    <div class="row mb-5">
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card border-success h-100 stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-icon bg-success text-white mb-3">
+                        <i class="fas fa-graduation-cap fa-2x"></i>
+                    </div>
+                    <h3 class="text-success mb-1">@Model.BrojUcenika</h3>
+                    <p class="card-text text-muted">Učenici</p>
+                    <a href="/Ucenici" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-eye"></i> Pregled
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card border-primary h-100 stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-icon bg-primary text-white mb-3">
+                        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                    </div>
+                    <h3 class="text-primary mb-1">@Model.BrojNastavnika</h3>
+                    <p class="card-text text-muted">Nastavnici</p>
+                    <a href="/Nastavnici" class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-eye"></i> Pregled
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card border-info h-100 stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-icon bg-info text-white mb-3">
+                        <i class="fas fa-users fa-2x"></i>
+                    </div>
+                    <h3 class="text-info mb-1">@Model.BrojRoditelja</h3>
+                    <p class="card-text text-muted">Roditelji</p>
+                    <a href="/Roditelji" class="btn btn-outline-info btn-sm">
+                        <i class="fas fa-eye"></i> Pregled
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card border-warning h-100 stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-icon bg-warning text-dark mb-3">
+                        <i class="fas fa-school fa-2x"></i>
+                    </div>
+                    <h3 class="text-warning mb-1">@Model.BrojRazreda</h3>
+                    <p class="card-text text-muted">Razredi</p>
+                    <a href="/Razredi" class="btn btn-outline-warning btn-sm">
+                        <i class="fas fa-eye"></i> Pregled
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card border-secondary h-100 stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-icon bg-secondary text-white mb-3">
+                        <i class="fas fa-book fa-2x"></i>
+                    </div>
+                    <h3 class="text-secondary mb-1">@Model.BrojPredmeta</h3>
+                    <p class="card-text text-muted">Predmeti</p>
+                    <a href="/Predmeti" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-eye"></i> Pregled
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-sm-6 mb-3">
+            <div class="card border-dark h-100 stat-card">
+                <div class="card-body text-center">
+                    <div class="stat-icon bg-dark text-white mb-3">
+                        <i class="fas fa-users-cog fa-2x"></i>
+                    </div>
+                    <h3 class="text-dark mb-1">@(Model.BrojUcenika + Model.BrojNastavnika + Model.BrojRoditelja)</h3>
+                    <p class="card-text text-muted">Ukupno korisnika</p>
+                    <button class="btn btn-outline-dark btn-sm" disabled>
+                        <i class="fas fa-chart-bar"></i> Statistike
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card bg-success text-white mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Nastavnici</h5>
-                <p class="card-text fs-4">@Model.BrojNastavnika</p>
+
+    <!-- Brze akcije -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0"><i class="fas fa-bolt text-warning"></i> Brze akcije</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3 mb-2">
+                            <a href="/Ucenici/Dodaj" class="btn btn-success w-100">
+                                <i class="fas fa-user-plus"></i> Dodaj učenika
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/Nastavnici/Dodaj" class="btn btn-primary w-100">
+                                <i class="fas fa-user-tie"></i> Dodaj nastavnika
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/Razredi/Dodaj" class="btn btn-warning w-100">
+                                <i class="fas fa-plus-square"></i> Dodaj razred
+                            </a>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <a href="/Predmeti/Dodaj" class="btn btn-secondary w-100">
+                                <i class="fas fa-book-open"></i> Dodaj predmet
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-4">
-        <div class="card bg-info text-white mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Roditelji</h5>
-                <p class="card-text fs-4">@Model.BrojRoditelja</p>
+
+    <!-- Pregled korisnika -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-users"></i> Pregled svih korisnika (@Model.Korisnici.Count)
+                    </h5>
+                    <div class="d-flex gap-2">
+
+                        <div class="input-group input-group-sm" style="width: 200px;">
+                            <input type="text" class="form-control" placeholder="Pretraži..." id="searchInput" onkeyup="searchTable()">
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="table table-hover mb-0" id="usersTable">
+                            <thead class="table-light sticky-top">
+                                <tr>
+                                    <th><i class="fas fa-user"></i> Ime i prezime</th>
+                                    <th><i class="fas fa-envelope"></i> Email</th>
+                                    <th><i class="fas fa-user-tag"></i> Uloge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var korisnik in Model.Korisnici)
+                                {
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                @{
+                                                    string roleClass = korisnik.Uloge.Contains("Ucenik") ? "success" :
+                                                    korisnik.Uloge.Contains("Nastavnik") ? "primary" :
+                                                    korisnik.Uloge.Contains("Roditelj") ? "info" : "secondary";
+                                                }
+                                                <div class="avatar-circle bg-@roleClass text-white me-3">
+                                                    @korisnik.Ime.First()@korisnik.Prezime.First()
+                                                </div>
+                                                <div>
+                                                    <strong>@korisnik.Ime @korisnik.Prezime</strong>
+                                                    <br>
+                                                    <small class="text-muted">ID: @korisnik.Id.Substring(0, 8)...</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(korisnik.Email))
+                                            {
+                                                <a href="mailto:@korisnik.Email" class="text-decoration-none">
+                                                    <i class="fas fa-envelope text-primary me-1"></i>
+                                                    @korisnik.Email
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">
+                                                    <i class="fas fa-minus"></i> Nema email
+                                                </span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @{
+                                                var roles = korisnik.Uloge.Split(',');
+                                            }
+                                            @foreach (var role in roles)
+                                            {
+                                                string badgeClass = role.Trim() switch
+                                                {
+                                                    "Ucenik" => "success",
+                                                    "Nastavnik" => "primary",
+                                                    "Roditelj" => "info",
+                                                    "Administrator" => "danger",
+                                                    _ => "secondary"
+                                                };
+
+                                                string badgeIcon = role.Trim() switch
+                                                {
+                                                    "Ucenik" => "fas fa-graduation-cap",
+                                                    "Nastavnik" => "fas fa-chalkboard-teacher",
+                                                    "Roditelj" => "fas fa-users",
+                                                    "Administrator" => "fas fa-crown",
+                                                    _ => "fas fa-user"
+                                                };
+
+                                                <span class="badge bg-@badgeClass me-1">
+                                                    <i class="@badgeIcon"></i> @role.Trim()
+                                                </span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                @if (!Model.Korisnici.Any())
+                {
+                    <div class="card-body text-center py-5">
+                        <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">Nema korisnika</h5>
+                        <p class="text-muted">Počnite dodavanjem prvog korisnika.</p>
+                    </div>
+                }
             </div>
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="card bg-warning text-dark mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Razredi</h5>
-                <p class="card-text fs-4">@Model.BrojRazreda</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card bg-dark text-white mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Predmeti</h5>
-                <p class="card-text fs-4">@Model.BrojPredmeta</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <!-- Prazan slot ako hoćeš ubaciti još neki entitet -->
-        <div class="card bg-light text-muted mb-3">
-            <div class="card-body text-center">
-                <h5 class="card-title">---</h5>
-                <p class="card-text fs-4">---</p>
-            </div>
-        </div>
-    </div>
-</div>
+<style>
+    .stat-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
 
-<hr />
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
 
-<h4 class="mb-3">Pregled svih korisnika</h4>
+    .stat-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
 
-<div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
-    <table class="table table-striped table-bordered mb-0">
-        <thead class="table-dark sticky-top">
-            <tr>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Email</th>
-                <th>Uloga/e</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var korisnik in Model.Korisnici)
-            {
-                <tr>
-                    <td>@korisnik.Ime</td>
-                    <td>@korisnik.Prezime</td>
-                    <td>@korisnik.Email</td>
-                    <td>@korisnik.Uloge</td>
-                </tr>
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .table th {
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .card {
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+        border-bottom: none;
+    }
+
+    .btn {
+        border-radius: 6px;
+    }
+
+    @@media (max-width: 768px) {
+        .stat-icon
+
+    {
+        width: 60px;
+        height: 60px;
+    }
+
+    .stat-icon i {
+        font-size: 1.5rem !important;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    }
+</style>
+
+<script>
+    function searchTable() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById('usersTable');
+        const rows = table.getElementsByTagName('tr');
+
+        for (let i = 1; i < rows.length; i++) {
+            const row = rows[i];
+            const cells = row.getElementsByTagName('td');
+            let found = false;
+
+            for (let j = 0; j < cells.length; j++) {
+                const cell = cells[j];
+                if (cell.textContent.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    break;
+                }
             }
-        </tbody>
-    </table>
-</div>
 
+            row.style.display = found ? '' : 'none';
+        }
+    }
+
+    function exportTable() {
+        // Placeholder funkcija za export
+        alert('Export funkcija - trebao bi se implementirati CSV/Excel export');
+    }
+
+    // Auto-refresh statistika svakih 5 minuta
+    setInterval(function() {
+        // Placeholder za auto-refresh
+        console.log('Auto refresh statistika...');
+    }, 300000);
+</script>

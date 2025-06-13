@@ -1,4 +1,5 @@
 ﻿using eDnevnik.Models;
+using eDnevnik.ViewModels;
 using eDnevnik.Services;
 using eDnevnik.Data.@enum;
 
@@ -110,4 +111,5 @@ namespace eDnevnik.ViewModels
                                      Prosjek >= 3.0 ? "text-warning" :
                                      Prosjek >= 2.0 ? "text-danger" : "text-muted";
     }
+
 }

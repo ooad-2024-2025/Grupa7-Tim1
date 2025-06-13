@@ -133,7 +133,9 @@
                                     <small>@izostanak.TerminInfo</small>
                                 </td>
                                 <td>
-                                    @izostanak.DatumCasa.ToString("dd.MM.yyyy")
+                                    <strong>@izostanak.DatumCasa.ToString("dd.MM.yyyy")</strong>
+                                    <br>
+                                    <small class="text-muted">@izostanak.DatumCasa.ToString("HH:mm") (@izostanak.DanUSedmici)</small>
                                 </td>
                                 <td>
                                     <span class="badge bg-@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan ? "success" : "danger")">

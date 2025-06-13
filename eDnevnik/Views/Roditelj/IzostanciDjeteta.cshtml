@@ -1,4 +1,12 @@
-﻿@model List<eDnevnik.Models.Izostanak>
+﻿<!-- Prvo, trebamo promjena u RoditeljController.cs - akcija IzostanciDjeteta -->
+<!-- STARA akcija koristi: -->
+<!-- Model = await _context.Izostanak.Where(i => i.UcenikId == dijete.Id)... -->
+
+<!-- NOVA akcija treba koristiti IzostanakSaDetaljima klasu i helper metodu -->
+
+<!-- Evo kompletne izmjene za IzostanciDjeteta.cshtml: -->
+
+@model List<eDnevnik.ViewModels.IzostanakSaDetaljima>
 
 @{
     ViewData["Title"] = "Izostanci djeteta";
@@ -35,7 +43,7 @@
         <div class="col-md-3">
             <div class="card border-warning">
                 <div class="card-body text-center">
-                    <h4 class="text-warning">@Model.Count(i => i.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan)</h4>
+                    <h4 class="text-warning">@Model.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan)</h4>
                     <p class="card-text">Opravdanih</p>
                 </div>
             </div>
@@ -43,7 +51,7 @@
         <div class="col-md-3">
             <div class="card border-danger">
                 <div class="card-body text-center">
-                    <h4 class="text-danger">@Model.Count(i => i.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan)</h4>
+                    <h4 class="text-danger">@Model.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan)</h4>
                     <p class="card-text">Neopravdanih</p>
                 </div>
             </div>
@@ -54,7 +62,7 @@
                     <h4 class="text-info">
                         @if (Model.Any())
                         {
-                            @Math.Round(Model.Count(i => i.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan) * 100.0 / Model.Count, 1)
+                            @Math.Round(Model.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan) * 100.0 / Model.Count, 1)
                             <text>%</text>
                         }
                         else
@@ -91,18 +99,24 @@
                         <tbody>
                             @foreach (var izostanak in Model)
                             {
-                                <tr class="@(izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan ? "table-danger" : "table-warning")">
+                                <tr class="@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan ? "table-danger" : "table-warning")">
                                     <td>
-                                        <strong>@izostanak.Cas.Termin.ToString("dd.MM.yyyy")</strong>
+                                        <strong>@izostanak.DatumCasa.ToString("dd.MM.yyyy")</strong>
                                         <br>
-                                        <small class="text-muted">@izostanak.Cas.Termin.ToString("HH:mm")</small>
+                                        <small class="text-muted">
+                                            @izostanak.DatumCasa.ToString("HH:mm")
+                                            @if (!string.IsNullOrEmpty(izostanak.TerminInfo))
+                                            {
+                                                <text>(@izostanak.TerminInfo)</text>
+                                            }
+                                        </small>
                                     </td>
                                     <td>
                                         <i class="fas fa-book text-primary me-1"></i>
-                                        @izostanak.Cas.Predmet?.Naziv
+                                        @izostanak.PredmetNaziv
                                     </td>
                                     <td>
-                                        @if (izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan)
+                                        @if (izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan)
                                         {
                                             <span class="badge bg-warning text-dark">
                                                 <i class="fas fa-check"></i> Opravdan
@@ -116,9 +130,9 @@
                                         }
                                     </td>
                                     <td>
-                                        @if (!string.IsNullOrEmpty(izostanak.Komentar))
+                                        @if (!string.IsNullOrEmpty(izostanak.Izostanak.Komentar))
                                         {
-                                            <small class="text-muted">@izostanak.Komentar</small>
+                                            <small class="text-muted">@izostanak.Izostanak.Komentar</small>
                                         }
                                         else
                                         {
@@ -144,12 +158,12 @@
                 <div class="row">
                     @{
                         var mjesecniIzostanci = Model
-                            .GroupBy(i => new { i.Cas.Termin.Year, i.Cas.Termin.Month })
+                            .GroupBy(i => new { i.DatumCasa.Year, i.DatumCasa.Month })
                             .Select(g => new {
                                 Mjesec = new DateTime(g.Key.Year, g.Key.Month, 1),
                                 Ukupno = g.Count(),
-                                Opravdanih = g.Count(i => i.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan),
-                                Neopravdanih = g.Count(i => i.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan)
+                                Opravdanih = g.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Opravdan),
+                                Neopravdanih = g.Count(i => i.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan)
                             })
                             .OrderByDescending(x => x.Mjesec)
                             .Take(6);

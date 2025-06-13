@@ -329,13 +329,42 @@ namespace eDnevnik.Controllers
 
             var izostanci = await query.OrderByDescending(i => i.Id).ToListAsync();
 
-            return izostanci.Select(i => new IzostanakSaDetaljima
+            var rezultat = new List<IzostanakSaDetaljima>();
+
+            foreach (var i in izostanci)
             {
-                Izostanak = i,
-                PredmetNaziv = i.Cas?.Predmet?.Naziv ?? "Nepoznat predmet",
-                TerminInfo = i.Cas?.FixniTermin?.FormatiraniTermin ?? "Nepoznat termin",
-                DatumCasa = DateTime.Now // Ovdje bi trebao biti pravi datum časa
-            }).ToList();
+                // Pronađi evidenciju časa da dohvatiš pravi datum
+                var evidencija = await _context.EvidencijaCasa
+                    .Where(e => e.CasId == i.CasId)
+                    .OrderByDescending(e => e.DatumOdrzavanja)
+                    .FirstOrDefaultAsync();
+
+                DateTime datumCasa;
+                if (evidencija != null)
+                {
+                    // Ako postoji evidencija, koristi datum iz evidencije + vrijeme iz FixniTermin
+                    datumCasa = evidencija.DatumOdrzavanja.Date;
+                    if (i.Cas?.FixniTermin != null)
+                    {
+                        datumCasa = datumCasa.Add(i.Cas.FixniTermin.PocetakVremena);
+                    }
+                }
+                else
+                {
+                    // Fallback - koristi postojeći Termin iz časa ili današnji datum
+                    datumCasa = i.Cas?.Termin ?? DateTime.Now;
+                }
+
+                rezultat.Add(new IzostanakSaDetaljima
+                {
+                    Izostanak = i,
+                    PredmetNaziv = i.Cas?.Predmet?.Naziv ?? "Nepoznat predmet",
+                    TerminInfo = i.Cas?.FixniTermin?.FormatiraniTermin ?? "Nepoznat termin",
+                    DatumCasa = datumCasa
+                });
+            }
+
+            return rezultat;
         }
 
         private async Task<List<OcjenePoPremetima>> GetOcjenePoPremetima(int razredId)

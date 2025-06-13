@@ -4,54 +4,245 @@
     ViewData["Title"] = "Pregled učenika";
 }
 
-<h2 class="text-center mb-4">Pregled učenika</h2>
-
-<div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
-    <table class="table table-bordered table-striped mb-0">
-        <thead class="table-primary text-center sticky-top">
-            <tr>
-                <th>Ime</th>
-                <th>Prezime</th>
-                <th>Email</th>
-                <th>Telefon</th>
-                <th>Adresa</th>
-                <th>Razred</th>
-                <th>Akcija</th>
-            </tr>
-        </thead>
-        <tbody class="text-center">
-            @foreach (var ucenik in Model)
-            {
-                <tr>
-                    <td>@ucenik.Ime</td>
-                    <td>@ucenik.Prezime</td>
-                    <td>@ucenik.Email</td>
-                    <td>@ucenik.Telefon</td>
-                    <td>@ucenik.Adresa</td>
-                    <td>@(ucenik.Razred != null ? ucenik.Razred.Naziv : "Nema razred")</td>
-                        <td>
-        <div class="d-flex gap-2">
-            <a class="btn btn-warning w-100" style="min-width:80px;" asp-action="Edit" asp-route-id="@ucenik.Id">Uredi</a>
-
-            <form asp-action="Obrisi" asp-route-id="@ucenik.Id" method="post"
-                  class="w-100" style="min-width:80px;" onsubmit="return confirm('Da li ste sigurni da želite obrisati učenika?');">
-                <button type="submit" class="btn btn-danger w-100">Obriši</button>
-            </form>
-
-                        <form asp-controller="Report" asp-action="Send" method="post" class="w-100">
-        <input type="hidden" name="ucenikId" value="@ucenik.Id" />
-        <button type="submit" class="btn btn-success w-100">Izvještaj</button>
-        </form>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-graduation-cap text-success"></i> Pregled učenika</h2>
+            <p class="text-muted">Upravljanje učenicima u sistemu</p>
         </div>
-    </td>
+        <div class="col-md-4 text-end">
+            <a class="btn btn-success btn-lg" asp-controller="Ucenici" asp-action="Dodaj">
+                <i class="fas fa-plus"></i> Dodaj učenika
+            </a>
+        </div>
+    </div>
 
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-                </tr>
-            }
-        </tbody>
-    </table>
+    @if (TempData["Greska"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.Any())
+    {
+        <!-- Tabela učenika -->
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-list"></i> Lista učenika (@Model.Count)
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive" style="max-height: 600px; overflow-y: auto;">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light sticky-top">
+                            <tr>
+                                <th><i class="fas fa-user"></i> Ime i prezime</th>
+                                <th><i class="fas fa-envelope"></i> Email</th>
+                                <th><i class="fas fa-phone"></i> Telefon</th>
+                                <th><i class="fas fa-map-marker-alt"></i> Adresa</th>
+                                <th><i class="fas fa-school"></i> Razred</th>
+                                <th><i class="fas fa-award"></i> Vladanje</th>
+                                <th class="text-center"><i class="fas fa-cogs"></i> Akcije</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ucenik in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-circle bg-success text-white me-3">
+                                                @ucenik.Ime.First()@ucenik.Prezime.First()
+                                            </div>
+                                            <div>
+                                                <strong>@ucenik.Ime @ucenik.Prezime</strong>
+                                                <br>
+                                                <small class="text-muted">ID: @ucenik.Id.Substring(0, 8)...</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(ucenik.Email))
+                                        {
+                                            <a href="mailto:@ucenik.Email" class="text-decoration-none">
+                                                <i class="fas fa-envelope text-info me-1"></i>
+                                                @ucenik.Email
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema email
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(ucenik.Telefon))
+                                        {
+                                            <a href="tel:@ucenik.Telefon" class="text-decoration-none">
+                                                <i class="fas fa-phone text-success me-1"></i>
+                                                @ucenik.Telefon
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema telefon
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(ucenik.Adresa))
+                                        {
+                                            <i class="fas fa-map-marker-alt text-primary me-1"></i>
+                                            @ucenik.Adresa
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">
+                                                <i class="fas fa-minus"></i> Nema adresu
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (ucenik.Razred != null)
+                                        {
+                                            <span class="badge bg-primary">
+                                                <i class="fas fa-school"></i> @ucenik.Razred.Naziv
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-warning text-dark">
+                                                <i class="fas fa-exclamation-triangle"></i> Nema razred
+                                            </span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @{
+                                            string vladanjeClass = ucenik.Vladanje.ToString() switch
+                                            {
+                                                "Primjereno" => "success",
+                                                "VrloDobro" => "info",
+                                                "Dobro" => "primary",
+                                                "Zadovoljava" => "warning",
+                                                "Neprimjereno" => "danger",
+                                                _ => "secondary"
+                                            };
+
+                                            string vladanjeText = ucenik.Vladanje.ToString() switch
+                                            {
+                                                "Primjereno" => "Primjerno",
+                                                "VrloDobro" => "Vrlo dobro",
+                                                "Dobro" => "Dobro",
+                                                "Zadovoljava" => "Zadovoljava",
+                                                "Neprimjereno" => "Ne zadovoljava",
+                                                _ => "Neocijenjeno"
+                                            };
+                                        }
+                                        <span class="badge bg-@vladanjeClass">
+                                            <i class="fas fa-award"></i> @vladanjeText
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex gap-1 justify-content-center">
+                                            <a class="btn btn-warning btn-sm"
+                                               asp-action="Edit"
+                                               asp-route-id="@ucenik.Id"
+                                               title="Uredi učenika">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <form asp-action="Obrisi"
+                                                  asp-route-id="@ucenik.Id"
+                                                  method="post"
+                                                  class="d-inline"
+                                                  onsubmit="return confirm('Da li ste sigurni da želite obrisati učenika @ucenik.FullName?');">
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-sm"
+                                                        title="Obriši učenika">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </form>
+                                            <form asp-controller="Report"
+                                                  asp-action="Send"
+                                                  method="post"
+                                                  class="d-inline">
+                                                <input type="hidden" name="ucenikId" value="@ucenik.Id" />
+                                                <button type="submit"
+                                                        class="btn btn-info btn-sm"
+                                                        title="Generiraj izvještaj">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Prazno stanje -->
+        <div class="card">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-graduation-cap fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Nema učenika</h4>
+                <p class="text-muted">Dodajte prvog učenika klikom na dugme ispod.</p>
+                <a class="btn btn-success btn-lg" asp-controller="Ucenici" asp-action="Dodaj">
+                    <i class="fas fa-plus"></i> Dodaj prvog učenika
+                </a>
+            </div>
+        </div>
+    }
 </div>
 
-<div class="text-center mt-4">
-    <a class="btn btn-primary btn-lg" asp-controller="Ucenici" asp-action="Dodaj">+ Dodaj učenika</a>
-</div>
+<style>
+    .avatar-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+
+    .table th {
+        font-weight: 600;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+</style>
