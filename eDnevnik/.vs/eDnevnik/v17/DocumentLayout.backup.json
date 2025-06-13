@@ -130,8 +130,7 @@
               "RelativeToolTip": "Services\\VladanjeService.cs",
               "ViewState": "AgIAAI0AAAAAAAAAAAAEwJ0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T08:03:48.73Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T08:03:48.73Z"
             },
             {
               "$type": "Document",
@@ -143,8 +142,7 @@
               "RelativeToolTip": "Controllers\\EvidencijaController.cs",
               "ViewState": "AgIAADkAAAAAAAAAAAAYwEMAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T07:50:25.933Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:50:25.933Z"
             },
             {
               "$type": "Document",
@@ -156,8 +154,7 @@
               "RelativeToolTip": "Controllers\\NastavniciController.cs",
               "ViewState": "AgIAAG4AAAAAAAAAAAAuwBAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T07:50:19.194Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:50:19.194Z"
             },
             {
               "$type": "Document",
@@ -169,8 +166,7 @@
               "RelativeToolTip": "Controllers\\RazrednikController.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAAAwwLYAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T07:49:51.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:49:51.391Z"
             },
             {
               "$type": "Document",
@@ -182,8 +178,7 @@
               "RelativeToolTip": "ViewModels\\UcenikDashboardViewModel.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T07:42:50.742Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:42:50.742Z"
             },
             {
               "$type": "Document",
@@ -195,8 +190,7 @@
               "RelativeToolTip": "..\\..\\..\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\Services\\VladanjeService.cs",
               "ViewState": "AgIAAKIAAAAAAAAAAAAqwLwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T07:40:04.761Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:40:04.761Z"
             },
             {
               "$type": "Document",
@@ -208,8 +202,7 @@
               "RelativeToolTip": "Views\\Ucenik\\Index.cshtml",
               "ViewState": "AgIAAFsAAAAAAAAAAAD4v2IAAABhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T07:37:09.118Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:37:09.118Z"
             },
             {
               "$type": "Document",
@@ -221,8 +214,7 @@
               "RelativeToolTip": "Views\\Raspored\\Create.cshtml",
               "ViewState": "AgIAAOwAAAAAAAAAAAAUwAYBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T07:25:19.077Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:25:19.077Z"
             },
             {
               "$type": "Document",
@@ -234,8 +226,7 @@
               "RelativeToolTip": "Controllers\\RasporedController.cs",
               "ViewState": "AgIAAHABAAAAAAAAAAAUwHkBAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T07:21:04.667Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:21:04.667Z"
             },
             {
               "$type": "Document",
@@ -247,8 +238,7 @@
               "RelativeToolTip": "Views\\Raspored\\Index.cshtml",
               "ViewState": "AgIAACUBAAAAAAAAAAAwwC4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T07:20:08.69Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:20:08.69Z"
             },
             {
               "$type": "Document",
@@ -260,8 +250,7 @@
               "RelativeToolTip": "Views\\Razredi\\Index.cshtml",
               "ViewState": "AgIAAF8AAAAAAAAAAAD4v3cAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T07:00:58.661Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T07:00:58.661Z"
             },
             {
               "$type": "Document",
@@ -273,8 +262,7 @@
               "RelativeToolTip": "Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAALMAAAAAAAAAAAAUwMcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T06:53:24.55Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:53:24.55Z"
             },
             {
               "$type": "Document",
@@ -286,8 +274,7 @@
               "RelativeToolTip": "Views\\Razredi\\Delete.cshtml",
               "ViewState": "AgIAAIUAAAAAAAAAAAAIwJ8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:52:45.953Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:52:45.953Z"
             },
             {
               "$type": "Document",
@@ -299,8 +286,7 @@
               "RelativeToolTip": "Controllers\\RazredController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-13T06:52:08.889Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:52:08.889Z"
             },
             {
               "$type": "Document",
@@ -312,8 +298,7 @@
               "RelativeToolTip": "Views\\Ucenici\\Dodaj.cshtml",
               "ViewState": "AgIAADUAAAAAAAAAAAAkwEMAAABxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:45:21.705Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:45:21.705Z"
             },
             {
               "$type": "Document",
@@ -325,8 +310,7 @@
               "RelativeToolTip": "Views\\Roditelji\\Dodaj.cshtml",
               "ViewState": "AgIAACIAAAAAAAAAAAAkwDAAAABtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:45:09.427Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:45:09.427Z"
             },
             {
               "$type": "Document",
@@ -338,8 +322,7 @@
               "RelativeToolTip": "Views\\Nastavnici\\Dodaj.cshtml",
               "ViewState": "AgIAADcAAAAAAAAAAAAkwEUAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:43:57.481Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:43:57.481Z"
             },
             {
               "$type": "Document",
@@ -351,8 +334,7 @@
               "RelativeToolTip": "Views\\Roditelji\\Edit.cshtml",
               "ViewState": "AgIAACQAAAAAAAAAAAAkwDIAAABtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:40:21.031Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:40:21.031Z"
             },
             {
               "$type": "Document",
@@ -364,8 +346,7 @@
               "RelativeToolTip": "Views\\Razredi\\Edit.cshtml",
               "ViewState": "AgIAAEUAAAAAAAAAAAAIwF8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:40:04.52Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:40:04.52Z"
             },
             {
               "$type": "Document",
@@ -377,8 +358,7 @@
               "RelativeToolTip": "Views\\Predmeti\\Edit.cshtml",
               "ViewState": "AgIAAEsAAAAAAAAAAAAIwGUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:39:39.38Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:39:39.38Z"
             },
             {
               "$type": "Document",
@@ -390,8 +370,7 @@
               "RelativeToolTip": "Views\\Nastavnici\\Edit.cshtml",
               "ViewState": "AgIAADgAAAAAAAAAAAAkwEUAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:39:26.59Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:39:26.59Z"
             },
             {
               "$type": "Document",
@@ -403,8 +382,7 @@
               "RelativeToolTip": "Views\\Ucenici\\Edit.cshtml",
               "ViewState": "AgIAADoAAAAAAAAAAAAkwEgAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-13T06:35:55.413Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-13T06:35:55.413Z"
             }
           ]
         }

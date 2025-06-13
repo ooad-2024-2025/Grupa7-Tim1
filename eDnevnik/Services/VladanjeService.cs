@@ -18,11 +18,11 @@ namespace eDnevnik.Services
         }
 
         /// <summary>
-        /// Izračunaj vladanje na osnovu broja izostanaka
+        /// Izračunaj vladanje na osnovu broja NEOPRAVDANIH izostanaka
         /// </summary>
-        public StatusVladanja IzracunajVladanje(int brojIzostanaka)
+        public StatusVladanja IzracunajVladanje(int brojNeopravdanihIzostanaka)
         {
-            return brojIzostanaka switch
+            return brojNeopravdanihIzostanaka switch
             {
                 <= 5 => StatusVladanja.Primjereno,
                 <= 15 => StatusVladanja.VrloDobro,
@@ -46,13 +46,13 @@ namespace eDnevnik.Services
                 var roles = await _userManager.GetRolesAsync(ucenik);
                 if (!roles.Contains("Ucenik")) return false;
 
-                // Izbroji izostanke za ovaj semestar/godinu
-                var brojIzostanaka = await _context.Izostanak
-                    .Where(i => i.UcenikId == ucenikId)
+                // Izbroji SAMO NEOPRAVDANE izostanke za ovaj semestar/godinu
+                var brojNeopravdanihIzostanaka = await _context.Izostanak
+                    .Where(i => i.UcenikId == ucenikId && i.status == StatusIzostanka.Neopravdan)
                     .CountAsync();
 
-                // Izračunaj novo vladanje
-                var novoVladanje = IzracunajVladanje(brojIzostanaka);
+                // Izračunaj novo vladanje na osnovu neopravdanih izostanaka
+                var novoVladanje = IzracunajVladanje(brojNeopravdanihIzostanaka);
 
                 // Ažuriraj ako se promjenilo
                 if (ucenik.Vladanje != novoVladanje)
@@ -156,21 +156,21 @@ namespace eDnevnik.Services
             };
         }
 
-        private StatusVladanja? GetSlijedeciNivoVladanja(int trenutniIzostanci)
+        private StatusVladanja? GetSlijedeciNivoVladanja(int trenutniNeopravdaniIzostanci)
         {
-            if (trenutniIzostanci <= 5) return StatusVladanja.VrloDobro;
-            if (trenutniIzostanci <= 15) return StatusVladanja.Dobro;
-            if (trenutniIzostanci <= 25) return StatusVladanja.Zadovoljava;
-            if (trenutniIzostanci <= 35) return StatusVladanja.Neprimjereno;
+            if (trenutniNeopravdaniIzostanci <= 5) return StatusVladanja.VrloDobro;
+            if (trenutniNeopravdaniIzostanci <= 15) return StatusVladanja.Dobro;
+            if (trenutniNeopravdaniIzostanci <= 25) return StatusVladanja.Zadovoljava;
+            if (trenutniNeopravdaniIzostanci <= 35) return StatusVladanja.Neprimjereno;
             return null; // Već najgore
         }
 
-        private int GetIzostankeDoSlijedecegNivoa(int trenutniIzostanci)
+        private int GetIzostankeDoSlijedecegNivoa(int trenutniNeopravdaniIzostanci)
         {
-            if (trenutniIzostanci <= 5) return 6 - trenutniIzostanci;
-            if (trenutniIzostanci <= 15) return 16 - trenutniIzostanci;
-            if (trenutniIzostanci <= 25) return 26 - trenutniIzostanci;
-            if (trenutniIzostanci <= 35) return 36 - trenutniIzostanci;
+            if (trenutniNeopravdaniIzostanci <= 5) return 6 - trenutniNeopravdaniIzostanci;
+            if (trenutniNeopravdaniIzostanci <= 15) return 16 - trenutniNeopravdaniIzostanci;
+            if (trenutniNeopravdaniIzostanci <= 25) return 26 - trenutniNeopravdaniIzostanci;
+            if (trenutniNeopravdaniIzostanci <= 35) return 36 - trenutniNeopravdaniIzostanci;
             return 0; // Već na najgorem nivou
         }
     }

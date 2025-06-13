@@ -27,6 +27,22 @@
             _ => Model.VladanjeInfo.SlijedeciNivo.ToString()
         };
     }
+    
+    // Funkcija za mapiranje dana u tjednu na bosanski
+    string GetBosnianDayName(DayOfWeek dayOfWeek)
+    {
+        return dayOfWeek switch
+        {
+            DayOfWeek.Monday => "ponedjeljak",
+            DayOfWeek.Tuesday => "utorak",
+            DayOfWeek.Wednesday => "srijeda",
+            DayOfWeek.Thursday => "četvrtak",
+            DayOfWeek.Friday => "petak",
+            DayOfWeek.Saturday => "subota",
+            DayOfWeek.Sunday => "nedjelja",
+            _ => dayOfWeek.ToString()
+        };
+    }
 }
 
 <div class="container-fluid">
@@ -93,17 +109,6 @@
                     <strong>Pažnja!</strong> 
                     Još <strong>@Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa izostanaka</strong> 
                     do promjene vladanja na "@vladanjeSlijedeciNivo".
-                </div>
-                <div class="col-md-4 text-end">
-                    <div class="progress" style="height: 25px;">
-                        @{
-                            var maxIzostanci = Model.VladanjeInfo.UkupnoIzostanaka + Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa;
-                            var procenat = maxIzostanci > 0 ? (Model.VladanjeInfo.UkupnoIzostanaka * 100 / maxIzostanci) : 0;
-                        }
-                        <div class="progress-bar bg-warning" style="width: @procenat%">
-                            @procenat%
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -178,7 +183,7 @@
                                 <tr class="@(izostanak.Izostanak.status == eDnevnik.Data.@enum.StatusIzostanka.Neopravdan ? "table-danger" : "table-warning")">
                                     <td>
                                         <strong>@izostanak.DatumCasa.ToString("dd.MM.yyyy")</strong><br>
-                                        <small class="text-muted">@izostanak.DatumCasa.ToString("dddd")</small>
+                                        <small class="text-muted">@GetBosnianDayName(izostanak.DatumCasa.DayOfWeek)</small>
                                     </td>
                                     <td>
                                         <strong>@izostanak.PredmetNaziv</strong>
