@@ -71,7 +71,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label asp-for="RazredId" class="form-label">🏫 Razred *</label>
-                                <select asp-for="RazredId" asp-items="ViewBag.RazredId" class="form-select" required>
+                                <select asp-for="RazredId" asp-items="ViewBag.RazredId" class="form-select" required id="razredSelect">
                                     <option value="">-- Izaberite razred --</option>
                                 </select>
                                 <span asp-validation-for="RazredId" class="text-danger"></span>
@@ -79,10 +79,13 @@
 
                             <div class="col-md-6 mb-3">
                                 <label asp-for="PredmetId" class="form-label">📚 Predmet *</label>
-                                <select asp-for="PredmetId" asp-items="ViewBag.PredmetId" class="form-select" required>
-                                    <option value="">-- Izaberite predmet --</option>
+                                <select asp-for="PredmetId" class="form-select" required id="predmetSelect">
+                                    <option value="">-- Prvo odaberite razred --</option>
                                 </select>
                                 <span asp-validation-for="PredmetId" class="text-danger"></span>
+                                <div class="form-text" id="predmetInfo">
+                                    Prikazuju se samo predmeti dodijeljeni odabranom razredu
+                                </div>
                             </div>
                         </div>
 
@@ -176,9 +179,44 @@
             "Friday": "Petak"
         };
 
+        // Dinamično učitavanje predmeta za odabrani razred
+        document.getElementById('razredSelect').addEventListener('change', function() {
+            const razredId = this.value;
+            const predmetSelect = document.getElementById('predmetSelect');
+            const predmetInfo = document.getElementById('predmetInfo');
+
+            if (!razredId) {
+                predmetSelect.innerHTML = '<option value="">-- Prvo odaberite razred --</option>';
+                predmetInfo.textContent = 'Prikazuju se samo predmeti dodijeljeni odabranom razredu';
+                return;
+            }
+
+            // Pošalji AJAX zahtjev za predmete odabranog razreda
+            fetch(`/Raspored/GetPredmetiZaRazred?razredId=${razredId}`)
+                .then(response => response.json())
+                .then(data => {
+                    predmetSelect.innerHTML = '<option value="">-- Izaberite predmet --</option>';
+
+                    if (data.length === 0) {
+                        predmetSelect.innerHTML += '<option value="" disabled>Nema dodijeljenih predmeta</option>';
+                        predmetInfo.innerHTML = '<span class="text-warning">⚠️ Ovaj razred nema dodijeljene predmete</span>';
+                    } else {
+                        data.forEach(predmet => {
+                            predmetSelect.innerHTML += `<option value="${predmet.id}">${predmet.naziv}</option>`;
+                        });
+                        predmetInfo.innerHTML = `<span class="text-success">✅ Učitano ${data.length} predmeta za odabrani razred</span>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Greška:', error);
+                    predmetSelect.innerHTML = '<option value="">-- Greška pri učitavanju --</option>';
+                    predmetInfo.innerHTML = '<span class="text-danger">❌ Greška pri učitavanju predmeta</span>';
+                });
+        });
+
         function previewCas() {
-            const razred = document.querySelector('#RazredId option:checked')?.text || 'Nije odabran';
-            const predmet = document.querySelector('#PredmetId option:checked')?.text || 'Nije odabran';
+            const razred = document.querySelector('#razredSelect option:checked')?.text || 'Nije odabran';
+            const predmet = document.querySelector('#predmetSelect option:checked')?.text || 'Nije odabran';
             const nastavnik = document.querySelector('#NastavnikId option:checked')?.text || 'Nije odabran';
             const dan = document.querySelector('#DanUSedmici').value;
             const terminId = document.querySelector('#FixniTerminId').value;
@@ -192,23 +230,23 @@
             const terminNaziv = termini[terminId] || 'Nepoznat termin';
 
             const previewHtml = `
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6"><strong>📅 Dan:</strong></div>
                     <div class="col-6">${danNaziv}</div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6"><strong>🕐 Termin:</strong></div>
                     <div class="col-6">${terminNaziv}</div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6"><strong>🏫 Razred:</strong></div>
                     <div class="col-6">${razred}</div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6"><strong>📚 Predmet:</strong></div>
                     <div class="col-6">${predmet}</div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-6"><strong>👨‍🏫 Nastavnik:</strong></div>
                     <div class="col-6">${nastavnik}</div>
                 </div>

@@ -17,29 +17,26 @@
 
     var danasnjiDan = daniUTjednu[DateTime.Now.DayOfWeek];
 
-    // Mapiranje vladanja na bosanski
-    string vladanjeText = Model.VladanjeInfo.TrenutnoVladanje.ToString() switch
+    // ISPRAVKA: Jedinstvena funkcija za mapiranje vladanja
+    string MapirajVladanje(eDnevnik.Data.@enum.StatusVladanja vladanje)
     {
-        "Primjereno" => "Primjerno",
-        "VrloDobro" => "Vrlo dobro",
-        "Dobro" => "Dobro",
-        "Zadovoljava" => "Zadovoljava",
-        "Neprimjereno" => "Ne zadovoljava",
-        _ => Model.VladanjeInfo.TrenutnoVladanje.ToString()
-    };
+        return vladanje switch
+        {
+            eDnevnik.Data.@enum.StatusVladanja.Primjereno => "Primjerno",
+            eDnevnik.Data.@enum.StatusVladanja.VrloDobro => "Vrlo dobro",
+            eDnevnik.Data.@enum.StatusVladanja.Dobro => "Dobro",
+            eDnevnik.Data.@enum.StatusVladanja.Zadovoljava => "Zadovoljava",
+            eDnevnik.Data.@enum.StatusVladanja.Neprimjereno => "Ne zadovoljava",
+            _ => vladanje.ToString()
+        };
+    }
+
+    string vladanjeText = MapirajVladanje(Model.VladanjeInfo.TrenutnoVladanje);
 
     string vladanjeSlijedeciNivo = "";
     if (Model.VladanjeInfo.SlijedeciNivo.HasValue)
     {
-        vladanjeSlijedeciNivo = Model.VladanjeInfo.SlijedeciNivo.ToString() switch
-        {
-            "Primjerno" => "Primjerno",
-            "VrloDobar" => "Vrlo dobro",
-            "Dobro" => "Dobro",
-            "Zadovoljava" => "Zadovoljava",
-            "NeZadovoljava" => "Ne zadovoljava",
-            _ => Model.VladanjeInfo.SlijedeciNivo.ToString()
-        };
+        vladanjeSlijedeciNivo = MapirajVladanje(Model.VladanjeInfo.SlijedeciNivo.Value);
     }
 }
 
@@ -111,11 +108,11 @@
                     <p class="card-text">Vladanje</p>
                     @if (Model.VladanjeInfo.SlijedeciNivo.HasValue)
                     {
-                    <small class="text-muted">@Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa do "@vladanjeSlijedeciNivo"</small>
+                        <small class="text-muted">@Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa neopravdanih do "@vladanjeSlijedeciNivo"</small>
                     }
                     else
                     {
-                    <small class="text-muted">Pazio na izostanke!</small>
+                        <small class="text-success">Pazio na izostanke!</small>
                     }
                 </div>
             </div>
@@ -135,39 +132,39 @@
                 <div class="card-body">
                     @if (Model.DanasnjiCasovi.Any())
                     {
-                    <div class="table-responsive">
-                        <table class="table table-sm table-hover mb-0">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Termin</th>
-                                    <th>Predmet</th>
-                                    <th>Nastavnik</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var cas in Model.DanasnjiCasovi)
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Termin</th>
+                                        <th>Predmet</th>
+                                        <th>Nastavnik</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var cas in Model.DanasnjiCasovi)
                                     {
-                                <tr>
-                                    <td>
-                                        <strong>@cas.FixniTermin?.Naziv</strong><br>
-                                        <small class="text-muted">@cas.FixniTermin?.FormatiraniTermin</small>
-                                    </td>
-                                    <td>@cas.Predmet?.Naziv</td>
-                                    <td>
-                                        <small>@cas.Nastavnik?.FullName</small>
-                                    </td>
-                                </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>@cas.FixniTermin?.Naziv</strong><br>
+                                                <small class="text-muted">@cas.FixniTermin?.FormatiraniTermin</small>
+                                            </td>
+                                            <td>@cas.Predmet?.Naziv</td>
+                                            <td>
+                                                <small>@cas.Nastavnik?.FullName</small>
+                                            </td>
+                                        </tr>
                                     }
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
                     }
                     else
                     {
-                    <div class="text-center text-muted">
-                        <i class="fas fa-calendar-times fa-3x mb-3"></i>
-                        <p>Nema časova danas!</p>
-                    </div>
+                        <div class="text-center text-muted">
+                            <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                            <p>Nema časova danas!</p>
+                        </div>
                     }
                 </div>
             </div>
@@ -187,60 +184,60 @@
                 <div class="card-body">
                     @if (Model.OcjenePoPremetima.Any())
                     {
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Predmet</th>
-                                    <th>Prosjek</th>
-                                    <th>Broj ocjena</th>
-                                    <th>Najnovija ocjena</th>
-                                    <th>Datum</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var predmet in Model.OcjenePoPremetima.Take(5))
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Predmet</th>
+                                        <th>Prosjek</th>
+                                        <th>Broj ocjena</th>
+                                        <th>Najnovija ocjena</th>
+                                        <th>Datum</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var predmet in Model.OcjenePoPremetima.Take(5))
                                     {
-                                <tr>
-                                    <td><strong>@predmet.Predmet?.Naziv</strong></td>
-                                    <td>
-                                        <span class="badge bg-primary">@predmet.ProsjekText</span>
-                                    </td>
-                                    <td>@predmet.BrojOcjena</td>
-                                    <td>
-                                        @if (predmet.NajnovijaOcjena != null)
+                                        <tr>
+                                            <td><strong>@predmet.Predmet?.Naziv</strong></td>
+                                            <td>
+                                                <span class="badge bg-primary">@predmet.ProsjekText</span>
+                                            </td>
+                                            <td>@predmet.BrojOcjena</td>
+                                            <td>
+                                                @if (predmet.NajnovijaOcjena != null)
                                                 {
-                                        <span class="badge bg-@(predmet.NajnovijaOcjena.Vrijednost >= 3 ? "success" : "danger")">
-                                            @predmet.NajnovijaOcjena.Vrijednost
-                                        </span>
+                                                    <span class="badge bg-@(predmet.NajnovijaOcjena.Vrijednost >= 3 ? "success" : "danger")">
+                                                        @predmet.NajnovijaOcjena.Vrijednost
+                                                    </span>
                                                 }
                                                 else
                                                 {
-                                        <span class="text-muted">-</span>
+                                                    <span class="text-muted">-</span>
                                                 }
-                                    </td>
-                                    <td>
-                                        @if (predmet.NajnovijaOcjena != null)
+                                            </td>
+                                            <td>
+                                                @if (predmet.NajnovijaOcjena != null)
                                                 {
-                                        <small class="text-muted">@predmet.NajnovijaOcjena.Datum.ToString("dd.MM.yyyy")</small>
+                                                    <small class="text-muted">@predmet.NajnovijaOcjena.Datum.ToString("dd.MM.yyyy")</small>
                                                 }
                                                 else
                                                 {
-                                        <small class="text-muted">-</small>
+                                                    <small class="text-muted">-</small>
                                                 }
-                                    </td>
-                                </tr>
+                                            </td>
+                                        </tr>
                                     }
-                            </tbody>
-                        </table>
-                    </div>
+                                </tbody>
+                            </table>
+                        </div>
                     }
                     else
                     {
-                    <div class="text-center text-muted">
-                        <i class="fas fa-star fa-3x mb-3"></i>
-                        <p>Još nema ocjena</p>
-                    </div>
+                        <div class="text-center text-muted">
+                            <i class="fas fa-star fa-3x mb-3"></i>
+                            <p>Još nema ocjena</p>
+                        </div>
                     }
                 </div>
             </div>
@@ -276,13 +273,22 @@
 
                     @if (Model.VladanjeInfo.SlijedeciNivo.HasValue)
                     {
-                    <div class="alert alert-warning">
-                        <small>
-                            <i class="fas fa-exclamation-triangle"></i>
-                            Još <strong>@Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa izostanaka</strong>
-                            do "@vladanjeSlijedeciNivo"
-                        </small>
-                    </div>
+                        <div class="alert alert-warning">
+                            <small>
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Još <strong>@Model.VladanjeInfo.IzostanaciDoSlijedecegNivoa neopravdanih izostanaka</strong>
+                                do "@vladanjeSlijedeciNivo"
+                            </small>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-success">
+                            <small>
+                                <i class="fas fa-check-circle"></i>
+                                <strong>Odličo!</strong> Nastavi paziti na izostanke.
+                            </small>
+                        </div>
                     }
 
                     <a asp-action="Izostanci" class="btn btn-outline-primary btn-sm w-100 mb-2">

@@ -76,9 +76,6 @@ namespace eDnevnik.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-
-
         [HttpGet]
         public async Task<IActionResult> Detalji(int id)
         {
@@ -97,7 +94,6 @@ namespace eDnevnik.Controllers
             return View(ucenici);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -114,7 +110,6 @@ namespace eDnevnik.Controllers
             ViewBag.Nastavnici = lista;
             return View(razred);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -145,22 +140,52 @@ namespace eDnevnik.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var razred = await _context.Razred.FindAsync(id);
-            if (razred == null) return NotFound();
+            var razred = await _context.Razred
+                .Include(r => r.Nastavnik)
+                .FirstOrDefaultAsync(r => r.Id == id);
 
-            bool imaUcenika = await _context.Users.AnyAsync(u => u.RazredId == id);
-            if (imaUcenika)
+            if (razred == null)
+                return NotFound();
+
+            // Brojanje povezanih entiteta
+            var brojUcenika = await _context.Users.CountAsync(u => u.RazredId == id);
+            var brojCasova = await _context.Cas.CountAsync(c => c.RazredId == id);
+            var brojPredmeta = await _context.PredmetRazred.CountAsync(pr => pr.RazredId == id);
+
+            ViewBag.BrojUcenika = brojUcenika;
+            ViewBag.BrojCasova = brojCasova;
+            ViewBag.BrojPredmeta = brojPredmeta;
+
+            return View(razred);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var razred = await _context.Razred.FindAsync(id);
+            if (razred == null)
             {
-                TempData["Greska"] = "Nije moguće obrisati razred jer ima učenika.";
+                TempData["Greska"] = "Razred nije pronađen.";
                 return RedirectToAction(nameof(Index));
             }
 
-            _context.Razred.Remove(razred);
-            await _context.SaveChangesAsync();
+            try
+            {
+                // Cascade delete će obrisati sve povezane entitete automatski
+                _context.Razred.Remove(razred);
+                await _context.SaveChangesAsync();
+
+                TempData["Uspjeh"] = $"Razred {razred.Naziv} je uspješno obrisan. Predmeti su zadržani u sistemu.";
+            }
+            catch (Exception ex)
+            {
+                TempData["Greska"] = "Greška pri brisanju razreda. Pokušajte ponovo.";
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -191,7 +216,6 @@ namespace eDnevnik.Controllers
 
             return View(predmeti);
         }
-
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
@@ -234,7 +258,5 @@ namespace eDnevnik.Controllers
 
             return RedirectToAction("DetaljiPredmeti", new { id = razredId });
         }
-
-
     }
 }

@@ -39,7 +39,7 @@ namespace eDnevnik.Data
                 .HasOne(e => e.Cas)
                 .WithMany()
                 .HasForeignKey(e => e.CasId)
-                .OnDelete(DeleteBehavior.Cascade); // PROMIJENI sa Restrict na Cascade
+                .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<EvidencijaCasa>()
                 .HasOne(e => e.Nastavnik)
@@ -71,6 +71,13 @@ namespace eDnevnik.Data
                 .HasForeignKey(c => c.NastavnikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // CAS - Kada se obriše razred, obrišu se svi časovi
+            modelBuilder.Entity<Cas>()
+                .HasOne(c => c.Razred)
+                .WithMany()
+                .HasForeignKey(c => c.RazredId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             // IZOSTANAK
             modelBuilder.Entity<Izostanak>()
                 .HasOne(i => i.Ucenik)
@@ -82,7 +89,7 @@ namespace eDnevnik.Data
                 .HasOne(i => i.Cas)
                 .WithMany()
                 .HasForeignKey(i => i.CasId)
-                .OnDelete(DeleteBehavior.Cascade); // PROMIJENI sa Restrict na Cascade
+                .OnDelete(DeleteBehavior.Cascade);
 
             // PREDMET
             modelBuilder.Entity<Predmet>()
@@ -112,12 +119,12 @@ namespace eDnevnik.Data
                 .HasForeignKey(o => o.UcenikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // KORISNIK
+            // KORISNIK - Kada se obriše razred, učenicima se ukloni razred (postavlja se na null)
             modelBuilder.Entity<Korisnik>()
                 .HasOne(k => k.Razred)
                 .WithMany()
                 .HasForeignKey(k => k.RazredId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.SetNull);
 
             modelBuilder.Entity<Korisnik>()
                 .HasOne(k => k.Roditelj)
@@ -138,12 +145,27 @@ namespace eDnevnik.Data
                 .HasForeignKey(p => p.PrimalacId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // PREDMET RAZRED - Kada se obriše razred, obrišu se samo VEZE, ali ne i predmeti
+            modelBuilder.Entity<PredmetRazred>()
+                .HasOne(pr => pr.Razred)
+                .WithMany()
+                .HasForeignKey(pr => pr.RazredId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            // PREDMET RAZRED - Kada se obriše predmet, obrišu se veze, ali ne razred
+            modelBuilder.Entity<PredmetRazred>()
+                .HasOne(pr => pr.Predmet)
+                .WithMany()
+                .HasForeignKey(pr => pr.PredmetId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             modelBuilder.Entity<Aktivnost>()
                 .HasOne(a => a.Nastavnik)
                 .WithMany()
                 .HasForeignKey(a => a.NastavnikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // AKTIVNOST - Kada se obriše razred, aktivnostima se ukloni razred
             modelBuilder.Entity<Aktivnost>()
                 .HasOne(a => a.Razred)
                 .WithMany()

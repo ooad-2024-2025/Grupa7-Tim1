@@ -151,8 +151,8 @@ namespace eDnevnik.Services
                 UkupnoIzostanaka = ukupnoIzostanaka,
                 NeopravdaniIzostanci = neopravdaniIzostanci,
                 OpravdaniIzostanci = opravdaniIzostanci,
-                SlijedeciNivo = GetSlijedeciNivoVladanja(ukupnoIzostanaka),
-                IzostanaciDoSlijedecegNivoa = GetIzostankeDoSlijedecegNivoa(ukupnoIzostanaka)
+                SlijedeciNivo = GetSlijedeciNivoVladanja(neopravdaniIzostanci),
+                IzostanaciDoSlijedecegNivoa = GetIzostankeDoSlijedecegNivoa(neopravdaniIzostanci)
             };
         }
 

@@ -21,65 +21,113 @@ namespace eDnevnik.Controllers
 
         // PREGLED RASPOREDA - glavni sedmični prikaz
         [Authorize]
-        public async Task<IActionResult> Index(string dan, string nastavnikId, int? razredId)
+        public async Task<IActionResult> Index(string? dan, int? razredId)
         {
-            var casovi = await _context.Cas
-                .Include(c => c.Razred)
-                .Include(c => c.Predmet)
-                .Include(c => c.Nastavnik)
-                .Include(c => c.FixniTermin)
-                .Where(c => c.FixniTerminId != null) // Samo novi časovi sa fiksnim terminima
-                .ToListAsync();
+            var casovi = new List<Cas>(); // Počni sa praznom listom
 
-            var trenutniKorisnik = await _userManager.GetUserAsync(User);
-            var uloge = await _userManager.GetRolesAsync(trenutniKorisnik);
-
-            // Filtriraj po ulogama
-            if (uloge.Contains("Nastavnik"))
+            // Samo za Administrator prikaži selektor razreda
+            if (User.IsInRole("Administrator"))
             {
-                casovi = casovi.Where(c => c.NastavnikId == trenutniKorisnik.Id).ToList();
-                ViewBag.FilterInfo = $"Nastavnik: {trenutniKorisnik.FullName}";
+                var razredi = await _context.Razred
+                    .OrderBy(r => r.Naziv)
+                    .Select(r => new SelectListItem
+                    {
+                        Value = r.Id.ToString(),
+                        Text = r.Naziv,
+                        Selected = r.Id == razredId
+                    }).ToListAsync();
+
+                // Dodaj "Odaberi razred" opciju na vrh
+                razredi.Insert(0, new SelectListItem
+                {
+                    Value = "",
+                    Text = "-- Odaberi razred --",
+                    Selected = !razredId.HasValue
+                });
+
+                ViewBag.Razredi = razredi;
+
+                // Učitaj časove SAMO ako je razred odabran
+                if (razredId.HasValue)
+                {
+                    casovi = await _context.Cas
+                        .Include(c => c.Predmet)
+                        .Include(c => c.Razred)
+                        .Include(c => c.Nastavnik)
+                        .Include(c => c.FixniTermin)
+                        .Where(c => c.RazredId == razredId.Value && c.FixniTerminId != null)
+                        .ToListAsync();
+
+                    var odabraniRazred = await _context.Razred.FindAsync(razredId.Value);
+                    ViewBag.FilterInfo = $"Raspored za razred: {odabraniRazred?.Naziv}";
+                }
+                else
+                {
+                    ViewBag.FilterInfo = "Odaberite razred za prikaz rasporeda";
+                }
             }
-            else if (uloge.Contains("Ucenik"))
+            else if (User.IsInRole("Nastavnik"))
             {
-                casovi = casovi.Where(c => c.RazredId == trenutniKorisnik.RazredId).ToList();
-                ViewBag.FilterInfo = $"Razred: {trenutniKorisnik.Razred?.Naziv}";
+                var nastavnikId = _userManager.GetUserId(User);
+                casovi = await _context.Cas
+                    .Include(c => c.Predmet)
+                    .Include(c => c.Razred)
+                    .Include(c => c.Nastavnik)
+                    .Include(c => c.FixniTermin)
+                    .Where(c => c.NastavnikId == nastavnikId && c.FixniTerminId != null)
+                    .ToListAsync();
+
+                ViewBag.FilterInfo = "Vaš raspored časova";
+            }
+            else if (User.IsInRole("Ucenik"))
+            {
+                var ucenik = await _userManager.GetUserAsync(User);
+                if (ucenik?.RazredId != null)
+                {
+                    casovi = await _context.Cas
+                        .Include(c => c.Predmet)
+                        .Include(c => c.Razred)
+                        .Include(c => c.Nastavnik)
+                        .Include(c => c.FixniTermin)
+                        .Where(c => c.RazredId == ucenik.RazredId && c.FixniTerminId != null)
+                        .ToListAsync();
+
+                    ViewBag.FilterInfo = $"Raspored za razred: {ucenik.Razred?.Naziv}";
+                }
             }
 
-            // Dodatni filteri
-            if (!string.IsNullOrEmpty(dan))
+            // Filtriraj po danu ako je odabran
+            if (!string.IsNullOrEmpty(dan) && Enum.TryParse<DayOfWeek>(dan, out var dayOfWeek))
             {
-                var danFilter = Enum.Parse<DayOfWeek>(dan);
-                casovi = casovi.Where(c => c.DanUSedmici == danFilter).ToList();
+                casovi = casovi.Where(c => c.DanUSedmici == dayOfWeek).ToList();
                 ViewBag.IzabraniDan = dan;
+                ViewBag.DanNaziv = GetDanNaziv(dayOfWeek);
 
-                var naziviDana = new Dictionary<string, string> {
-                    { "Monday", "Ponedjeljak" }, { "Tuesday", "Utorak" }, { "Wednesday", "Srijeda" },
-                    { "Thursday", "Četvrtak" }, { "Friday", "Petak" }
-                };
-                ViewBag.DanNaziv = naziviDana[dan];
+                if (!string.IsNullOrEmpty(ViewBag.FilterInfo as string))
+                {
+                    ViewBag.FilterInfo += $" - {GetDanNaziv(dayOfWeek)}";
+                }
             }
-
-            if (!string.IsNullOrEmpty(nastavnikId) && uloge.Contains("Administrator"))
-            {
-                casovi = casovi.Where(c => c.NastavnikId == nastavnikId).ToList();
-                ViewBag.IzabraniNastavnik = nastavnikId;
-                var nastavnik = await _userManager.FindByIdAsync(nastavnikId);
-                ViewBag.FilterInfo = $"Nastavnik: {nastavnik?.FullName}";
-            }
-
-            if (razredId.HasValue && uloge.Contains("Administrator"))
-            {
-                casovi = casovi.Where(c => c.RazredId == razredId).ToList();
-                ViewBag.IzabraniRazred = razredId;
-                var razred = await _context.Razred.FindAsync(razredId);
-                ViewBag.FilterInfo = $"Razred: {razred?.Naziv}";
-            }
-
-            // Pripremi dropdown liste za filtriranje
-            await PrepareFilters();
 
             return View(casovi);
+        }
+
+        // AJAX METODA - Dohvati predmete za odabrani razred
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> GetPredmetiZaRazred(int razredId)
+        {
+            var predmeti = await _context.PredmetRazred
+                .Include(pr => pr.Predmet)
+                .Where(pr => pr.RazredId == razredId)
+                .Select(pr => new {
+                    id = pr.Predmet.Id,
+                    naziv = pr.Predmet.Naziv
+                })
+                .OrderBy(p => p.naziv)
+                .ToListAsync();
+
+            return Json(predmeti);
         }
 
         // ADMIN FUNKCIJE - upravljanje rasporedom
@@ -111,6 +159,15 @@ namespace eDnevnik.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create(Cas cas)
         {
+            // Provjeri da li je predmet dodijeljen odabranom razredu
+            var predmetJeDodijeljen = await _context.PredmetRazred
+                .AnyAsync(pr => pr.RazredId == cas.RazredId && pr.PredmetId == cas.PredmetId);
+
+            if (!predmetJeDodijeljen)
+            {
+                ModelState.AddModelError("PredmetId", "Odabrani predmet nije dodijeljen ovom razredu.");
+            }
+
             // Provjeri da li već postoji čas u istom terminu za taj razred
             var postojeciCas = await _context.Cas
                 .AnyAsync(c => c.RazredId == cas.RazredId &&
@@ -145,8 +202,6 @@ namespace eDnevnik.Controllers
             return View(cas);
         }
 
-        // DODAJ OVE METODE U RasporedController.cs NA KRAJ KLASE (prije zatvorene zagrade)
-
         // EDIT ČASA
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
@@ -180,6 +235,15 @@ namespace eDnevnik.Controllers
             if (id != cas.Id)
             {
                 return NotFound();
+            }
+
+            // Provjeri da li je predmet dodijeljen odabranom razredu
+            var predmetJeDodijeljen = await _context.PredmetRazred
+                .AnyAsync(pr => pr.RazredId == cas.RazredId && pr.PredmetId == cas.PredmetId);
+
+            if (!predmetJeDodijeljen)
+            {
+                ModelState.AddModelError("PredmetId", "Odabrani predmet nije dodijeljen ovom razredu.");
             }
 
             // Provjeri da li već postoji čas u istom terminu za taj razred (osim trenutnog)
@@ -272,17 +336,32 @@ namespace eDnevnik.Controllers
             return RedirectToAction(nameof(Upravljanje));
         }
 
-        // HELPER METODA
+        // HELPER METODE
         private bool CasExists(int id)
         {
             return _context.Cas.Any(e => e.Id == id);
         }
 
-        // HELPER METODE
         private async Task PrepareDropdownLists(Cas cas = null)
         {
             ViewData["RazredId"] = new SelectList(_context.Razred, "Id", "Naziv", cas?.RazredId);
-            ViewData["PredmetId"] = new SelectList(_context.Predmet, "Id", "Naziv", cas?.PredmetId);
+
+            // Za Edit akciju - učitaj predmete samo za odabrani razred
+            if (cas?.RazredId != null)
+            {
+                var predmetiZaRazred = await _context.PredmetRazred
+                    .Include(pr => pr.Predmet)
+                    .Where(pr => pr.RazredId == cas.RazredId)
+                    .Select(pr => pr.Predmet)
+                    .ToListAsync();
+
+                ViewData["PredmetId"] = new SelectList(predmetiZaRazred, "Id", "Naziv", cas?.PredmetId);
+            }
+            else
+            {
+                // Za Create akciju - prazan dropdown (popunit će se JavaScript-om)
+                ViewData["PredmetId"] = new SelectList(new List<Predmet>(), "Id", "Naziv");
+            }
 
             var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
             ViewData["NastavnikId"] = new SelectList(
@@ -294,11 +373,17 @@ namespace eDnevnik.Controllers
             ViewData["FixniTerminId"] = new SelectList(termini, "Id", "Naziv", cas?.FixniTerminId);
         }
 
-        private async Task PrepareFilters()
+        private string GetDanNaziv(DayOfWeek dan)
         {
-            var nastavnici = await _userManager.GetUsersInRoleAsync("Nastavnik");
-            ViewBag.Nastavnici = new SelectList(nastavnici, "Id", "FullName");
-            ViewBag.Razredi = new SelectList(_context.Razred, "Id", "Naziv");
+            return dan switch
+            {
+                DayOfWeek.Monday => "Ponedjeljak",
+                DayOfWeek.Tuesday => "Utorak",
+                DayOfWeek.Wednesday => "Srijeda",
+                DayOfWeek.Thursday => "Četvrtak",
+                DayOfWeek.Friday => "Petak",
+                _ => "Nepoznat dan"
+            };
         }
     }
 }

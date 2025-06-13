@@ -1,12 +1,12 @@
 ﻿@model List<eDnevnik.Models.Cas>
 
-    @{
+@{
     ViewData["Title"] = "Evidencija časova";
-    }
+}
 
-    <div class="container">
-        <!-- Success/Error poruke -->
-        @if (TempData["Uspjeh"] != null)
+<div class="container">
+    <!-- Success/Error poruke -->
+    @if (TempData["Uspjeh"] != null)
     {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
             <i class="fas fa-check-circle"></i> @TempData["Uspjeh"]
@@ -14,7 +14,7 @@
         </div>
     }
 
-        @if (TempData["Greska"] != null)
+    @if (TempData["Greska"] != null)
     {
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
             <i class="fas fa-exclamation-circle"></i> @TempData["Greska"]
@@ -22,20 +22,20 @@
         </div>
     }
 
-        <!-- Header -->
-        <div class="row mb-4">
-            <div class="col-md-8">
-                <h2><i class="fas fa-clipboard-check"></i> Evidencija časova</h2>
-                <p class="text-muted">Evidentirajte održane časove - @ViewBag.Danas</p>
-            </div>
-            <div class="col-md-4 text-end">
-                <a asp-action="Pregled" class="btn btn-outline-primary">
-                    <i class="fas fa-history"></i> Pregled evidencija
-                </a>
-            </div>
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h2><i class="fas fa-clipboard-check"></i> Evidencija časova</h2>
+            <p class="text-muted">Evidentirajte održane časove - @ViewBag.Danas</p>
         </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Pregled" class="btn btn-outline-primary">
+                <i class="fas fa-history"></i> Pregled evidencija
+            </a>
+        </div>
+    </div>
 
-        @if (!Model.Any())
+    @if (!Model.Any())
     {
         <div class="alert alert-info text-center">
             <i class="fas fa-info-circle"></i>
@@ -44,7 +44,7 @@
     }
     else
     {
- <!-- Tabela časova -->
+        <!-- Tabela časova -->
         <div class="card">
             <div class="card-header bg-primary text-white">
                 <h5 class="mb-0">
@@ -69,47 +69,47 @@
                                 var jeDanasnji = cas.DanUSedmici == DateTime.Today.DayOfWeek;
                                 var jeEvidentiran = ViewData[$"Evidentiran_{cas.Id}"] as bool? ?? false;
 
-                            <tr class="@(jeEvidentiran ? "table-success" : (jeDanasnji ? "" : "table-light"))">
-                                <td>
-                                    <strong>@cas.FixniTermin?.Naziv</strong><br>
-                                    <small class="text-muted">@cas.FixniTermin?.FormatiraniTermin</small>
-                                </td>
-                                <td>
-                                    <strong>@cas.Predmet?.Naziv</strong>
-                                </td>
-                                <td>
-                                    <span class="badge bg-info">@cas.Razred?.Naziv</span>
-                                </td>
-                                <td>
-                                    @if (jeEvidentiran)
+                                <tr class="@(jeEvidentiran ? "table-success" : (jeDanasnji ? "" : "table-light"))">
+                                    <td>
+                                        <strong>@cas.FixniTermin?.Naziv</strong><br>
+                                        <small class="text-muted">@cas.FixniTermin?.FormatiraniTermin</small>
+                                    </td>
+                                    <td>
+                                        <strong>@cas.Predmet?.Naziv</strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-info">@cas.Razred?.Naziv</span>
+                                    </td>
+                                    <td>
+                                        @if (jeEvidentiran)
                                         {
-                                    <span class="badge bg-success">
-                                        <i class="fas fa-check"></i> Evidentiran
-                                    </span>
+                                            <span class="badge bg-success">
+                                                <i class="fas fa-check"></i> Evidentiran
+                                            </span>
                                         }
                                         else
                                         {
-                                    <span class="badge bg-warning">
-                                        <i class="fas fa-clock"></i> Čeka evidentiranje
-                                    </span>
+                                            <span class="badge bg-warning">
+                                                <i class="fas fa-clock"></i> Čeka evidentiranje
+                                            </span>
                                         }
-                                </td>
-                                <td>
-                                    @if (!jeEvidentiran)
+                                    </td>
+                                    <td>
+                                        @if (!jeEvidentiran)
                                         {
-                                    <a asp-action="Evidentiranje" asp-route-casId="@cas.Id"
-                                       class="btn btn-primary btn-sm">
-                                        <i class="fas fa-plus"></i> Evidentirati čas
-                                    </a>
+                                            <a asp-action="Evidentiranje" asp-route-casId="@cas.Id"
+                                               class="btn btn-primary btn-sm">
+                                                <i class="fas fa-plus"></i> Evidentirati čas
+                                            </a>
                                         }
                                         else
                                         {
-                                    <span class="text-muted">
-                                        <i class="fas fa-check"></i> Završen
-                                    </span>
+                                            <span class="text-muted">
+                                                <i class="fas fa-check"></i> Završen
+                                            </span>
                                         }
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table>
@@ -117,7 +117,7 @@
             </div>
         </div>
 
- <!-- Legenda -->
+        <!-- Legenda -->
         <div class="mt-3">
             <small class="text-muted">
                 <i class="fas fa-info-circle"></i>
@@ -127,32 +127,71 @@
         </div>
     }
 
-        <!-- Brze akcije -->
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <div class="card border-info">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">
-                            <i class="fas fa-chart-line"></i> Statistike
-                        </h6>
-                        <p class="card-text">
-                            <strong>@Model.Count(c => ViewData[$"Evidentiran_{c.Id}"] as bool? ?? false)</strong> od
-                            <strong>@Model.Count</strong> časova evidentirano
-                        </p>
-                    </div>
+    <!-- Proširene statistike preko cijele širine -->
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card border-info">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-line"></i> Statistike evidencije
+                    </h5>
                 </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card border-primary">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">
-                            <i class="fas fa-graduation-cap"></i> Brze akcije
-                        </h6>
-                        <a asp-controller="Raspored" asp-action="Index" class="btn btn-outline-primary btn-sm">
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-primary">@Model.Count</h4>
+                                <p class="text-muted mb-0">Ukupno časova</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-success">@Model.Count(c => ViewData[$"Evidentiran_{c.Id}"] as bool? ?? false)</h4>
+                                <p class="text-muted mb-0">Evidentirano</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="border-end">
+                                <h4 class="text-warning">@(Model.Count - Model.Count(c => ViewData[$"Evidentiran_{c.Id}"] as bool? ?? false))</h4>
+                                <p class="text-muted mb-0">Čeka evidentiranje</p>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            @{
+                                var procenat = Model.Count > 0 ? (Model.Count(c => ViewData[$"Evidentiran_{c.Id}"] as bool? ?? false) * 100.0 / Model.Count) : 0;
+                            }
+                            <h4 class="@(procenat == 100 ? "text-success" : procenat >= 50 ? "text-info" : "text-danger")">
+                                @procenat.ToString("F0")%
+                            </h4>
+                            <p class="text-muted mb-0">Završenost</p>
+                        </div>
+                    </div>
+                    
+                    @if (Model.Count > 0)
+                    {
+                        <div class="mt-3">
+                            <div class="progress" style="height: 10px;">
+                                <div class="progress-bar @(procenat == 100 ? "bg-success" : procenat >= 50 ? "bg-info" : "bg-warning")" 
+                                     role="progressbar" 
+                                     style="width: @(procenat)%" 
+                                     aria-valuenow="@procenat" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <div class="mt-3 text-center">
+                        <a asp-controller="Raspored" asp-action="Index" class="btn btn-outline-primary btn-sm me-2">
                             <i class="fas fa-calendar"></i> Sedmični raspored
+                        </a>
+                        <a asp-action="Pregled" class="btn btn-outline-secondary btn-sm">
+                            <i class="fas fa-history"></i> Pregled evidencija
                         </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

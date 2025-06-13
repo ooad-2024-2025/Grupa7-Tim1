@@ -112,17 +112,12 @@
                                                title="Učenici razreda">
                                                 <i class="fas fa-users"></i>
                                             </a>
-                                            <form asp-action="Delete"
-                                                  asp-route-id="@razred.Id"
-                                                  method="post"
-                                                  class="d-inline"
-                                                  onsubmit="return confirm('Da li ste sigurni da želite obrisati razred @razred.Naziv?');">
-                                                <button type="submit"
-                                                        class="btn btn-danger btn-sm"
-                                                        title="Obriši razred">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            <a class="btn btn-danger btn-sm"
+                                               asp-action="Delete"
+                                               asp-route-id="@razred.Id"
+                                               title="Obriši razred">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
                                         </div>
                                     </td>
                                 </tr>

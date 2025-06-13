@@ -1,6 +1,7 @@
 ﻿using eDnevnik.Data;
 using eDnevnik.Models;
 using eDnevnik.Data.@enum;
+using eDnevnik.Services; // DODANO
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +14,13 @@ namespace eDnevnik.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Korisnik> _userManager;
+        private readonly VladanjeService _vladanjeService; // DODANO
 
-        public EvidencijaController(ApplicationDbContext context, UserManager<Korisnik> userManager)
+        public EvidencijaController(ApplicationDbContext context, UserManager<Korisnik> userManager, VladanjeService vladanjeService) // DODANO parametar
         {
             _context = context;
             _userManager = userManager;
+            _vladanjeService = vladanjeService; // DODANO
         }
 
         // PREGLED ČASOVA ZA EVIDENTIRANJE
@@ -36,8 +39,8 @@ namespace eDnevnik.Controllers
                 .ToListAsync();
 
             // Filtriraj časove za današnji dan (na osnovu DanUSedmici)
-            var danasnjiDan = danas.DayOfWeek;
-            var danasnjiCasovi = casovi.Where(c => c.DanUSedmici == danasnjiDan).ToList();
+            var danasnjiDanEnum = danas.DayOfWeek;
+            var danasnjiCasovi = casovi.Where(c => c.DanUSedmici == danasnjiDanEnum).ToList();
 
             // Dohvati već evidentirane časove za danas
             var evidencije = await _context.EvidencijaCasa
@@ -52,7 +55,20 @@ namespace eDnevnik.Controllers
                 ViewData[$"Evidentiran_{cas.Id}"] = evidencije.Contains(cas.Id);
             }
 
-            ViewBag.Danas = danas.ToString("dddd, dd.MM.yyyy");
+            // Mapiranje dana na bosanski
+            var daniUTjednu = new Dictionary<DayOfWeek, string>
+            {
+                { DayOfWeek.Monday, "Ponedjeljak" },
+                { DayOfWeek.Tuesday, "Utorak" },
+                { DayOfWeek.Wednesday, "Srijeda" },
+                { DayOfWeek.Thursday, "Četvrtak" },
+                { DayOfWeek.Friday, "Petak" },
+                { DayOfWeek.Saturday, "Subota" },
+                { DayOfWeek.Sunday, "Nedjelja" }
+            };
+
+            var danasnjiDanNaziv = daniUTjednu[danas.DayOfWeek];
+            ViewBag.Danas = $"{danasnjiDanNaziv}, {danas:dd.MM.yyyy}";
             return View(danasnjiCasovi);
         }
 
@@ -168,6 +184,9 @@ namespace eDnevnik.Controllers
 
                 var neprisutniUcenici = uceniciIds.Except(prisutniUcenici).ToList();
 
+                // DODANO: Lista učenika kojima treba ažurirati vladanje
+                var uceniciZaAzuriranjeVladanja = new HashSet<string>();
+
                 for (int i = 0; i < neprisutniUcenici.Count; i++)
                 {
                     var izostanak = new Izostanak
@@ -178,6 +197,9 @@ namespace eDnevnik.Controllers
                         Komentar = i < komentariIzostanci?.Count ? komentariIzostanci[i] : null
                     };
                     _context.Izostanak.Add(izostanak);
+
+                    // DODANO: Dodaj učenika u listu za ažuriranje vladanja
+                    uceniciZaAzuriranjeVladanja.Add(neprisutniUcenici[i]);
                 }
 
                 // 3. UNESI OCJENE
@@ -201,6 +223,13 @@ namespace eDnevnik.Controllers
                 }
 
                 await _context.SaveChangesAsync();
+
+                // DODANO: Ažuriraj vladanje za sve učenike koji su dobili izostanak
+                foreach (var ucenikId in uceniciZaAzuriranjeVladanja)
+                {
+                    await _vladanjeService.AzurirajVladanjeUcenika(ucenikId);
+                }
+
                 await transaction.CommitAsync();
 
                 TempData["Uspjeh"] = $"Čas {cas.Predmet?.Naziv} za razred {cas.Razred?.Naziv} je uspješno evidentiran!";

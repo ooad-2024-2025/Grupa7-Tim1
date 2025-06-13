@@ -120,8 +120,9 @@ namespace eDnevnik.Controllers
                 return RedirectToAction("Izostanci");
             }
 
-            // Opravdaj izostanak
+            // ISPRAVKA: Opravdaj izostanak i eksplicitno ažuriraj u kontekstu
             izostanak.status = StatusIzostanka.Opravdan;
+            _context.Izostanak.Update(izostanak); // DODANO: Eksplicitno Update
             await _context.SaveChangesAsync();
 
             // Ažuriraj vladanje učenika
@@ -163,6 +164,7 @@ namespace eDnevnik.Controllers
                 if (izostanak.status != StatusIzostanka.Opravdan)
                 {
                     izostanak.status = StatusIzostanka.Opravdan;
+                    _context.Izostanak.Update(izostanak); // DODANO: Eksplicitno Update
                     uceniciZaAzuriranje.Add(izostanak.UcenikId);
                     opravdano++;
                 }

@@ -1,33 +1,160 @@
 ﻿@model eDnevnik.Models.Razred
-
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Obriši razred";
 }
 
-<h1>Delete</h1>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow border-danger">
+                <div class="card-header bg-danger text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i> Potvrda brisanja razreda
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-danger">
+                        <i class="fas fa-warning"></i>
+                        <strong>Pazi!</strong> Ova akcija će potpuno obrisati razred i sve povezane podatke.
+                    </div>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Razred</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naziv)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naziv)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nastavnik)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nastavnik.Id)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+                    <!-- Osnovne informacije o razredu -->
+                    <div class="mb-4">
+                        <h5><i class="fas fa-school text-warning"></i> Informacije o razredu</h5>
+                        <div class="row">
+                            <div class="col-sm-4"><strong>Naziv:</strong></div>
+                            <div class="col-sm-8">@Model.Naziv</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4"><strong>Razrednik:</strong></div>
+                            <div class="col-sm-8">
+                                @if (Model.Nastavnik != null)
+                                {
+                                    @Model.Nastavnik.Ime @Model.Nastavnik.Prezime
+                                }
+                                else
+                                {
+                                    <span class="text-muted">Bez razrednika</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Statistike povezanih podataka -->
+                    <div class="mb-4">
+                        <h5><i class="fas fa-chart-bar text-info"></i> Povezani podaci koji će biti promijenjeni</h5>
+                        <div class="row text-center">
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-users fa-2x text-success mb-2"></i>
+                                        <h4 class="text-success">@ViewBag.BrojUcenika</h4>
+                                        <small class="text-muted">Učenika</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-clock fa-2x text-primary mb-2"></i>
+                                        <h4 class="text-primary">@ViewBag.BrojCasova</h4>
+                                        <small class="text-muted">Časova</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <i class="fas fa-link fa-2x text-warning mb-2"></i>
+                                        <h4 class="text-warning">@ViewBag.BrojPredmeta</h4>
+                                        <small class="text-muted">Veza sa predmetima</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upozorenja -->
+                    <div class="mb-4">
+                        <div class="alert alert-warning">
+                            <i class="fas fa-info-circle"></i>
+                            <strong>Šta će biti obrisano:</strong>
+                            <ul class="mb-0 mt-2">
+                                <li>Razred "@Model.Naziv"</li>
+                                <li>Svi časovi koji su vezani za ovaj razred</li>
+                                <li>Sve evidencije časova</li>
+                                <li>Svi izostanci učenika iz ovog razreda</li>
+                                <li>Sve ocjene učenika iz ovog razreda</li>
+                                <li><strong>Veze između predmeta i ovog razreda</strong> (predmeti neće biti dodijeljeni ovom razredu)</li>
+                            </ul>
+                        </div>
+
+                        <div class="alert alert-success">
+                            <i class="fas fa-shield-alt"></i>
+                            <strong>Šta neće biti obrisano:</strong>
+                            <ul class="mb-0 mt-2">
+                                <li><strong>Predmeti</strong> (ostaju u sistemu za druge razrede)</li>
+                                <li><strong>Učenici</strong> (bit će im uklonjen razred, ali ostaju u sistemu)</li>
+                                <li><strong>Nastavnici</strong> (ostaju u sistemu)</li>
+                                <li>Poruke između korisnika</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Forma za potvrdu -->
+                    <form asp-action="DeleteConfirmed" method="post">
+                        <input type="hidden" asp-for="Id" />
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="potvrda" required>
+                                <label class="form-check-label" for="potvrda">
+                                    <strong>Potvrđujem da razumijem posledice brisanja i želim nastaviti</strong>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-danger flex-fill" id="btnObrisi" disabled>
+                                <i class="fas fa-trash"></i> Da, obriši razred
+                            </button>
+                            <a href="/Razredi" class="btn btn-secondary flex-fill">
+                                <i class="fas fa-arrow-left"></i> Odustani
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
+
+    .btn {
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+    }
+
+    .card.border-danger {
+        border-width: 2px;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const checkbox = document.getElementById('potvrda');
+        const btnObrisi = document.getElementById('btnObrisi');
+
+        checkbox.addEventListener('change', function() {
+            btnObrisi.disabled = !this.checked;
+        });
+    });
+</script>

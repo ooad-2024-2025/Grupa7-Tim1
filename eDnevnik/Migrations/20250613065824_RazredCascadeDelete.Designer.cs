@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eDnevnik.Data;
 
@@ -11,9 +12,11 @@ using eDnevnik.Data;
 namespace eDnevnik.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250613065824_RazredCascadeDelete")]
+    partial class RazredCascadeDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -909,7 +912,7 @@ namespace eDnevnik.Migrations
                     b.HasOne("eDnevnik.Models.Razred", "Razred")
                         .WithMany()
                         .HasForeignKey("RazredId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("eDnevnik.Models.Korisnik", "Roditelj")
                         .WithMany()

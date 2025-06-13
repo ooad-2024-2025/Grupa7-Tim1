@@ -4,39 +4,98 @@
     var nastavnici = ViewBag.Nastavnici as List<eDnevnik.Models.Korisnik>;
 }
 
-<h2 class="text-center mb-4">Uredi predmet</h2>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-edit"></i> Uredi predmet
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <input type="hidden" asp-for="Id" />
 
-<form asp-action="Edit" method="post">
-    <input type="hidden" asp-for="Id" />
+                        <div class="mb-3">
+                            <label asp-for="Naziv" class="form-label">
+                                <i class="fas fa-tag text-primary"></i> Naziv predmeta *
+                            </label>
+                            <input asp-for="Naziv" class="form-control" placeholder="Unesite naziv predmeta" maxlength="100" />
+                            <span asp-validation-for="Naziv" class="text-danger"></span>
+                        </div>
 
-    <div class="mb-3">
-        <label asp-for="Naziv" class="form-label">Naziv predmeta</label>
-        <input asp-for="Naziv" class="form-control" />
-        <span asp-validation-for="Naziv" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Opis" class="form-label">
+                                <i class="fas fa-align-left text-primary"></i> Opis
+                            </label>
+                            <textarea asp-for="Opis" class="form-control" rows="4" placeholder="Kratki opis predmeta (opciono)" maxlength="500"></textarea>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Kratki opis sadržaja predmeta
+                            </div>
+                            <span asp-validation-for="Opis" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label">
+                                <i class="fas fa-chalkboard-teacher text-primary"></i> Nastavnik
+                            </label>
+                            <select asp-for="NastavnikId" class="form-select">
+                                <option value="">-- Odaberi nastavnika --</option>
+                                @if (nastavnici != null)
+                                {
+                                    @foreach (var n in nastavnici)
+                                    {
+                                        <option value="@n.Id">@n.Ime @n.Prezime (@n.Email)</option>
+                                    }
+                                }
+                            </select>
+                            <div class="form-text">
+                                <i class="fas fa-info-circle"></i> Odaberite nastavnika koji će predavati ovaj predmet
+                            </div>
+                            <span asp-validation-for="NastavnikId" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn btn-primary flex-fill">
+                                <i class="fas fa-save"></i> Spasi izmjene
+                            </button>
+                            <a href="/Predmeti" class="btn btn-secondary flex-fill">
+                                <i class="fas fa-arrow-left"></i> Nazad
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="mb-3">
-        <label asp-for="Opis" class="form-label">Opis</label>
-        <textarea asp-for="Opis" class="form-control"></textarea>
-        <span asp-validation-for="Opis" class="text-danger"></span>
-    </div>
+<style>
+    .card {
+        border: none;
+        border-radius: 10px;
+    }
 
-    <div class="mb-3">
-        <label class="form-label">Nastavnik</label>
-        <select asp-for="NastavnikId" class="form-select">
-            <option value="">(nema nastavnika)</option>
-            @foreach (var nastavnik in nastavnici)
-            {
-                <option value="@nastavnik.Id" selected="@(nastavnik.Id == Model.NastavnikId)">
-                    @nastavnik.Ime @nastavnik.Prezime
-                </option>
-            }
-        </select>
-    </div>
+    .card-header {
+        border-radius: 10px 10px 0 0 !important;
+    }
 
-    <button type="submit" class="btn btn-primary">Spasi izmjene</button>
-    <a asp-action="Index" class="btn btn-secondary">Nazad</a>
-</form>
+    .form-control:focus, .form-select:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    }
+
+    .form-text {
+        font-size: 0.875rem;
+        color: #6c757d;
+    }
+
+    .btn {
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+    }
+</style>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
