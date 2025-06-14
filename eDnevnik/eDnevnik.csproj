@@ -35,6 +35,11 @@
   <ItemGroup>
     <Folder Include="NewFolder1\" />
     <Folder Include="NewFolder\" />
+    <Folder Include="publish\NewFolder\" />
+    <Folder Include="publish\publish\NewFolder1\" />
+    <Folder Include="publish\publish\NewFolder2\" />
+    <Folder Include="publish\publish\NewFolder3\" />
+    <Folder Include="publish\publish\NewFolder\" />
     <Folder Include="Views\NewFolder1\" />
     <Folder Include="Views\NewFolder\" />
   </ItemGroup>

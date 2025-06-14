@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {}
+    "C:\\Users\\bombi\\OneDrive\\Desktop\\OOAD\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {}
   },
   "projects": {
-    "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {
+    "C:\\Users\\bombi\\OneDrive\\Desktop\\OOAD\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+        "projectUniqueName": "C:\\Users\\bombi\\OneDrive\\Desktop\\OOAD\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
         "projectName": "eDnevnik",
-        "projectPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
-        "packagesPath": "C:\\Users\\emirb\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\obj\\",
+        "projectPath": "C:\\Users\\bombi\\OneDrive\\Desktop\\OOAD\\Grupa7-Tim1\\eDnevnik\\eDnevnik.csproj",
+        "packagesPath": "C:\\Users\\bombi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\bombi\\OneDrive\\Desktop\\OOAD\\Grupa7-Tim1\\eDnevnik\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\emirb\\OneDrive\\Desktop\\zavrsnepopravke\\Grupa7-Tim1\\eDnevnik\\NuGet.Config",
-          "C:\\Users\\emirb\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\bombi\\OneDrive\\Desktop\\OOAD\\Grupa7-Tim1\\eDnevnik\\NuGet.Config",
+          "C:\\Users\\bombi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,6 +26,7 @@
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.300"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -111,7 +111,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
