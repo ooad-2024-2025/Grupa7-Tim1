@@ -16,11 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("eDnevnik")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-<<<<<<< HEAD
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fe85b02705f4971751c53716c039bfc46101492")]
-=======
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+763369114dd8c35ab8e9dc5df3139113a48acb7b")]
->>>>>>> cd19668 (Deploy)
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+94ff0c30dee611cb1da9e79446d4c6ac7843e8bd")]
 [assembly: System.Reflection.AssemblyProductAttribute("eDnevnik")]
 [assembly: System.Reflection.AssemblyTitleAttribute("eDnevnik")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

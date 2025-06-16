@@ -1,0 +1,62 @@
+﻿@using eDnevnik.ViewModels
+@model RazrednikUceniciViewModel
+
+@{
+    ViewData["Title"] = "Učenici razreda";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+            @if (TempData["Greska"] != null)
+            {
+                <div class="alert alert-danger text-center">
+                    @TempData["Greska"]
+                </div>
+            }
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Razred: @Model.Razred.Naziv</h4>
+                </div>
+
+                <div class="card-body">
+                    @if (Model.UceniciSaStatistikama.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered text-center align-middle">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Ime i prezime</th>
+                                        <th>Vladanje</th>
+                                        <th>Opći prosjek</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var ucenik in Model.UceniciSaStatistikama)
+                                    {
+                                        <tr>
+                                            <td>@ucenik.Ucenik.Ime @ucenik.Ucenik.Prezime</td>
+                                            <td>@ucenik.VladanjeInfo.TrenutnoVladanje</td>
+                                            <td>@String.Format("{0:0.00}", ucenik.OpciProsjek)</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted text-center">Nema unesenih učenika za ovaj razred.</p>
+                    }
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-action="Index" class="btn btn-outline-secondary">Nazad na početnu</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,11 +19,17 @@
     <form asp-action="Dodaj" asp-controller="Ocjena" method="post">
         <input type="hidden" name="UcenikId" value="@ucenik.Id" />
         <input type="hidden" name="PredmetId" value="@predmet.Id" />
-
         <div class="mb-3">
             <label for="Vrijednost" class="form-label">Ocjena (1-5)</label>
-            <input type="number" name="Vrijednost" min="1" max="5" class="form-control" required />
+            <input type="number" name="Vrijednost" id="Vrijednost"
+                   class="form-control"
+                   min="1" max="5" required
+                   oninvalid="this.setCustomValidity('Molimo unesite ocjenu između 1 i 5.')"
+                   oninput="this.setCustomValidity('')" />
         </div>
+
+
+      
 
         <div class="mb-3">
             <label for="Komentar" class="form-label">Komentar</label>
