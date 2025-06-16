@@ -19,6 +19,14 @@ namespace eDnevnik.Controllers
         {
             // Sada ne treba provjera User.Identity.IsAuthenticated jer je [Authorize] već to osigurao
             var user = await _userManager.GetUserAsync(User);
+
+            // Dodaj null check za slučaj da user nije pronađen
+            if (user == null)
+            {
+                // Koristi Challenge() umjesto RedirectToAction jer nemaš Account controller
+                return Challenge();
+            }
+
             var roles = await _userManager.GetRolesAsync(user);
 
             // Preusmjeri korisnike prema njihovoj ulozi
