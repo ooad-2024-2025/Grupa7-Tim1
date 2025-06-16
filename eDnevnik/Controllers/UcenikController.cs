@@ -288,7 +288,8 @@ namespace eDnevnik.Controllers
                 Izostanak = i,
                 PredmetNaziv = i.Cas?.Predmet?.Naziv ?? "Nepoznat predmet",
                 TerminInfo = i.Cas?.FixniTermin?.FormatiraniTermin ?? "Nepoznat termin",
-                DatumCasa = DateTime.Now // Trebao bi biti stvarni datum časa
+                // ISPRAVKA: Kombinuj dan u sedmici sa vremenom fiksnog termina
+                DatumCasa = IzracunajDatumCasa(i.Cas)
             }).ToList();
 
             // Filtriraj po datumu
@@ -300,25 +301,61 @@ namespace eDnevnik.Controllers
             return rezultat.OrderByDescending(r => r.DatumCasa).ToList();
         }
 
+        // Helper metoda za izračunavanje datuma časa
+        private DateTime IzracunajDatumCasa(Cas? cas)
+        {
+            if (cas?.DanUSedmici == null || cas.FixniTermin == null)
+                return DateTime.Now;
+
+            // Pronađi poslednji odgovarajući dan u sedmici
+            var danas = DateTime.Today;
+            var danasnjiDan = danas.DayOfWeek;
+            var ciljaniDan = cas.DanUSedmici.Value;
+
+            // Izračunaj razliku u danima
+            int razlikaDana = (int)ciljaniDan - (int)danasnjiDan;
+
+            // Ako je dan već prošao u ovoj sedmici, uzmi iz prošle sedmice
+            if (razlikaDana > 0)
+                razlikaDana -= 7;
+
+            var datumCasa = danas.AddDays(razlikaDana);
+
+            // Dodaj vrijeme iz fiksnog termina
+            var datumSaVremenom = datumCasa.Add(cas.FixniTermin.PocetakVremena);
+
+            return datumSaVremenom;
+        }
+
         private async Task<Dictionary<string, int>> GetIzostanciPoMjesecima(string ucenikId)
         {
             var izostanci = await _context.Izostanak
+                .Include(i => i.Cas)
+                    .ThenInclude(c => c.FixniTermin)
                 .Where(i => i.UcenikId == ucenikId)
                 .ToListAsync();
 
-            // Simuliramo mjesece - trebao bi postojati datum časa
             var mjeseci = new Dictionary<string, int>();
             string[] naziviMjeseci = { "Januar", "Februar", "Mart", "April", "Maj", "Jun",
-                                     "Juli", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" };
+                             "Juli", "Avgust", "Septembar", "Oktobar", "Novembar", "Decembar" };
 
+            // Inicijaliziraj sve mjesece na 0
             for (int i = 0; i < 12; i++)
             {
                 mjeseci[naziviMjeseci[i]] = 0;
             }
 
-            // Dodaj izostanke - ovo je simulacija, trebala bi biti prava logika
-            var mjesecSada = DateTime.Now.Month;
-            mjeseci[naziviMjeseci[mjesecSada - 1]] = izostanci.Count;
+            // Grupiraj izostanke po mjesecima na osnovu izračunatog datuma časa
+            foreach (var izostanak in izostanci)
+            {
+                var datumCasa = IzracunajDatumCasa(izostanak.Cas);
+                var mjesec = datumCasa.Month - 1; // -1 jer array počinje od 0
+
+                if (mjesec >= 0 && mjesec < 12)
+                {
+                    mjeseci[naziviMjeseci[mjesec]]++;
+                }
+            }
 
             return mjeseci;
         }

@@ -3,6 +3,46 @@
   "WorkspaceRootPath": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\controllers\\ucenikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\ucenikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\models\\fixnitermin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\fixnitermin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\models\\evidencijacasa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\evidencijacasa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\models\\cas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:models\\cas.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\viewmodels\\razrednikviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\razrednikviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\controllers\\razrednikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\razrednikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\views\\ucenik\\izostanci.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\ucenik\\izostanci.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\viewmodels\\ucenikdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\ucenikdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\views\\razrednik\\izostanci.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\razrednik\\izostanci.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,20 +82,8 @@
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\admindashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\viewmodels\\razrednikviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\razrednikviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\views\\razrednik\\ucenici.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:views\\razrednik\\ucenici.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\controllers\\razrednikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:controllers\\razrednikcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\viewmodels\\ucenikdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|solutionrelative:viewmodels\\ucenikdashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0900D6E5-71DF-4C6E-A368-7730AB53CB2B}|eDnevnik.csproj|c:\\users\\emirb\\onedrive\\desktop\\aldinspremiozad\\grupa7-tim1\\ednevnik\\views\\ucenik\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -129,7 +157,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -138,19 +166,143 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAHoAAAAAAAAAAAAYwIwAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-16T17:43:26.435Z",
+              "Title": "Korisnik.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\Korisnik.cs",
+              "RelativeDocumentMoniker": "Models\\Korisnik.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\Korisnik.cs",
+              "RelativeToolTip": "Models\\Korisnik.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:07:45.253Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "FixniTermin.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\FixniTermin.cs",
+              "RelativeDocumentMoniker": "Models\\FixniTermin.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\FixniTermin.cs",
+              "RelativeToolTip": "Models\\FixniTermin.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAADwvxEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:07:42.638Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EvidencijaCasa.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\EvidencijaCasa.cs",
+              "RelativeDocumentMoniker": "Models\\EvidencijaCasa.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\EvidencijaCasa.cs",
+              "RelativeToolTip": "Models\\EvidencijaCasa.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:07:22.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Cas.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\Cas.cs",
+              "RelativeDocumentMoniker": "Models\\Cas.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\Cas.cs",
+              "RelativeToolTip": "Models\\Cas.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAuwCUAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:02:35.775Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UcenikController.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\UcenikController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UcenikController.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\UcenikController.cs*",
+              "RelativeToolTip": "Controllers\\UcenikController.cs*",
+              "ViewState": "AgIAAFYBAAAAAAAAAAAgwFkBAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T18:00:01.526Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Izostanci.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Razrednik\\Izostanci.cshtml",
+              "RelativeDocumentMoniker": "Views\\Razrednik\\Izostanci.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Razrednik\\Izostanci.cshtml",
+              "RelativeToolTip": "Views\\Razrednik\\Izostanci.cshtml",
+              "ViewState": "AgIAAA4BAAAAAAAAAAAYwCMBAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-16T17:55:59.229Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Izostanci.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenik\\Izostanci.cshtml",
+              "RelativeDocumentMoniker": "Views\\Ucenik\\Izostanci.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenik\\Izostanci.cshtml",
+              "RelativeToolTip": "Views\\Ucenik\\Izostanci.cshtml",
+              "ViewState": "AgIAACMAAAAAAAAAAAAQwC8AAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-16T17:50:43.729Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UcenikDashboardViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\UcenikDashboardViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\UcenikDashboardViewModel.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\UcenikDashboardViewModel.cs",
+              "RelativeToolTip": "ViewModels\\UcenikDashboardViewModel.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAA7wGMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T15:37:28.487Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RazrednikController.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\RazrednikController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RazrednikController.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\RazrednikController.cs",
+              "RelativeToolTip": "Controllers\\RazrednikController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAApwFcAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-14T15:37:28.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RazrednikViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\RazrednikViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\RazrednikViewModel.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\RazrednikViewModel.cs",
+              "RelativeToolTip": "ViewModels\\RazrednikViewModel.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAAswHIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T07:48:43.42Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "Controllers\\HomeController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAgwEEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-16T17:39:33.427Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -158,25 +310,23 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAHkAAAAAAAAAAAAgwIsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T17:43:14.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-16T17:43:14.028Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\HomeController.cs*",
-              "RelativeToolTip": "Controllers\\HomeController.cs*",
-              "ViewState": "AgIAADUAAAAAAAAAAAAgwEEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T17:39:33.427Z",
-              "EditorCaption": ""
+              "DocumentIndex": 12,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAYwIwAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-16T17:43:26.435Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 14,
               "Title": "Dodaj.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Ocjena\\Dodaj.cshtml",
               "RelativeDocumentMoniker": "Views\\Ocjena\\Dodaj.cshtml",
@@ -188,7 +338,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 15,
               "Title": "OcjenaController.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\OcjenaController.cs",
               "RelativeDocumentMoniker": "Controllers\\OcjenaController.cs",
@@ -200,7 +350,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 16,
               "Title": "Ocjena.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Models\\Ocjena.cs",
               "RelativeDocumentMoniker": "Models\\Ocjena.cs",
@@ -212,7 +362,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 17,
               "Title": "RoditeljDashboardViewModel.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\RoditeljDashboardViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\RoditeljDashboardViewModel.cs",
@@ -224,7 +374,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 18,
               "Title": "KorisnikViewModel.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\KorisnikViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\KorisnikViewModel.cs",
@@ -236,7 +386,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 19,
               "Title": "AdminDashboardViewModel.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\AdminDashboardViewModel.cs",
               "RelativeDocumentMoniker": "ViewModels\\AdminDashboardViewModel.cs",
@@ -248,19 +398,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "RazrednikViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\RazrednikViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\RazrednikViewModel.cs",
-              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\RazrednikViewModel.cs",
-              "RelativeToolTip": "ViewModels\\RazrednikViewModel.cs",
-              "ViewState": "AgIAAHIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-16T07:48:43.42Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "Ucenici.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Razrednik\\Ucenici.cshtml",
               "RelativeDocumentMoniker": "Views\\Razrednik\\Ucenici.cshtml",
@@ -272,31 +410,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "RazrednikController.cs",
-              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\RazrednikController.cs",
-              "RelativeDocumentMoniker": "Controllers\\RazrednikController.cs",
-              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\RazrednikController.cs",
-              "RelativeToolTip": "Controllers\\RazrednikController.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAwEkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T15:37:28.481Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "UcenikDashboardViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\UcenikDashboardViewModel.cs",
-              "RelativeDocumentMoniker": "ViewModels\\UcenikDashboardViewModel.cs",
-              "ToolTip": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\ViewModels\\UcenikDashboardViewModel.cs",
-              "RelativeToolTip": "ViewModels\\UcenikDashboardViewModel.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAxwAcAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-14T15:37:28.487Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "VladanjeService.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\Services\\VladanjeService.cs",
               "RelativeDocumentMoniker": "..\\..\\..\\mikinapravioraspored\\Grupa7-Tim1\\eDnevnik\\Services\\VladanjeService.cs",
@@ -308,7 +422,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 21,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenik\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Ucenik\\Index.cshtml",
@@ -320,7 +434,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 22,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Raspored\\Create.cshtml",
               "RelativeDocumentMoniker": "Views\\Raspored\\Create.cshtml",
@@ -332,7 +446,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 23,
               "Title": "RasporedController.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\RasporedController.cs",
               "RelativeDocumentMoniker": "Controllers\\RasporedController.cs",
@@ -344,7 +458,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 24,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Raspored\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Raspored\\Index.cshtml",
@@ -356,7 +470,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 25,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Razredi\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Razredi\\Index.cshtml",
@@ -368,7 +482,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 26,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
@@ -380,7 +494,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 27,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Razredi\\Delete.cshtml",
               "RelativeDocumentMoniker": "Views\\Razredi\\Delete.cshtml",
@@ -392,7 +506,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 28,
               "Title": "RazredController.cs",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Controllers\\RazredController.cs",
               "RelativeDocumentMoniker": "Controllers\\RazredController.cs",
@@ -404,7 +518,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 29,
               "Title": "Dodaj.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenici\\Dodaj.cshtml",
               "RelativeDocumentMoniker": "Views\\Ucenici\\Dodaj.cshtml",
@@ -416,7 +530,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 30,
               "Title": "Dodaj.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Roditelji\\Dodaj.cshtml",
               "RelativeDocumentMoniker": "Views\\Roditelji\\Dodaj.cshtml",
@@ -428,7 +542,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 31,
               "Title": "Dodaj.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Nastavnici\\Dodaj.cshtml",
               "RelativeDocumentMoniker": "Views\\Nastavnici\\Dodaj.cshtml",
@@ -440,7 +554,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 32,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Roditelji\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Roditelji\\Edit.cshtml",
@@ -452,7 +566,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 33,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Razredi\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Razredi\\Edit.cshtml",
@@ -464,7 +578,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 34,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Predmeti\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Predmeti\\Edit.cshtml",
@@ -476,7 +590,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 35,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Nastavnici\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Nastavnici\\Edit.cshtml",
@@ -488,7 +602,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 36,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\emirb\\OneDrive\\Desktop\\aldinspremiozad\\Grupa7-Tim1\\eDnevnik\\Views\\Ucenici\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Ucenici\\Edit.cshtml",
