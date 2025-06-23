@@ -33,7 +33,7 @@ Aplikacija je hostovana na sljedećem linku:
 | Admin               | admin@ednevnik.com        | Admin123!     |
 | Nastavnik/Razrednik | nastavnikprvi@gmail.com   | Nastavnik123! |
 | Ucenik              | ucenikprvi@gmail.com      | Ucenik123!    |
-| Roditelj            | ebegic5@etf.unsa.ba       | Student123!   |
+| Roditelj            | ebegic5@etf.unsa.ba       | Roditelj123!  |
 
 ---
 
