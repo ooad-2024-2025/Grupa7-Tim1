@@ -23,6 +23,8 @@ Cilj sistema je da poveća transparentnost i efikasnost obrazovnog procesa te za
 
 Aplikacija je hostovana na sljedećem linku:  
 🔗 [http://mirnes-001-site1.anytempurl.com](http://mirnes-001-site1.anytempurl.com)
+username: 11248498
+password: 60-dayfreetrial
 
 ---
 
